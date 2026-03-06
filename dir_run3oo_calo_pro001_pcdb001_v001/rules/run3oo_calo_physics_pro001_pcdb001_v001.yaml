@@ -1,13 +1,13 @@
 #______________________________________________________________________________
-prod1_TRIGGERED_EVENT_run3oo:
+pro001_TRIGGERED_EVENT_run3oo:
   params:
     dsttype:      DST_TRIGGERED_EVENT
+    build:        pro.001
+    dbtag:        pcdb001
+    version:      1
     period:       run3oo
-    physicsmode:  physics
     dataset:      run3oo
-    build:        PROD
-    dbtag:        TAG
-    version:      VERSION
+    physicsmode:  physics
 
   input:
     db:             rawr
@@ -26,20 +26,20 @@ prod1_TRIGGERED_EVENT_run3oo:
     priority:              '90'
 
 #______________________________________________________________________________
-prod1_CALOFITTING_run3oo:
+pro001_CALOFITTING_run3oo:
   params:
     dsttype:      DST_CALOFITTING
+    build:        pro.001
+    dbtag:        pcdb001
+    version:      1
     period:       run3oo
-    physicsmode:  physics
     dataset:      run3oo
-    build:        PROD
-    dbtag:        TAG
-    version:      VERSION
+    physicsmode:  physics
 
   input:
     db:           fcr
     table:        datasets
-    intriplet:    PROD_TAG_VERSION  # This is the output triplet of the previous rule
+    intriplet:    pro001_pcdb001_v001  # This is the output triplet of the previous rule
 
   job:
     script:                 run_fitting.sh

@@ -1,0 +1,29 @@
+################################# Prod03 #######################################
+### Standard full production 
+sphnxprod02:
+  defaultlocations:
+    prodbase:   /sphenix/u/sphnxpro/Production2026/sphenixprod
+    configbase: /sphenix/u/sphnxpro/Production2026/run3oo_calo_pro001_pcdb001_v001/dir_run3oo_calo_pro001_pcdb001_v001/rules
+    submitdir:  /sphenix/data/data02/sphnxpro/production/run3oo/submission/{rule}
+
+  # Event combining
+  pro001_TRIGGERED_EVENT_run3oo:
+    config: run3oo_calo_physics_pro001_pcdb001_v001.yaml
+    runlist: /sphenix/u/sphnxpro/Production2026/run3oo_calo_pro001_pcdb001_v001/dir_run3oo_calo_pro001_pcdb001_v001/runlist_run3oo_calo_pro001
+    # runs: [82374 82703]
+    #jobprio: 90
+    jobprio: 110
+    submit: on
+    dstspider: on
+    finishmon: on
+
+  # Waveform fitting
+  pro001_CALOFITTING_run3oo:
+    config: run3oo_calo_physics_pro001_pcdb001_v001.yaml
+    runlist: /sphenix/u/sphnxpro/Production2026/run3oo_calo_pro001_pcdb001_v001/dir_run3oo_calo_pro001_pcdb001_v001/runlist_run3oo_calo_pro001
+    jobprio: 110
+    submit: on
+    dstspider: on
+    finishmon: on
+
+###############################################################################
