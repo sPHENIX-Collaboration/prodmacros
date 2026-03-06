@@ -6,8 +6,8 @@
   - [Adapt or create rules](#adapt-or-create-rules)
 - [Add autopilot to the crontab(s)](#add-autopilot-to-the-crontabs)
 - [Appendix: Complete yaml files](#appendix-complete-yaml-files)
-  - [`run3oo_calo_physics_pro001_2025p009.yaml`](#run3oo_calo_physics_pro001_2025p009yaml)
-  - [`autopilot_run3oo_calo_physics_pro001_2025p009`](#autopilot_run3oo_calo_physics_pro001_2025p009)
+  - [Contents of `rules/run3oo_calo_physics_pro001_pcdb001_v001.yaml`](#contents-of-rulesrun3oo_calo_physics_pro001_pcdb001_v001yaml)
+  - [Contents of `pilots/autopilot_run3oo_calo_physics_pro001_pcdb001_v001.yaml`](#contents-of-pilotsautopilot_run3oo_calo_physics_pro001_pcdb001_v001yaml)
 
 ## Getting started
 
@@ -154,7 +154,6 @@ create_submission.py --rule pro001_TRIGGERED_EVENT_run3oo --config rules/run3oo_
 ```
 You could also periodically run `dstspider.py` and `histspider.py` with the same arguments. However, especially for spiders, we want to put this job on autopilot.
 
-
 ## Autopilot
 Start from the appropriate template.
 ```
@@ -191,14 +190,13 @@ Now add an entry for each of the rules we want to run, ex.:
 ```
 The full file in the [Appendix](#appendix-complete-yaml-files) shows additional parameters to control the spider(s), monitoring, priority, etc. Also shown is a repetition that allows to run submission and/or spidering of the same job type from multiple hosts.
 
-
 ## Add autopilot to the crontab(s)
-To run, a setup script has to be sourced and a python executable invoked with the location of the steering file. I.e., the abstract command for cron is
+To run, a setup script has to be sourced and a python executable invoked with the location of the steering file. I.~e., the abstract command for cron is
 ```bash
 source /path/to/this_sphenixprod.sh
 production_control.py --steer /path/to/autopilot.yaml
 ```
-Console output in cron jobs spams emails to whoever is at the receiving end (Chris), so in practice we need to redirect the output. It gets logged automatically anyway (the `-vv` flag increases verbosity to `DEBUG` level). The full line to be added to the crontabs (of at least those hosts that should run the production) is
+Console output in cron jobs spams emails to whoever is at the receiving end (Chris), so in practice we need to redirect the output. It gets logged automatically anyway (the `-vv` flag increases verbosity to `DEBUG` level). The full line to be added to the crontabs (on at least those hosts that should run the production) is
 ```bash
 # pro001 run3oo calo 
 15,55 * * * * source /sphenix/u/sphnxpro/mainkolja/sphenixprod/this_sphenixprod.sh >& /dev/null && production_control.py --steer 
@@ -207,27 +205,11 @@ Console output in cron jobs spams emails to whoever is at the receiving end (Chr
 For the 
 To generate more complex `cron` time expressions, see [crontab.guru](https://crontab.guru/).
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+The proper way to edit crontabs is to edit the version controlled (and soft-linked) named file in `sphnxpro`'s home directory, then call the `crontab` command with the file as an argument **on the proper host**.
+```bash
+sphnxpro@sphnxprod02 ~> emacs crontab.sphnxprod02
+sphnxpro@sphnxprod02 ~> crontab crontab.sphnxprod02
+```
 
 
 
@@ -236,23 +218,23 @@ To generate more complex `cron` time expressions, see [crontab.guru](https://cro
 
 ## Appendix: Complete yaml files
 
-### `run3oo_calo_physics_pro001_2025p009.yaml`
+### Contents of `rules/run3oo_calo_physics_pro001_pcdb001_v001.yaml`
 
 ```yaml
-#__________________________________________________________________________________
+#______________________________________________________________________________
 pro001_TRIGGERED_EVENT_run3oo:
   params:
-    dsttype:    DST_TRIGGERED_EVENT
-    period:     run3oo
-    physicsmode: physics
-    dataset:    run3oo
-    build:      pro001 
-    dbtag:      nocdbtag
-    version:    1
+    dsttype:      DST_TRIGGERED_EVENT
+    build:        pro.001
+    dbtag:        pcdb001
+    version:      1
+    period:       run3oo
+    dataset:      run3oo
+    physicsmode:  physics
 
   input:
-    db:          rawr
-    table:       datasets
+    db:             rawr
+    table:          datasets
     min_run_time:   300
     min_run_events: 100000
 
@@ -260,91 +242,74 @@ pro001_TRIGGERED_EVENT_run3oo:
     script:                 run_eventcombine.sh
     log:                   '{condor}/{logbase}.condor'
     neventsper:             10000
-    payload:                [calo_code/*]
-    request_memory:         2024MB
+    payload:                [../triggered_code/*]
+    request_memory:         2 GB, 3 GB, 5 GB
     request_xferslots:     '3'    
-    batch_name:            '{dsttype}_{dataset}_{outtriplet}'
+    batch_name:            '{rule_name}_{dataset}_{outtriplet}'
     priority:              '90'
 
 #______________________________________________________________________________
-  pro001_CALOFITTING_run3oo:
+pro001_CALOFITTING_run3oo:
   params:
-    dsttype:     DST_CALOFITTING
-    period:      run3oo
-    physicsmode: physics
-    dataset:     run3oo
-    build:       pro001
-    dbtag:       2025p009
-    version:     1
+    dsttype:      DST_CALOFITTING
+    build:        pro.001
+    dbtag:        pcdb001
+    version:      1
+    period:       run3oo
+    dataset:      run3oo
+    physicsmode:  physics
 
   input:
-    db:          fcr
-    table:       datasets
-    intriplet:   pro001_nocdbtag_v001
+    db:           fcr
+    table:        datasets
+    intriplet:    pro001_pcdb001_v001  # This is the output triplet of the previous rule
 
   job:
     script:                 run_fitting.sh
     log:                   '{condor}/{logbase}.condor'
     neventsper:             100000
-    payload:                [calo_code/*]
-    request_memory:         2500MB
+    payload:                [../calo_code/*]
+    request_memory:         2500MB, 4GB, 6GB
     request_cpus:          '1'
-    batch_name:            '{dsttype}_{dataset}_{outtriplet}'
+    batch_name:            '{rule_name}_{dataset}_{outtriplet}'
     priority:              '60'
 
-###############################################################################################
+###############################################################################
+
 ```
 
-
-### `autopilot_run3oo_calo_physics_pro001_2025p009`
+### Contents of `pilots/autopilot_run3oo_calo_physics_pro001_pcdb001_v001.yaml`
 
 ```yaml
-
-################################# Prod01 #######################################
+################################# Prod03 #######################################
 ### Standard full production 
-sphnxprod01:
+sphnxprod02:
   defaultlocations:
-    prodbase:   /sphenix/u/sphnxpro/mainkolja/sphenixprod
-    configbase: /sphenix/u/sphnxpro/Production2026/run3oo_calo_pro001/run3oo_calo_pro001
+    prodbase:   /sphenix/u/sphnxpro/Production2026/sphenixprod
+    configbase: /sphenix/u/sphnxpro/Production2026/run3oo_calo_pro001_pcdb001_v001/dir_run3oo_calo_pro001_pcdb001_v001/rules
     submitdir:  /sphenix/data/data02/sphnxpro/production/run3oo/submission/{rule}
 
   # Event combining
   pro001_TRIGGERED_EVENT_run3oo:
-    config: run3oo_calo_physics_pro001_2025p009.yaml
-    runlist: /sphenix/u/sphnxpro/Production2026/run3oo_calo_pro001/run3oo_calo_pro001/runlist_run3oo_calo_pro001
+    config: run3oo_calo_physics_pro001_pcdb001_v001.yaml
+    runlist: /sphenix/u/sphnxpro/Production2026/run3oo_calo_pro001_pcdb001_v001/dir_run3oo_calo_pro001_pcdb001_v001/runlist_run3oo_calo_pro001
     # runs: [82374 82703]
-    jobprio: 90
+    #jobprio: 90
+    jobprio: 110
     submit: on
     dstspider: on
     finishmon: on
 
   # Waveform fitting
   pro001_CALOFITTING_run3oo:
-    config: run3oo_calo_physics_pro001_2025p009.yaml
-    runlist: /sphenix/u/sphnxpro/Production2026/run3oo_calo_pro001/run3oo_calo_pro001/runlist_run3oo_calo_pro001
-    jobprio: 60
+    config: run3oo_calo_physics_pro001_pcdb001_v001.yaml
+    runlist: /sphenix/u/sphnxpro/Production2026/run3oo_calo_pro001_pcdb001_v001/dir_run3oo_calo_pro001_pcdb001_v001/runlist_run3oo_calo_pro001
+    jobprio: 110
     submit: on
     dstspider: on
     finishmon: on
 
-################################# Prod02 #######################################
-### Additional host for FITTING
-sphnxprod02:
-  defaultlocations:
-    prodbase:   /sphenix/u/sphnxpro/mainkolja/sphenixprod
-    configbase: /sphenix/u/sphnxpro/Production2026/run3oo_calo_pro001/run3oo_calo_pro001
-    submitdir:  /sphenix/data/data02/sphnxpro/production/run3oo/submission/{rule}
-
-
-  # Waveform fitting
-  pro001_CALOFITTING_run3oo:
-    config: run3oo_calo_physics_pro001_2025p009.yaml
-    runlist: /sphenix/u/sphnxpro/Production2026/run3oo_calo_pro001/run3oo_calo_pro001/runlist_run3oo_calo_pro001
-    jobprio: 60
-    submit: on
-    dstspider: on
-    finishmon: off
-    
+###############################################################################
 ```
 
 
