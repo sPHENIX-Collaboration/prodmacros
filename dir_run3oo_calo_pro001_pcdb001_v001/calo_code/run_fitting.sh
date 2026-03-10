@@ -29,8 +29,9 @@ echo end of ls -la '*.list'
 # done
 
 outfile=${logbase}.root
+outzdc=${logbase/DST_CALOFITTING/DST_ZDC_RAW}.root
 outhist=${outfile/DST_CALOFITTING/HIST_CALOFITTINGQA}
-root_line="Fun4All_Year2_Fitting.C(${nevents},\"infile.list\",\"${outfile}\",\"${outhist}\",\"${dbtag}\")"
+root_line="Fun4All_Year2_Fitting.C(${nevents},\"infile.list\",\"${outfile}\",\"${outzdc}\",\"${outhist}\",\"${dbtag}\")"
 full_command="root.exe -q -b '${root_line}'"
 eval "${full_command}"
 
@@ -41,6 +42,9 @@ done
 
 echo ./stageout.sh ${logbase}.root ${outdir} ${dbid}
 ./stageout.sh ${logbase}.root ${outdir} ${dbid}
+
+echo ./stageout.sh ${outzdc} ${zdcoutdir:-${outdir}} ${zdcdbid:-${dbid}}
+./stageout.sh ${outzdc} ${zdcoutdir:-${outdir}} ${zdcdbid:-${dbid}}
 
 
 
