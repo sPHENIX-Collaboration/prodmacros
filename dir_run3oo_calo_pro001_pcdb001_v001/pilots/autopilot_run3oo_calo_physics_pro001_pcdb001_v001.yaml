@@ -25,5 +25,12 @@ sphnxprod02:
     submit: on
     dstspider: on
     finishmon: on
-
+  # jet skimmer
+  pro001_JETSKIMMER_run3oo:
+    config: run3oo_calo_physics_pro001_pcdb001_v001.yaml
+    runlist: /sphenix/u/sphnxpro/Production2026/run3oo_calo_pro001_pcdb001_v001/dir_run3oo_calo_pro001_pcdb001_v001/runlist_run3oo_calo_pro001
+    jobprio: 110
+    submit: on
+    dstspider: on
+    finishmon: on
 ###############################################################################

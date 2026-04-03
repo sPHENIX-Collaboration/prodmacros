@@ -58,6 +58,35 @@ pro001_CALOFITTING_run3oo:
       logdir:   "/sphenix/data/data03/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/log"
       histdir:  "/sphenix/data/data03/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/hist"
       condor:            "/tmp/data03/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/log"
+#----------------------------------------------------------------------------
+pro001_JETSKIMMER_run3oo:
+  params:
+    dsttype:     DST_JETCALO
+    period:      run3oo
+    physicsmode: physics
+    dataset:     run3oo
+    build:       pro.001
+    dbtag:       2025p012
+    version:     1
 
+  input:
+    db:          fcr
+    table:       datasets
+    intriplet:   pro001_pcdb001_v001
+    indsttype:   DST_CALOFITTING
+
+  job:
+    script:                 run_jetskimmer.sh
+    log:                   '{condor}/{logbase}.condor'
+    neventsper:             100000
+    payload:                [../calo_code/*]
+    request_memory:         2500MB, 4GB, 6GB
+    request_cpus:          '1'
+    batch_name:            '{dsttype}_{dataset}_{outtriplet}'
+    priority:              '60'
+    filesystem:
+      logdir:   "/sphenix/data/data03/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/log"
+      histdir:  "/sphenix/data/data03/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/hist"
+      condor:            "/tmp/data03/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/log"
 ###############################################################################
 
