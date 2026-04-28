@@ -29,8 +29,8 @@ sphnxprod02:
     config: run3auau_calo_physics_pro001_pcdb001_v001.yaml
     runlist: /sphenix/u/sphnxpro/Production2026/run3auau_calo_pro001_pcdb001_v001/dir_run3auau_calo_pro001_pcdb001_v001/run3auau_1M_v1.list
     jobprio: 110
-    submit: off
-    dstspider: off
-    finishmon: off
+    submit: on
+    dstspider: on
+    finishmon: on
 
 ###############################################################################
