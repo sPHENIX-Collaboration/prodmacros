@@ -1,11 +1,11 @@
 #______________________________________________________________________________________________________________________
-ana543_STREAMING_EVENT_run3laser:
+ana545_STREAMING_EVENT_run3pp:
   params:
     dsttype:    DST_STREAMING_EVENT
-    period:     run3laser
-    physicsmode: calib
-    dataset:    run3laser
-    build:      ana.543
+    period:     run3pp
+    physicsmode: physics
+    dataset:    run3pp
+    build:      ana.545
     dbtag:      pcdb002
     version:    1
 
@@ -30,32 +30,3 @@ ana543_STREAMING_EVENT_run3laser:
       histdir:  "/sphenix/data/data02/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/hist"
       condor:            "/tmp/data02/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/log"
 
-#______________________________________________________________________________________________________________________
-ana543_TRKR_CLUSTER_run3laser:
-  params:
-    dsttype:     DST_TRKR_CLUSTER
-    period:      run3laser
-    physicsmode: calib
-    dataset:     run3laser
-    build:       ana.543
-    dbtag:       pcdb002
-    version:     1
-
-  input:
-    db:          fcr
-    table:       datasets
-    intriplet:   ana543_pcdb002_v001
-    # cut_segment: 10
-  job:
-    script:                 run_rolloverjob0.sh
-    log:                   '{condor}/{logbase}.condor'
-    neventsper:             1000
-    payload:                [../tracking_code/*]
-    request_memory:         8192 MB, 12092 MB, 16092 MB 
-    request_cpus:          '1'
-    batch_name:            '{rule_name}_{dataset}_{outtriplet}'
-    priority:              '60'
-    filesystem:
-      logdir:   "/sphenix/data/data02/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/log"
-      histdir:  "/sphenix/data/data02/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/hist"
-      condor:            "/tmp/data02/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/log"

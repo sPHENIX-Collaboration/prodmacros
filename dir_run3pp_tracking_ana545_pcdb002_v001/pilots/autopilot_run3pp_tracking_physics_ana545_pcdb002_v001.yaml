@@ -3,26 +3,16 @@
 ### Standard full production 
 sphnxprod01:
   defaultlocations:
-    submitdir:  /sphenix/data/data02/sphnxpro/production/run3laser/submission/{rule}
+    submitdir:  /sphenix/data/data02/sphnxpro/production/run3pp/submission/{rule}
     prodbase:   /sphenix/u/sphnxpro/Production2026/sphenixprod
-    configbase: /sphenix/u/sphnxpro/Production2026/run3laser_tracking_ana543_pcdb002_v001/dir_run3laser_tracking_ana543_pcdb002_v001/rules
+    configbase: /sphenix/u/sphnxpro/Production2026/run3pp_tracking_ana545_pcdb002_v001/dir_run3pp_tracking_ana545_pcdb002_v001/rules
 
   # STREAMING physics
-  ana543_STREAMING_EVENT_run3laser:
-    config: run3laser_tracking_physics_ana543_pcdb002_v001.yaml
-    runlist: /sphenix/u/sphnxpro/Production2026/run3laser_tracking_ana543_pcdb002_v001/dir_run3laser_tracking_ana543_pcdb002_v001/runlist_full
-    #runs: [82372 82703]
+  ana545_STREAMING_EVENT_run3pp:
+    config: run3pp_tracking_physics_ana545_pcdb002_v001.yaml
+    #runlist: /sphenix/u/sphnxpro/Production2026/run3pp_tracking_ana545_pcdb002_v001/dir_run3pp_tracking_ana545_pcdb002_v001/runlist
+    runs: [79146 81668]
     jobprio: 90
-    submit: on
-    dstspider: on
-    finishmon: on
-
-  # TRKR_CLUSTER physics
-  ana543_TRKR_CLUSTER_run3laser:
-    config: run3laser_tracking_physics_ana543_pcdb002_v001.yaml
-    runlist: /sphenix/u/sphnxpro/Production2026/run3laser_tracking_ana543_pcdb002_v001/dir_run3laser_tracking_ana543_pcdb002_v001/runlist_full
-    #runs: [82372 82703]
-    jobprio: 60
     submit: on
     dstspider: on
     finishmon: on
