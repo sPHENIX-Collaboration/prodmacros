@@ -1,6 +1,6 @@
 ################################## run2pp ######################################
 ### Standard full production
-sphnxprod02:
+sphnxprod01:
   defaultlocations:
     prodbase:   /sphenix/u/sphnxpro/Production2026/sphenixprod
     configbase: /sphenix/u/sphnxpro/Production2026/run2pp_calo_pro001_pcdb001_v001/dir_run2pp_calo_pro001_pcdb001_v001/rules
@@ -13,6 +13,21 @@ sphnxprod02:
     jobprio: 110
     submit: off
     dstspider: on
+    finishmon: off
+
+sphnxprod02:
+  defaultlocations:
+    prodbase:   /sphenix/u/sphnxpro/Production2026/sphenixprod
+    configbase: /sphenix/u/sphnxpro/Production2026/run2pp_calo_pro001_pcdb001_v001/dir_run2pp_calo_pro001_pcdb001_v001/rules
+    submitdir:  /sphenix/data/data02/sphnxpro/production/run2pp/submission/{rule}
+
+  # Event combining
+  pro001_TRIGGERED_EVENT_run2pp:
+    config: run2pp_calo_physics_pro001_pcdb001_v001.yaml
+    runlist: /sphenix/u/sphnxpro/Production2026/run2pp_calo_pro001_pcdb001_v001/dir_run2pp_calo_pro001_pcdb001_v001/run2pp_1M_v1.list
+    jobprio: 110
+    submit: on
+    dstspider: on
     finishmon: on
 
   # Waveform fitting
@@ -20,7 +35,7 @@ sphnxprod02:
     config: run2pp_calo_physics_pro001_pcdb001_v001.yaml
     runlist: /sphenix/u/sphnxpro/Production2026/run2pp_calo_pro001_pcdb001_v001/dir_run2pp_calo_pro001_pcdb001_v001/run2pp_1M_v1.list
     jobprio: 110
-    submit: off
+    submit: on
     dstspider: on
     finishmon: on
 
