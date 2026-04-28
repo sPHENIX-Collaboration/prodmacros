@@ -20,7 +20,7 @@ pro001_TRIGGERED_EVENT_run3auau:
     log:                   '{condor}/{logbase}.condor'
     neventsper:             10000
     payload:                [../triggered_code/*]
-    request_memory:         2 GB, 3 GB, 5 GB
+    request_memory:         3.9 GB, 6 GB
     request_xferslots:     '3'
     batch_name:            '{rule_name}_{dataset}_{outtriplet}'
     priority:              '90'
