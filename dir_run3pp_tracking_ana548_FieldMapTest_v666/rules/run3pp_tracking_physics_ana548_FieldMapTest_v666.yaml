@@ -1,22 +1,71 @@
-
 #______________________________________________________________________________________________________________________
-v666_TRKR_SEED_run3pp:
+ana548_STREAMING_EVENT_run3pp_v666:
   params:
-    dsttype:     DST_TRKR_SEED
+    dsttype:     DST_STREAMING_EVENT
     period:      run3pp
     physicsmode: physics
     dataset:     run3pp
-    build:       ana.545
-    dbtag:       newcdbtag
+    build:       ana.548
+    dbtag:       FieldMapTest
     version:     666
 
   input:
-    intriplet:   ana532_2025p009_v001
+    min_run_time:   300
+    min_run_events: 100000
+    combine_seg0_only: false
+
+  job:
+    script:                 run_parallel_streams.sh
+    log:                   '{condor}/{logbase}.condor'
+    neventsper:             10000
+    payload:                [../streaming_code/*]
+    request_memory:         1500MB, 2GB, 2500MB, 4GB, 6GB, 10GB
+    request_xferslots:     '3'
+    batch_name:            '{rule_name}_{dataset}_{outtriplet}'
+    priority:              '90'
+
+#______________________________________________________________________________________________________________________
+ana548_TRKR_CLUSTER_run3pp_v666:
+  params:
+    dsttype:     DST_TRKR_CLUSTER
+    period:      run3pp
+    physicsmode: physics
+    dataset:     run3pp
+    build:       ana.548
+    dbtag:       FieldMapTest
+    version:     666
+
+  input:
+    intriplet:   ana548_FieldMapTest_v666
+
+  job:
+    script:                 run_rolloverjob0.sh
+    log:                   '{condor}/{logbase}.condor'
+    neventsper:             1000
+    payload:                [../tracking_code/*]
+    request_memory:         8GB, 12GB, 16GB
+    request_cpus:          '1'
+    batch_name:            '{rule_name}_{dataset}_{outtriplet}'
+    priority:              '60'
+
+#______________________________________________________________________________________________________________________
+ana548_TRKR_SEED_run3pp_v666:
+  params:
+    dsttype:     DST_TRKR_SEED
+    period:      run3pp
+    physicsmode: physics
+    dataset:     run3pp
+    build:       ana.548
+    dbtag:       FieldMapTest
+    version:     666
+
+  input:
+    intriplet:   ana548_FieldMapTest_v666
 
   job:
     script:                 run_jobA.sh
     log:                   '{condor}/{logbase}.condor'
-    neventsper:             1000  # MUST match neventsper used to produce the input intriplet
+    neventsper:             1000
     payload:                [../tracking_code/*]
     request_memory:         3GB, 4GB, 6GB
     request_cpus:          '2'
@@ -24,73 +73,27 @@ v666_TRKR_SEED_run3pp:
     priority:              '30'
 
 #______________________________________________________________________________________________________________________
-v667_TRKR_SEED_run3pp:
+ana548_TRKR_TRACKS_run3pp_v666:
   params:
-    dsttype:     DST_TRKR_SEED
+    dsttype:     DST_TRKR_TRACKS
     period:      run3pp
     physicsmode: physics
     dataset:     run3pp
-    build:       ana.545
-    dbtag:       newcdbtag
-    version:     667
+    build:       ana.548
+    dbtag:       FieldMapTest
+    version:     666
 
   input:
-    intriplet:   ana532_2025p009_v001
+    intriplet:   ana548_FieldMapTest_v666
 
   job:
-    script:                 run_jobA.sh
+    script:                 run_jobC.sh
     log:                   '{condor}/{logbase}.condor'
-    neventsper:             1000  # MUST match neventsper used to produce the input intriplet
+    neventsper:             1000
     payload:                [../tracking_code/*]
     request_memory:         3GB, 4GB, 6GB
     request_cpus:          '2'
     batch_name:            '{rule_name}_{dataset}_{outtriplet}'
     priority:              '30'
 
-#______________________________________________________________________________________________________________________
-v668_TRKR_SEED_run3pp:
-  params:
-    dsttype:     DST_TRKR_SEED
-    period:      run3pp
-    physicsmode: physics
-    dataset:     run3pp
-    build:       ana.545
-    dbtag:       newcdbtag
-    version:     668
-
-  input:
-    intriplet:   ana532_2025p009_v001
-
-  job:
-    script:                 run_jobA.sh
-    log:                   '{condor}/{logbase}.condor'
-    neventsper:             1000  # MUST match neventsper used to produce the input intriplet
-    payload:                [../tracking_code/*]
-    request_memory:         3GB, 4GB, 6GB
-    request_cpus:          '2'
-    batch_name:            '{rule_name}_{dataset}_{outtriplet}'
-    priority:              '30'
-
-#______________________________________________________________________________________________________________________
-v669_TRKR_SEED_run3pp:
-  params:
-    dsttype:     DST_TRKR_SEED
-    period:      run3pp
-    physicsmode: physics
-    dataset:     run3pp
-    build:       ana.545
-    dbtag:       newcdbtag
-    version:     669
-
-  input:
-    intriplet:   ana532_2025p009_v001
-
-  job:
-    script:                 run_jobA.sh
-    log:                   '{condor}/{logbase}.condor'
-    neventsper:             1000  # MUST match neventsper used to produce the input intriplet
-    payload:                [../tracking_code/*]
-    request_memory:         3GB, 4GB, 6GB
-    request_cpus:          '2'
-    batch_name:            '{rule_name}_{dataset}_{outtriplet}'
-    priority:              '30'
+###############################################################################

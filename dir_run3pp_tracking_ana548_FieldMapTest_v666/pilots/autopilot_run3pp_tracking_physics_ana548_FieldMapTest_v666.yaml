@@ -1,0 +1,41 @@
+################################# Prod03 #######################################
+### Standard full production
+sphnxprod02:
+  defaultlocations:
+    prodbase:   /sphenix/u/sphnxpro/devkolja/sphenixprod
+    configbase: /sphenix/u/sphnxpro/devkolja/run3pp_tracking_ana548_FieldMapTest_v666/dir_run3pp_tracking_ana548_FieldMapTest_v666/rules
+    submitdir:  /sphenix/data/data02/sphnxpro/production/run3pp/submission/{rule}
+
+  # Event combining
+  ana548_STREAMING_EVENT_run3pp_v666:
+    config: run3pp_tracking_physics_ana548_FieldMapTest_v666.yaml
+    runs: [79507 79516]
+    jobprio: 111
+    submit: on
+    dstspider: on
+
+  # Clustering
+  ana548_TRKR_CLUSTER_run3pp_v666:
+    config: run3pp_tracking_physics_ana548_FieldMapTest_v666.yaml
+    runs: [79507 79516]
+    jobprio: 111
+    submit: on
+    dstspider: on
+
+  # Seeding
+  ana548_TRKR_SEED_run3pp_v666:
+    config: run3pp_tracking_physics_ana548_FieldMapTest_v666.yaml
+    runs: [79507 79516]
+    jobprio: 111
+    submit: on
+    dstspider: on
+
+  # Tracking
+  ana548_TRKR_TRACKS_run3pp_v666:
+    config: run3pp_tracking_physics_ana548_FieldMapTest_v666.yaml
+    runs: [79507 79516]
+    jobprio: 111
+    submit: on
+    dstspider: on
+
+###############################################################################
