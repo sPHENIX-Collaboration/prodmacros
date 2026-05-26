@@ -1,12 +1,12 @@
 #______________________________________________________________________________
-PROD_TRIGGERED_EVENT_run3oo
+pro001_TRIGGERED_EVENT_run3pp:
   params:
     dsttype:      DST_TRIGGERED_EVENT
-    build:        PROD
-    dbtag:        TAG
-    version:      VERSION
-    period:       run3oo
-    dataset:      run3oo
+    build:        pro.001
+    dbtag:        pcdb001
+    version:      1
+    period:       run3pp
+    dataset:      run3pp
     physicsmode:  physics
 
   input:
@@ -28,19 +28,19 @@ PROD_TRIGGERED_EVENT_run3oo
       condor:            "/tmp/data03/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/log"
 
 #______________________________________________________________________________
-PROD_CALOFITTING_run3oo
+pro001_CALOFITTING_run3pp:
   params:
     dsttype:      DST_CALOFITTING
-    build:        PROD
-    dbtag:        TAG
-    version:      VERSION
-    period:       run3oo
-    dataset:      run3oo
+    build:        pro.001
+    dbtag:        pcdb001
+    version:      1
+    period:       run3pp
+    dataset:      run3pp
     physicsmode:  physics
 
   input:
     table:        datasets
-    intriplet:    PROD_TAG_vVERSION  # This is the output triplet of the previous rule
+    intriplet:    pro001_pcdb001_v001  # This is the output triplet of the previous rule
 
   job:
     script:                 run_fitting.sh
@@ -57,19 +57,19 @@ PROD_CALOFITTING_run3oo
       condor:            "/tmp/data03/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/log"
 
 #______________________________________________________________________________
-PROD_JETSKIMMER_run3oo
+pro001_JETSKIMMER_run3pp:
   params:
     dsttype:     DST_JETCALO
-    build:       PROD
-    dbtag:       TAG
-    version:     VERSION
-    period:      run3oo
-    dataset:     run3oo
+    build:       pro.001
+    dbtag:       2025p012
+    version:     1
+    period:      run3pp
+    dataset:     run3pp
     physicsmode: physics
 
   input:
     table:       datasets
-    intriplet:   PROD_TAG
+    intriplet:   pro001_pcdb001_v001
     indsttype:   DST_CALOFITTING
 
   job:
