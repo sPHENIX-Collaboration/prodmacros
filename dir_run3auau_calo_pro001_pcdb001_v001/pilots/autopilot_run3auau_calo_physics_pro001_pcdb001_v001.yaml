@@ -10,27 +10,24 @@ sphnxprod02:
   pro001_TRIGGERED_EVENT_run3auau:
     config: run3auau_calo_physics_pro001_pcdb001_v001.yaml
     runlist: /sphenix/u/sphnxpro/Production2026/run3auau_calo_pro001_pcdb001_v001/dir_run3auau_calo_pro001_pcdb001_v001/run3auau_1M_v1.list
-    jobprio: 110
+    jobprio: 90
     submit: on
     dstspider: on
-    finishmon: on
 
   # Waveform fitting
   pro001_CALOFITTING_run3auau:
     config: run3auau_calo_physics_pro001_pcdb001_v001.yaml
     runlist: /sphenix/u/sphnxpro/Production2026/run3auau_calo_pro001_pcdb001_v001/dir_run3auau_calo_pro001_pcdb001_v001/run3auau_1M_v1.list
-    jobprio: 110
-    submit: on
-    dstspider: on
-    finishmon: on
+    jobprio: 90
+    submit: off
+    dstspider: off
 
   # Jet skimmer
   pro001_JETSKIMMER_run3auau:
     config: run3auau_calo_physics_pro001_pcdb001_v001.yaml
     runlist: /sphenix/u/sphnxpro/Production2026/run3auau_calo_pro001_pcdb001_v001/dir_run3auau_calo_pro001_pcdb001_v001/run3auau_1M_v1.list
-    jobprio: 110
-    submit: on
-    dstspider: on
-    finishmon: on
+    jobprio: 90
+    submit: off
+    dstspider: off
 
 ###############################################################################
