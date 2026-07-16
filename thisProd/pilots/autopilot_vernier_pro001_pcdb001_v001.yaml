@@ -1,0 +1,63 @@
+sphnxprod01:
+  defaultlocations:
+    prodbase:   /sphenix/u/sphnxpro/Production2026/dev_sphenixprod
+    configbase: /sphenix/u/sphnxpro/Production2026/vernier_pro001_pcdb001_v001/thisProd/rules
+    submitdir:  /sphenix/data/data03/sphnxpro/production/vernier/submission/{rule}
+
+  # Vernier fit run3auau
+  PROD_VERNIER_run3auau:
+    config: vernier_pro001_pcdb001_v001.yaml
+    runs: [69561]
+    jobprio: 100
+    submit: off
+    dstspider: off
+
+  # Vernier fit run2auau
+  PROD_VERNIER_run2auau:
+    config: vernier_pro001_pcdb001_v001.yaml
+    runs: [54733]
+    jobprio: 100
+    submit: off
+    dstspider: off
+
+  # Vernier fit run2pp
+  PROD_VERNIER_run2pp:
+    config: vernier_pro001_pcdb001_v001.yaml
+    runs: [51195]
+    jobprio: 100
+    submit: off
+    dstspider: off
+
+  # Vernier fit run3pp
+  PROD_VERNIER_run3pp:
+    config: vernier_pro001_pcdb001_v001.yaml
+    runs: [80843]
+    jobprio: 100
+    submit: on
+    dstspider: on
+
+  # Triggered run3pp
+  pro001_TRIGGERED_EVENT_run3pp:
+    config: vernier_triggered_pro001_pcdb001_v001.yaml
+    runs: [80843]
+    jobprio: 100
+    submit: off
+    dstspider: off
+
+  # Vernier fit run3oo
+  PROD_VERNIER_run3oo:
+    config: vernier_pro001_pcdb001_v001.yaml
+    runs: [82475 82476]
+    jobprio: 100
+    submit: off
+    dstspider: off
+
+  # Triggered run3oo
+  pro001_TRIGGERED_EVENT_run3oo:
+    config: vernier_triggered_pro001_pcdb001_v001.yaml
+    runs: [82475 82476]
+    jobprio: 100
+    submit: off
+    dstspider: off
+
+###############################################################################

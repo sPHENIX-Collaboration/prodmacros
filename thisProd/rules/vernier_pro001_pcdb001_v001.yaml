@@ -1,0 +1,150 @@
+#______________________________________________________________________________
+PROD_VERNIER_run3auau:
+  params:
+    dsttype:      DST_VERNIER
+    build:        pro.001
+    version:      1
+    period:       run3auau
+    dataset:      run3auau
+    physicsmode:  physics
+    dbtag:        pcdb001
+
+  input:
+    intriplet:    pro001_pcdb001_v001  # output triplet of the triggered event rule
+    min_run_events: 1000
+    min_run_time:   60
+  job:
+    script:                 run_vernierfit.sh
+    log:                   '{condor}/{logbase}.condor'
+    neventsper:             100000
+    payload:                [../calo_code/*]
+    request_memory:         2500MB, 4GB, 16GB
+    request_cpus:          '1'
+    batch_name:            '{rule_name}_{outtriplet}'
+    priority:              '60'
+    filesystem:
+      logdir:   "/sphenix/data/data03/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/log"
+      histdir:  "/sphenix/data/data03/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/hist"
+      condor:            "/tmp/data03/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/log"
+
+#______________________________________________________________________________
+PROD_VERNIER_run2auau:
+  params:
+    dsttype:      DST_VERNIER
+    build:        pro.001
+    dbtag:        pcdb001
+    version:      1
+    period:       run2auau
+    dataset:      run2auau
+    physicsmode:  physics
+
+  input:
+    intriplet:    pro001_pcdb001_v001  # output triplet of the triggered event rule
+    min_run_events: 1000
+    min_run_time:   60
+
+  job:
+    script:                 run_vernierfit.sh
+    log:                   '{condor}/{logbase}.condor'
+    neventsper:             100000
+    payload:                [../calo_code/*]
+    request_memory:         2500MB, 4GB, 16GB
+    request_cpus:          '1'
+    batch_name:            '{rule_name}_{outtriplet}'
+    priority:              '60'
+    filesystem:
+      logdir:   "/sphenix/data/data03/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/log"
+      histdir:  "/sphenix/data/data03/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/hist"
+      condor:            "/tmp/data03/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/log"
+
+#______________________________________________________________________________
+PROD_VERNIER_run2pp:
+  params:
+    dsttype:      DST_VERNIER
+    build:        pro.001
+    dbtag:        pcdb001
+    version:      1
+    period:       run2pp
+    dataset:      run2pp
+    physicsmode:  physics
+
+  input:
+    intriplet:    pro001_pcdb001_v001  # output triplet of the triggered event rule
+    min_run_events: 1000
+    min_run_time:   60
+
+  job:
+    script:                 run_vernierfit.sh
+    log:                   '{condor}/{logbase}.condor'
+    neventsper:             100000
+    payload:                [../calo_code/*]
+    request_memory:         2500MB, 4GB, 16GB
+    request_cpus:          '1'
+    batch_name:            '{rule_name}_{outtriplet}'
+    priority:              '60'
+    filesystem:
+      logdir:   "/sphenix/data/data03/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/log"
+      histdir:  "/sphenix/data/data03/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/hist"
+      condor:            "/tmp/data03/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/log"
+
+#______________________________________________________________________________
+PROD_VERNIER_run3pp:
+  params:
+    dsttype:      DST_VERNIER
+    build:        pro.001
+    dbtag:        pcdb001
+    version:      1
+    period:       run3pp
+    dataset:      run3pp
+    physicsmode:  calib
+
+  input:
+    intriplet:    pro001_pcdb001_v001  # output triplet of the triggered event rule
+    min_run_events: 1000
+    min_run_time:   60
+
+  job:
+    script:                 run_vernierfit.sh
+    log:                   '{condor}/{logbase}.condor'
+    neventsper:             100000
+    payload:                [../calo_code/*]
+    request_memory:         2500MB, 4GB, 16GB
+    request_cpus:          '1'
+    batch_name:            '{rule_name}_{outtriplet}'
+    priority:              '60'
+    filesystem:
+      logdir:   "/sphenix/data/data03/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/log"
+      histdir:  "/sphenix/data/data03/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/hist"
+      condor:            "/tmp/data03/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/log"
+
+#______________________________________________________________________________
+PROD_VERNIER_run3oo:
+  params:
+    dsttype:      DST_VERNIER
+    build:        pro.001
+    dbtag:        pcdb001
+    version:      1
+    period:       run3oo
+    dataset:      run3oo
+    physicsmode:  physics
+
+  input:
+    intriplet:    pro001_pcdb001_v001  # output triplet of the triggered event rule
+    min_run_events: 1000
+    min_run_time:   60
+
+  job:
+    script:                 run_vernierfit.sh
+    log:                   '{condor}/{logbase}.condor'
+    neventsper:             100000
+    payload:                [../calo_code/*]
+    request_memory:         2500MB, 4GB, 16GB
+    request_cpus:          '1'
+    batch_name:            '{rule_name}_{outtriplet}'
+    priority:              '60'
+    filesystem:
+      logdir:   "/sphenix/data/data03/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/log"
+      histdir:  "/sphenix/data/data03/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/hist"
+      condor:            "/tmp/data03/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/log"
+
+###############################################################################
