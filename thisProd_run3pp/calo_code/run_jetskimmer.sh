@@ -29,14 +29,21 @@ echo "$make_filelists_zdc"
 eval "$make_filelists_zdc"
 fname_zdc=$(head -1 infile.list)
 
+sepddsttype=${dsttype/DST_CALOFITTING/DST_SEPD_RAW}
+make_filelists_sepd="./create_full_filelist_run_seg.py $dataset $intriplet $sepddsttype $run $seg"
+echo "$make_filelists_sepd"
+eval "$make_filelists_sepd"
+fname_sepd=$(head -1 infile.list)
+
 echo fname_calo=$fname_calo
 echo fname_zdc=$fname_zdc
+echo fname_sepd=$fname_sepd
 
 outfile_jetcalo=${logbase}.root
 outfile_jet=${logbase/DST_JETCALO/DST_Jet}.root
 outhist=${logbase/DST_JETCALO/HIST_JETQA}.root
 
-root_line="Fun4All_JetSkimmedProductionYear2.C(${nevents},\"${fname_calo}\",\"${fname_zdc}\",\"${outfile_jetcalo}\",\"${outfile_jet}\",\"${outhist}\",\"${dbtag}\")"
+root_line="Fun4All_JetSkimmedProductionYear2.C(${nevents},\"${fname_calo}\",\"${fname_zdc}\",\"${fname_sepd}\",\"${outfile_jetcalo}\",\"${outfile_jet}\",\"${outhist}\",\"${dbtag}\")"
 full_command="root.exe -q -b '${root_line}'"
 
 echo Sourcing ${SPHENIXPROD_SCRIPT_PATH}/common_runscript_exec.sh
