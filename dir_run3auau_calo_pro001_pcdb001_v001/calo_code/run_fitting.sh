@@ -47,6 +47,9 @@ echo ./stageout.sh ${logbase}.root ${outdir} ${dbid}
 echo ./stageout.sh ${outzdc} ${zdcoutdir:-${outdir}} ${zdcdbid:-${dbid}}
 . ./stageout.sh ${outzdc} ${zdcoutdir:-${outdir}} ${zdcdbid:-${dbid}}
 
+echo ./stageout.sh ${outsepd} ${sepdoutdir:-${outdir}} ${sepdbid:-${dbid}}
+. ./stageout.sh ${outsepd} ${sepdoutdir:-${outdir}} ${sepdbid:-${dbid}}
+
 ls -la
 
 echo Sourcing ${SPHENIXPROD_SCRIPT_PATH}/common_runscript_finish.sh

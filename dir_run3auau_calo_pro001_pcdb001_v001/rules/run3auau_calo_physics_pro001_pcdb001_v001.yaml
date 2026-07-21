@@ -83,7 +83,7 @@ pro001_JETSKIMMER_run3auau:
     payload:                [../calo_code/*]
     request_memory:         2500MB, 4GB, 6GB
     request_cpus:          '1'
-    batch_name:            '{dsttype}_{dataset}_{outtriplet}'
+    batch_name:            '{rule_name}_{dataset}_{outtriplet}'
     priority:              '60'
     filesystem:
       logdir:   "/sphenix/data/data03/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/log"

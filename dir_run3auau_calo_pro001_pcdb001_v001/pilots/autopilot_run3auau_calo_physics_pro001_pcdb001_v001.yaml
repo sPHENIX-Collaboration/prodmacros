@@ -1,6 +1,5 @@
 ################################# run3auau ####################################
-### Standard full production
-sphnxprod02:
+sphnxprod01:
   defaultlocations:
     prodbase:   /sphenix/u/sphnxpro/Production2026/sphenixprod
     configbase: /sphenix/u/sphnxpro/Production2026/run3auau_calo_pro001_pcdb001_v001/dir_run3auau_calo_pro001_pcdb001_v001/rules
@@ -13,21 +12,22 @@ sphnxprod02:
     jobprio: 90
     submit: on
     dstspider: on
-
+  
   # Waveform fitting
   pro001_CALOFITTING_run3auau:
     config: run3auau_calo_physics_pro001_pcdb001_v001.yaml
     runlist: /sphenix/u/sphnxpro/Production2026/run3auau_calo_pro001_pcdb001_v001/dir_run3auau_calo_pro001_pcdb001_v001/run3auau_1M_v1.list
     jobprio: 90
-    submit: off
-    dstspider: off
+    submit: on
+    dstspider: on
 
   # Jet skimmer
   pro001_JETSKIMMER_run3auau:
     config: run3auau_calo_physics_pro001_pcdb001_v001.yaml
     runlist: /sphenix/u/sphnxpro/Production2026/run3auau_calo_pro001_pcdb001_v001/dir_run3auau_calo_pro001_pcdb001_v001/run3auau_1M_v1.list
     jobprio: 90
-    submit: off
-    dstspider: off
+    submit: on
+    dstspider: on
+
 
 ###############################################################################
