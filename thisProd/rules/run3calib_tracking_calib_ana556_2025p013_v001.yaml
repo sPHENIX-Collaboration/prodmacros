@@ -11,7 +11,7 @@ ana556_STREAMING_EVENT_run3calib:
 
   input:
     min_run_time:   300
-    min_run_events: 100000
+    min_run_events: 1000
     combine_seg0_only: false
 
   job:
