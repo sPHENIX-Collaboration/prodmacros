@@ -1,29 +1,34 @@
 ################################# Prod02 #######################################
 ### Standard full production
-sphnxprod02:
+sphnxprod04:
   defaultlocations:
     prodbase:   /sphenix/u/sphnxpro/Production2026/sphenixprod
-    configbase: /sphenix/u/sphnxpro/Production2026/cosmics_calo_pro001_pcdb001_v002/thisProd
+    configbase: /sphenix/u/sphnxpro/Production2026/cosmics_calo_pro001_pcdb001_v002/thisProd/rules
     submitdir:  /sphenix/data/data03/sphnxpro/production/cosmics/submission/{rule}
 
   # Event combining
   pro001_TRIGGERED_EVENT_cosmics:
     config: cosmics_calo_cosmics_pro001_pcdb001_v002.yaml
-    runlist: /sphenix/u/sphnxpro/Production2026/cosmics_calo_pro001_pcdb001_v002/thisProd/runlist
-    # runs: [82716 82744]
+    runlist: /sphenix/u/sphnxpro/Production2026/cosmics_calo_pro001_pcdb001_v002/thisProd/runlist1.txt
     jobprio: 90
     submit: on
     dstspider: on
-    finishmon: on
 
-  # HCal cosmics analysis
-  pro001_HCALCOSMICS_cosmics:
+  # Waveform fitting
+  pro001_CALOFITTING_cosmics:
     config: cosmics_calo_cosmics_pro001_pcdb001_v002.yaml
-    runlist: /sphenix/u/sphnxpro/Production2026/cosmics_calo_pro001_pcdb001_v002/thisProd/runlist
-    # runs: [82716 82744]
+    runlist: /sphenix/u/sphnxpro/Production2026/cosmics_calo_pro001_pcdb001_v002/thisProd/runlist1.txt
     jobprio: 60
     submit: on
     dstspider: on
-    finishmon: on
+
+  # HCalCosmics is an alternate lightweight producer of DST_CALOFITTING; keep it disabled
+  # while standard CALOFITTING owns this dsttype for autopilot reproduction.
+  # pro001_HCALCOSMICS_cosmics:
+  #   config: cosmics_calo_cosmics_pro001_pcdb001_v002.yaml
+  #   runlist: /sphenix/u/sphnxpro/Production2026/cosmics_calo_pro001_pcdb001_v002/thisProd/runlist1.txt
+  #   jobprio: 60
+  #   submit: on
+  #   dstspider: on
 
 ###############################################################################
