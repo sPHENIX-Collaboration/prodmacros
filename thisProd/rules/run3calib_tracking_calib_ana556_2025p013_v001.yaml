@@ -1,13 +1,13 @@
 #______________________________________________________________________________________________________________________
-PROD_STREAMING_EVENT_run3pp:
+ana556_STREAMING_EVENT_run3calib:
   params:
     dsttype:     DST_STREAMING_EVENT
-    period:      run3pp
-    physicsmode: physics
-    dataset:     run3pp
-    build:       PROD
-    dbtag:       TAG
-    version:     VERSION
+    period:      run3calib
+    physicsmode: calib
+    dataset:     run3calib
+    build:       ana.556
+    dbtag:       2025p013
+    version:     1
 
   input:
     min_run_time:   300
@@ -25,18 +25,18 @@ PROD_STREAMING_EVENT_run3pp:
     priority:              '90'
 
 #______________________________________________________________________________________________________________________
-PROD_TRKR_CLUSTER_run3pp:
+ana556_TRKR_CLUSTER_run3calib:
   params:
     dsttype:     DST_TRKR_CLUSTER
-    period:      run3pp
-    physicsmode: physics
-    dataset:     run3pp
-    build:       PROD
-    dbtag:       TAG
-    version:     VERSION
+    period:      run3calib
+    physicsmode: calib
+    dataset:     run3calib
+    build:       ana.556
+    dbtag:       2025p013
+    version:     1
 
   input:
-    intriplet:   PROD_TAG_VERSION
+    intriplet:   ana556_2025p013_v001
 
   job:
     script:                 run_rolloverjob0.sh
@@ -49,18 +49,18 @@ PROD_TRKR_CLUSTER_run3pp:
     priority:              '60'
 
 #______________________________________________________________________________________________________________________
-PROD_TRKR_SEED_run3pp:
+ana556_TRKR_SEED_run3calib:
   params:
     dsttype:     DST_TRKR_SEED
-    period:      run3pp
-    physicsmode: physics
-    dataset:     run3pp
-    build:       PROD
-    dbtag:       TAG
-    version:     VERSION
+    period:      run3calib
+    physicsmode: calib
+    dataset:     run3calib
+    build:       ana.556
+    dbtag:       2025p013
+    version:     1
 
   input:
-    intriplet:   PROD_TAG_VERSION
+    intriplet:   ana556_2025p013_v001
 
   job:
     script:                 run_jobA.sh

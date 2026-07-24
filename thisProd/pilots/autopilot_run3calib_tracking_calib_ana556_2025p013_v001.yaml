@@ -1,0 +1,33 @@
+################################# Prod03 #######################################
+### Standard full production
+sphnxprod02:
+  defaultlocations:
+    prodbase:   /sphenix/u/sphnxpro/Production2026/sphenixprod
+    configbase: /sphenix/u/sphnxpro/Production2026/run3calib_tracking_ana556_2025p013_v001/thisProd/rules
+    submitdir:  /sphenix/data/data02/sphnxpro/production/run3calib/submission/{rule}
+
+  # Event combining
+  ana556_STREAMING_EVENT_run3calib:
+    config: run3calib_tracking_calib_ana556_2025p013_v001.yaml
+    runlist: /sphenix/u/sphnxpro/Production2026/run3calib_tracking_ana556_2025p013_v001/thisProd/runlist1.txt
+    jobprio: 90
+    submit: on
+    dstspider: on
+
+  # Clustering
+  ana556_TRKR_CLUSTER_run3calib:
+    config: run3calib_tracking_calib_ana556_2025p013_v001.yaml
+    runlist: /sphenix/u/sphnxpro/Production2026/run3calib_tracking_ana556_2025p013_v001/thisProd/runlist1.txt
+    jobprio: 60
+    submit: on
+    dstspider: on
+
+  # Seeding
+  ana556_TRKR_SEED_run3calib:
+    config: run3calib_tracking_calib_ana556_2025p013_v001.yaml
+    runlist: /sphenix/u/sphnxpro/Production2026/run3calib_tracking_ana556_2025p013_v001/thisProd/runlist1.txt
+    jobprio: 30
+    submit: on
+    dstspider: on
+
+###############################################################################
