@@ -13,24 +13,21 @@ sphnxprod02:
     jobprio: 110
     submit: on
     dstspider: on
-    finishmon: on
 
   # Waveform fitting
   pro001_CALOFITTING_run2auau:
     config: run2auau_calo_physics_pro001_pcdb001_v001.yaml
     runlist: /sphenix/u/sphnxpro/Production2026/run2auau_calo_pro001_pcdb001_v001/dir_run2auau_calo_pro001_pcdb001_v001/run2auau_1M_v1.list
     jobprio: 110
-    submit: off
+    submit: on
     dstspider: on
-    finishmon: on
 
   # Jet skimmer
   pro001_JETSKIMMER_run2auau:
     config: run2auau_calo_physics_pro001_pcdb001_v001.yaml
     runlist: /sphenix/u/sphnxpro/Production2026/run2auau_calo_pro001_pcdb001_v001/dir_run2auau_calo_pro001_pcdb001_v001/run2auau_1M_v1.list
     jobprio: 110
-    submit: off
-    dstspider: off
-    finishmon: off
+    submit: on
+    dstspider: on
 
 ###############################################################################

@@ -20,7 +20,7 @@ pro001_TRIGGERED_EVENT_run2auau:
     log:                   '{condor}/{logbase}.condor'
     neventsper:             10000
     payload:                [../triggered_code/*]
-    request_memory:         2 GB, 3 GB, 5 GB
+    request_memory:         3.9 GB, 6 GB
     request_xferslots:     '3'
     batch_name:            '{rule_name}_{dataset}_{outtriplet}'
     priority:              '90'
@@ -44,6 +44,7 @@ pro001_CALOFITTING_run2auau:
     db:           fcr
     table:        datasets
     intriplet:    pro001_pcdb001_v001  # This is the output triplet of the previous rule
+    min_seb:      19                   # Allow run 54781 where ZDC is missing
 
   job:
     script:                 run_fitting.sh
@@ -75,6 +76,7 @@ pro001_JETSKIMMER_run2auau:
     table:       datasets
     intriplet:   pro001_pcdb001_v001
     indsttype:   DST_CALOFITTING
+    min_seb:     19                   # Allow run 54781 where ZDC is missing
 
   job:
     script:                 run_jetskimmer.sh
@@ -83,7 +85,7 @@ pro001_JETSKIMMER_run2auau:
     payload:                [../calo_code/*]
     request_memory:         2500MB, 4GB, 6GB
     request_cpus:          '1'
-    batch_name:            '{dsttype}_{dataset}_{outtriplet}'
+    batch_name:            '{rule_name}_{dataset}_{outtriplet}'
     priority:              '60'
     filesystem:
       logdir:   "/sphenix/data/data03/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/log"
