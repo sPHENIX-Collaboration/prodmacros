@@ -1,6 +1,6 @@
 ################################# Prod02 #######################################
 ### Standard full production
-sphnxprod02:
+sphnxprod04:
   defaultlocations:
     prodbase:   /sphenix/u/sphnxpro/Production2026/sphenixprod
     configbase: /sphenix/u/sphnxpro/Production2026/cosmics_calo_pro001_pcdb001_v002/thisProd/rules
