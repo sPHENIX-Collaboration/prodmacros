@@ -43,7 +43,7 @@ pro001_CALOFITTING_run2pp:
   input:
     db:           fcr
     table:        datasets
-    # min_seb:      18
+    min_seb:      19
     intriplet:    pro001_pcdb001_v001  # This is the output triplet of the previous rule
 
   job:
