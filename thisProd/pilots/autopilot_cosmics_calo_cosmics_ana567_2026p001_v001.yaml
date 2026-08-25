@@ -9,7 +9,7 @@ sphnxprod01:
   # Event combining
   ana567_TRIGGERED_EVENT_cosmics:
     config: cosmics_calo_cosmics_ana567_2026p001_v001.yaml
-    runlist: /sphenix/u/sphnxpro/Production2026/cosmics_calo_ana567_2026p001_v001/thisProd/runlist1.txt
+    runlist: /sphenix/u/sphnxpro/Production2026/cosmics_calo_ana567_2026p001_v001/thisProd/runlist_cosmics_highgain_partial.txt
     jobprio: 90
     submit: on
     dstspider: on
@@ -17,7 +17,7 @@ sphnxprod01:
   # Waveform fitting
   ana567_CALOFITTING_cosmics:
     config: cosmics_calo_cosmics_ana567_2026p001_v001.yaml
-    runlist: /sphenix/u/sphnxpro/Production2026/cosmics_calo_ana567_2026p001_v001/thisProd/runlist1.txt
+    runlist: /sphenix/u/sphnxpro/Production2026/cosmics_calo_ana567_2026p001_v001/thisProd/runlist_cosmics_highgain_partial.txt
     jobprio: 60
     submit: on
     dstspider: on
@@ -26,7 +26,7 @@ sphnxprod01:
   # while standard CALOFITTING owns this dsttype for autopilot reproduction.
   # ana567_HCALCOSMICS_cosmics:
   #   config: cosmics_calo_cosmics_ana567_2026p001_v001.yaml
-  #   runlist: /sphenix/u/sphnxpro/Production2026/cosmics_calo_ana567_2026p001_v001/thisProd/runlist1.txt
+  #   runlist: /sphenix/u/sphnxpro/Production2026/cosmics_calo_ana567_2026p001_v001/thisProd/runlist_cosmics_highgain_partial.txt
   #   jobprio: 60
   #   submit: on
   #   dstspider: on
