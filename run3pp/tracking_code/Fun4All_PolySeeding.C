@@ -110,7 +110,6 @@ void Fun4All_PolySeeding(
     const std::string &filelist = "filelistold.list",
     const std::string &histdir = "")
 {
-  const bool convertSeeds = false;
   auto *se = Fun4AllServer::instance();
   se->Verbosity(1);
   se->VerbosityDownscale(100);
@@ -124,9 +123,6 @@ void Fun4All_PolySeeding(
   TRACKING::tpc_zero_supp = true;
   
   Enable::CDB = true;
-  
-  const std::string dsttype = "STREAMING_EVENT";
-  const std::string dsttype_to_save = "TPC";
 
   G4TPC::sampa_tzero_bias = 0;
 
