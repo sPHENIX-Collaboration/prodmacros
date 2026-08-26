@@ -106,7 +106,7 @@ void Fun4All_PolySeeding(
     const std::string &outfilename = "out.root",
     const int neventsper = 100,
     const int startseg = 0,
-    const std::string &dbtag = "2025p013",
+    const std::string &dbtag = "newcdbtag",
     const std::string &filelist = "filelistold.list",
     const std::string &histdir = "")
 {
@@ -254,9 +254,7 @@ void Fun4All_PolySeeding(
 
   auto *cluster = new Tpc_PolyClusterizer();  // makes TPC_POLYCLUSTERS
   cluster->setUseSurveyGeometry(false);
-  cluster->setKEffSide0(1.00);  // OO 82626 - 4.5, AuAu 6x6 76905 -0, pp 79513 - 1.0, 75391 5.8 75405 4.8
-  cluster->setKEffSide1(1.60);  // OO 82626 - 5.0, AuAu 6x6 76905 -0, pp 79513 - 1.6, 75391 5.6 75408 4.8
-  se->registerSubsystem(cluster);
+se->registerSubsystem(cluster);
 
   se->registerSubsystem(new Tpc_PolyTrackReco());      // makes TPC_POLYTRACKS
   se->registerSubsystem(new Tpc_PolyTrackVertexer());  // makes TPC_POLYTRACKVERTICES
