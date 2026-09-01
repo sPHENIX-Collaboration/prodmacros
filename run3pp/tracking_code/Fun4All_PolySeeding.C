@@ -371,7 +371,7 @@ void Fun4All_PolySeeding(
 
   out->UseFileRule();
   out->SetClosingScript("./stageout.sh");
-  out->SetClosingScriptArgs(outdir);
+  out->SetClosingScriptArgs(outdir + " --use-cp");
   se->registerOutputManager(out);
 
 
@@ -381,11 +381,11 @@ void Fun4All_PolySeeding(
   hm->setOutfileName(histoout);
   if (!histdir.empty())
   {
-    hm->SetClosingScriptArgs(histdir);
+    hm->SetClosingScriptArgs(histdir + " --use-cp");
   }
   else
   {
-    hm->SetClosingScriptArgs(outdir);
+    hm->SetClosingScriptArgs(outdir + " --use-cp");
   }
   
   se->run(nEvents);
