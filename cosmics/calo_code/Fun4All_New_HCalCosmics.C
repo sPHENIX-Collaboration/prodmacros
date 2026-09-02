@@ -1,10 +1,15 @@
 #ifndef FUN4ALL_NEW_HCALCOSMICS_C
 #define FUN4ALL_NEW_HCALCOSMICS_C
 
+#include <QA.C>
+
 #include <caloreco/CaloTowerBuilder.h>
-#include <caloreco/CaloTowerCalib.h>
-#include <caloreco/CaloTowerStatus.h>
+#include <caloreco/CaloTowerDefs.h>
 #include <caloreco/CaloWaveformProcessing.h>
+
+#include <calotrigger/TriggerRunInfoReco.h>
+
+#include <calovalid/CaloFittingQA.h>
 
 #include <ffamodules/CDBInterface.h>
 #include <ffamodules/FlagHandler.h>
@@ -23,28 +28,21 @@
 
 #include <phool/recoConsts.h>
 
-#include <calovalid/CaloValid.h>
-
-#include <litecaloeval/HCalCosmics.h>
-
 R__LOAD_LIBRARY(libfun4all.so)
 R__LOAD_LIBRARY(libfun4allraw.so)
 R__LOAD_LIBRARY(libcalo_reco.so)
-R__LOAD_LIBRARY(libcentrality.so)
 R__LOAD_LIBRARY(libffamodules.so)
-R__LOAD_LIBRARY(libLiteCaloEvalTowSlope.so)
 
-void Fun4All_New_HCalCosmics(int nEvents = 10000,
+void Fun4All_New_HCalCosmics(int nEvents = 0,
                              const std::string inlist = "files.list",
-                             const std::string &outfile = "DST_CALOFITTING_run3cosmics_ana502_2025p004_v001-00054530-00000.root",
-                             const std::string &outfile_hist1 = "HIST_COSMIC_HCALOUT_run3cosmics_ana502_2025p004_v001-00054530-00000.root",
-                             const std::string &outfile_hist2 = "HIST_COSMIC_HCALIN_run3cosmics_ana502_2025p004_v001-00054530-00000.root",
-                             const std::string &dbtag = "2025p004")
+                             const std::string &outfile = "DST_CALOFITTING_run3cosmics_pro001_pcdb001_v002-00067486-00000.root",
+                           const std::string &outfile_hist = "HIST_CALOFITTINGQA_run3cosmics_pro001_pcdb001_v001-00067486-00000.root",
+                             const std::string &dbtag = "pcdb001")
 {
   // v1 uncomment:
   // CaloTowerDefs::BuilderType buildertype = CaloTowerDefs:::kPRDFTowerv1;
   // v2 uncomment:
-  CaloTowerDefs::BuilderType buildertype = CaloTowerDefs::kWaveformTowerv2;
+  CaloTowerDefs::BuilderType buildertype = CaloTowerDefs::kPRDFTowerv4;
   // v3 uncomment:
 
   Fun4AllServer *se = Fun4AllServer::instance();
@@ -59,6 +57,10 @@ void Fun4All_New_HCalCosmics(int nEvents = 10000,
 
   FlagHandler *flag = new FlagHandler();
   se->registerSubsystem(flag);
+
+  // Get info from DB and store in DSTs
+  TriggerRunInfoReco *triggerinfo = new TriggerRunInfoReco();
+  se->registerSubsystem(triggerinfo);
 
   /////////////////
   // build towers
@@ -80,25 +82,8 @@ void Fun4All_New_HCalCosmics(int nEvents = 10000,
   ctbOHCal->set_softwarezerosuppression(true, 200);
   se->registerSubsystem(ctbOHCal);
 
-  CaloTowerStatus *statusHCalIn = new CaloTowerStatus("HCALINSTATUS");
-  statusHCalIn->set_detector_type(CaloTowerDefs::HCALIN);
-  se->registerSubsystem(statusHCalIn);
-
-  CaloTowerStatus *statusHCALOUT = new CaloTowerStatus("HCALOUTSTATUS");
-  statusHCALOUT->set_detector_type(CaloTowerDefs::HCALOUT);
-  se->registerSubsystem(statusHCALOUT);
-
-  ////////////////////
-  // Calibrate towers
-  std::cout << "Calibrating OHcal" << std::endl;
-  CaloTowerCalib *calibOHCal = new CaloTowerCalib("HCALOUT");
-  calibOHCal->set_detector_type(CaloTowerDefs::HCALOUT);
-  se->registerSubsystem(calibOHCal);
-
-  std::cout << "Calibrating IHcal" << std::endl;
-  CaloTowerCalib *calibIHCal = new CaloTowerCalib("HCALIN");
-  calibIHCal->set_detector_type(CaloTowerDefs::HCALIN);
-  se->registerSubsystem(calibIHCal);
+  CaloFittingQA *ca = new CaloFittingQA("CaloFittingQA");
+  se->registerSubsystem(ca);
 
   // loop over all files in file list and create an input manager for each one
   Fun4AllInputManager *In = nullptr;
@@ -136,47 +121,19 @@ void Fun4All_New_HCalCosmics(int nEvents = 10000,
     }
     infile.close();
   }
-  //std::cout << "Adding Geometry file" << std::endl;
-  //Fun4AllInputManager *intrue2 = new Fun4AllRunNodeInputManager("DST_GEO");
-  //std::string geoLocation = CDBInterface::instance()->getUrl("calo_geo");
-  //intrue2->AddFile(geoLocation);
-  //se->registerInputManager(intrue2);
 
-  ///////////////////////////////////////////
-  // Cosmics histMaker
-//  char outfile_hist[500];
-//sprintf(outfile_hist, "%s-%08d-%05d.root", outfile_hist2.c_str(), runnumber, segment);
-  HCalCosmics *wt2 = new HCalCosmics("HCalCalib_HCALIN", outfile_hist2);
-  wt2->set_tower_threshold(0.2498);  // 500*0.0004996=0.2498
-  wt2->set_vert_threshold(0.2498);   // 500*0.0004996=0.2498
-  wt2->set_veto_threshold(0.17486);  // 350*0.0004996=0.17486
-  wt2->HistBinWidth(0.01);
-  wt2->Detector("HCALIN");
-  wt2->TowerPrefix("TOWERINFO_CALIB_");
-  se->registerSubsystem(wt2);
-
-//  sprintf(outfile_hist, "%s-%08d-%05d.root", outfile_hist1.c_str(), runnumber, segment);
-  HCalCosmics *wt3 = new HCalCosmics("HCalCosmics_HCALOUT", outfile_hist1);
-  wt3->set_tower_threshold(1.665);  // 500*0.00333=1.665
-  wt3->set_vert_threshold(1.665);   // 500*0.00333=1.665
-  wt3->set_veto_threshold(1.1655);  // 350*0.00333=1.1655
-  wt3->HistBinWidth(0.05);
-  wt3->Detector("HCALOUT");
-  wt3->TowerPrefix("TOWERINFO_CALIB_");
-  se->registerSubsystem(wt3);
-
-  char dstoutfile[500];
-  sprintf(dstoutfile, "%s-%08d-%05d.root", outfile.c_str(), runnumber, segment);
+  std::string dstoutfile = std::format("{}-{:08}-{:05}.root",outfile, runnumber, segment);
   Fun4AllDstOutputManager *out = new Fun4AllDstOutputManager("DSTOUT", outfile);
   // this strips all nodes under the Packets PHCompositeNode
   // (means removes all offline packets)
   out->StripCompositeNode("Packets");
-  out->StripNode("TOWERINFO_CALIB_HCALOUT");
-  out->StripNode("TOWERINFO_CALIB_HCALIN");
   se->registerOutputManager(out);
   
   se->run(nEvents);
   se->End();
+
+  QAHistManagerDef::saveQARootFile(outfile_hist);
+
   CDBInterface::instance()->Print();  // print used DB files
   se->PrintTimer();
   delete se;
