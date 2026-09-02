@@ -28,13 +28,17 @@
 
 #include <phool/recoConsts.h>
 
+#include <TSystem.h>
+
+#include <fstream>
+
 R__LOAD_LIBRARY(libfun4all.so)
 R__LOAD_LIBRARY(libfun4allraw.so)
 R__LOAD_LIBRARY(libcalo_reco.so)
 R__LOAD_LIBRARY(libffamodules.so)
 
 void Fun4All_New_HCalCosmics(int nEvents = 0,
-                             const std::string inlist = "files.list",
+                             const std::string &inlist = "files.list",
                              const std::string &outfile = "DST_CALOFITTING_run3cosmics_pro001_pcdb001_v002-00067486-00000.root",
                            const std::string &outfile_hist = "HIST_CALOFITTINGQA_run3cosmics_pro001_pcdb001_v001-00067486-00000.root",
                              const std::string &dbtag = "pcdb001")
@@ -87,13 +91,12 @@ void Fun4All_New_HCalCosmics(int nEvents = 0,
 
   // loop over all files in file list and create an input manager for each one
   Fun4AllInputManager *In = nullptr;
-  ifstream infile;
+  std::ifstream infile;
   infile.open(inlist);
   int iman = 0;
   std::string line;
   bool first{true};
   int runnumber = 0;
-  int segment = 99999;
   if (infile.is_open())
   {
     while (std::getline(infile, line))
@@ -106,9 +109,8 @@ void Fun4All_New_HCalCosmics(int nEvents = 0,
       // extract run number from first not commented out file in list
       if (first)
       {
-        pair<int, int> runseg = Fun4AllUtils::GetRunSegment(line);
+	std::pair<int, int> runseg = Fun4AllUtils::GetRunSegment(line);
         runnumber = runseg.first;
-        segment = runseg.second;
         rc->set_uint64Flag("TIMESTAMP", runnumber);
         first = false;
       }
@@ -122,7 +124,6 @@ void Fun4All_New_HCalCosmics(int nEvents = 0,
     infile.close();
   }
 
-  std::string dstoutfile = std::format("{}-{:08}-{:05}.root",outfile, runnumber, segment);
   Fun4AllDstOutputManager *out = new Fun4AllDstOutputManager("DSTOUT", outfile);
   // this strips all nodes under the Packets PHCompositeNode
   // (means removes all offline packets)
