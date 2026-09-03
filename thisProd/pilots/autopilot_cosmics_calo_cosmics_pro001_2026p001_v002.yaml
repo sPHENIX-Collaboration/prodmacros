@@ -1,0 +1,33 @@
+################################# Prod01 #######################################
+### HCal cosmics downstream production from existing ana568 triggered inputs
+sphnxprod01:
+  defaultlocations:
+    prodbase:   /sphenix/u/sphnxpro/Production2026/sphenixprod
+    configbase: /sphenix/u/sphnxpro/Production2026/cosmics_calo_pro001_2026p001_v002/thisProd/rules
+    submitdir:  /sphenix/data/data03/sphnxpro/production/cosmics/submission/{rule}
+
+  # Event combining is intentionally disabled; downstream uses ana568_2026p001_v001 inputs.
+  # pro001_TRIGGERED_EVENT_cosmics:
+  #   config: cosmics_calo_cosmics_pro001_2026p001_v002.yaml
+  #   runlist: /sphenix/u/sphnxpro/Production2026/cosmics_calo_pro001_2026p001_v002/thisProd/runlist_cosmics_highgain_partial_final10.txt
+  #   jobprio: 90
+  #   submit: on
+  #   dstspider: on
+
+  # Waveform fitting (disabled while HCalCosmics owns DST_CALOFITTING)
+  # pro001_CALOFITTING_cosmics:
+  #   config: cosmics_calo_cosmics_pro001_2026p001_v002.yaml
+  #   runlist: /sphenix/u/sphnxpro/Production2026/cosmics_calo_pro001_2026p001_v002/thisProd/runlist_cosmics_highgain_partial_final10.txt
+  #   jobprio: 60
+  #   submit: on
+  #   dstspider: on
+
+  # HCalCosmics analysis
+  pro001_HCALCOSMICS_cosmics:
+    config: cosmics_calo_cosmics_pro001_2026p001_v002.yaml
+    runlist: /sphenix/u/sphnxpro/Production2026/cosmics_calo_pro001_2026p001_v002/thisProd/runlist_cosmics_highgain_partial_final10.txt
+    jobprio: 60
+    submit: on
+    dstspider: on
+
+###############################################################################
