@@ -1,0 +1,33 @@
+################################# Prod02 #######################################
+### Cosmics TRIGGERED_EVENT production, pcdb001
+sphnxprod02:
+  defaultlocations:
+    prodbase:   /sphenix/u/sphnxpro/Production2026/sphenixprod
+    configbase: /sphenix/u/sphnxpro/Production2026/cosmics_calo_ana569_pcdb001_v001/thisProd/rules
+    submitdir:  /sphenix/data/data03/sphnxpro/production/cosmics/submission/{rule}
+
+  # Event combining
+  ana569_TRIGGERED_EVENT_cosmics:
+    config: cosmics_calo_cosmics_ana569_pcdb001_v001.yaml
+    runlist: /sphenix/u/sphnxpro/Production2026/cosmics_calo_ana569_pcdb001_v001/thisProd/runlist_cosmics_highgain_partial.txt
+    jobprio: 90
+    submit: on
+    dstspider: on
+
+  # Waveform fitting disabled for now
+  # ana569_CALOFITTING_cosmics:
+  #   config: cosmics_calo_cosmics_ana569_pcdb001_v001.yaml
+  #   runlist: /sphenix/u/sphnxpro/Production2026/cosmics_calo_ana569_pcdb001_v001/thisProd/runlist_cosmics_highgain_partial.txt
+  #   jobprio: 60
+  #   submit: on
+  #   dstspider: on
+
+  # HCalCosmics disabled for now
+  # ana569_HCALCOSMICS_cosmics:
+  #   config: cosmics_calo_cosmics_ana569_pcdb001_v001.yaml
+  #   runlist: /sphenix/u/sphnxpro/Production2026/cosmics_calo_ana569_pcdb001_v001/thisProd/runlist_cosmics_highgain_partial.txt
+  #   jobprio: 60
+  #   submit: on
+  #   dstspider: on
+
+###############################################################################

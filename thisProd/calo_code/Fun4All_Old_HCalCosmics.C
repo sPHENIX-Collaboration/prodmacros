@@ -1,5 +1,5 @@
-#ifndef FUN4ALL_NEW_HCALCOSMICS_C
-#define FUN4ALL_NEW_HCALCOSMICS_C
+#ifndef FUN4ALL_OLD_HCALCOSMICS_C
+#define FUN4ALL_OLD_HCALCOSMICS_C
 
 #include <caloreco/CaloTowerBuilder.h>
 #include <caloreco/CaloTowerCalib.h>
@@ -34,7 +34,7 @@ R__LOAD_LIBRARY(libcentrality.so)
 R__LOAD_LIBRARY(libffamodules.so)
 R__LOAD_LIBRARY(libLiteCaloEvalTowSlope.so)
 
-void Fun4All_New_HCalCosmics(int nEvents = 10000,
+void Fun4All_Old_HCalCosmics(int nEvents = 10000,
                              const std::string inlist = "files.list",
                              const std::string &outfile = "DST_CALOFITTING_run3cosmics_ana502_2025p004_v001-00054530-00000.root",
                              const std::string &outfile_hist1 = "HIST_COSMIC_HCALOUT_run3cosmics_ana502_2025p004_v001-00054530-00000.root",
