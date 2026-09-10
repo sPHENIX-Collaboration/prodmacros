@@ -1,5 +1,5 @@
-#ifndef FUN4ALL_NEW_HCALCOSMICS_C
-#define FUN4ALL_NEW_HCALCOSMICS_C
+#ifndef FUN4ALL_HCAL_COSMICS_C
+#define FUN4ALL_HCAL_COSMICS_C
 
 #include <QA.C>
 
@@ -37,7 +37,7 @@ R__LOAD_LIBRARY(libfun4allraw.so)
 R__LOAD_LIBRARY(libcalo_reco.so)
 R__LOAD_LIBRARY(libffamodules.so)
 
-void Fun4All_New_HCalCosmics(int nEvents = 0,
+void Fun4All_Hcal_Cosmics(int nEvents = 0,
                              const std::string &inlist = "files.list",
                              const std::string &outfile = "DST_CALOFITTING_run3cosmics_pro001_pcdb001_v002-00067486-00000.root",
                            const std::string &outfile_hist = "HIST_CALOFITTINGQA_run3cosmics_pro001_pcdb001_v001-00067486-00000.root",
