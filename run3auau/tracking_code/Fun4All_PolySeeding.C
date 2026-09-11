@@ -151,7 +151,6 @@ void Fun4All_PolySeeding(
     
     std::string inputname = "InputManager" + std::to_string(i);
     auto *hitsin = new Fun4AllDstInputManager(inputname);
-    hitsin->TTreeCacheSize(0);
     hitsin->fileopen(filepath);
     se->registerInputManager(hitsin);
     i++;
@@ -170,7 +169,7 @@ void Fun4All_PolySeeding(
             << " vdrift: " << G4TPC::tpc_drift_velocity_reco
             << std::endl;
 
-  TRACKING::streaming_mode = true;
+  TRACKING::streaming_mode = false;
 
   FlagHandler *flag = new FlagHandler();
   se->registerSubsystem(flag);
@@ -222,7 +221,6 @@ void Fun4All_PolySeeding(
 
   Tracking_Reco_SiliconSeed_run2pp();
 
-  
   auto *converter = new TrackSeedTrackMapConverter("SiliconSeedToSvtxTrackMap");
   converter->setTrackSeedName("SiliconTrackSeedContainer");
   converter->setTrackMapName("SiliconSvtxTrackMap");
@@ -251,6 +249,7 @@ void Fun4All_PolySeeding(
   crossingFinder->setInputNodeName("TPC_ASSEMBLEDTRACKS");
   crossingFinder->setOutputNodeName("TPC_CROSSING_DECISIONS");
   crossingFinder->setVertexMapNodeName("SiliconSvtxVertexMap");  // optional, configurable
+  crossingFinder->setTriggeredMode(!TRACKING::streaming_mode);
   se->registerSubsystem(crossingFinder);
 
   auto *cluster = new Tpc_PolyClusterizer();  // makes TPC_POLYCLUSTERS
@@ -365,7 +364,7 @@ se->registerSubsystem(cluster);
 
   out->UseFileRule();
   out->SetClosingScript("./stageout.sh");
-  out->SetClosingScriptArgs(outdir + " --use-cp");
+  out->SetClosingScriptArgs(outdir);
   se->registerOutputManager(out);
 
 
@@ -375,11 +374,11 @@ se->registerSubsystem(cluster);
   hm->setOutfileName(histoout);
   if (!histdir.empty())
   {
-    hm->SetClosingScriptArgs(histdir + " --use-cp");
+    hm->SetClosingScriptArgs(histdir);
   }
   else
   {
-    hm->SetClosingScriptArgs(outdir + " --use-cp");
+    hm->SetClosingScriptArgs(outdir);
   }
   
   se->run(nEvents);
