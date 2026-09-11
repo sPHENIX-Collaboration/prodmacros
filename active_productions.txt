@@ -35,3 +35,4 @@
 
 # Run3auau calo TRIGGERED production, Sep 10, 2026 ana569_pcdb001_v666
 /sphenix/u/sphnxpro/Production2026/run3auau_calo_ana569_pcdb001_v666/thisProd/pilots/autopilot_run3auau_calo_physics_ana569_pcdb001_v666.yaml
+/sphenix/u/sphnxpro/Production2026/run3pp_tracking_combined_ana569_pcdb001_v666/thisProd/pilots/autopilot_run3pp_tracking_physics_ana569_pcdb001_v666.yaml

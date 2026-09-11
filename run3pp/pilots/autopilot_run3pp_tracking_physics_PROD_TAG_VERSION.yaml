@@ -14,6 +14,14 @@ sphnxprod03:
     submit: on
     dstspider: on
 
+  # DST combining
+  PROD_COMBINED_run3pp:
+    config: run3pp_tracking_physics_PROD_TAG_VERSION.yaml
+    runlist: /sphenix/u/sphnxpro/Production2026/BRANCH/thisProd/runlist
+    jobprio: 80
+    submit: on
+    dstspider: on
+
   # Clustering
   PROD_TRKR_CLUSTER_run3pp:
     config: run3pp_tracking_physics_PROD_TAG_VERSION.yaml

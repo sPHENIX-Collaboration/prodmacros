@@ -25,6 +25,30 @@ PROD_STREAMING_EVENT_run3pp:
     priority:              '90'
 
 #______________________________________________________________________________________________________________________
+PROD_COMBINED_run3pp:
+  params:
+    dsttype:     DST_COMBINED
+    period:      run3pp
+    physicsmode: physics
+    dataset:     run3pp
+    build:       PROD
+    dbtag:       TAG
+    version:     VERSION
+
+  input:
+    intriplet:   PROD_TAG_VERSION
+
+  job:
+    script:                 run_combining.sh
+    log:                   '{condor}/{logbase}.condor'
+    neventsper:             1000
+    payload:                [../tracking_code/*]
+    request_memory:         3GB, 5GB
+    request_cpus:          '1'
+    batch_name:            '{rule_name}_{outtriplet}'
+    priority:              '80'
+
+#______________________________________________________________________________________________________________________
 PROD_TRKR_CLUSTER_run3pp:
   params:
     dsttype:     DST_TRKR_CLUSTER
