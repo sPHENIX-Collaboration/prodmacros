@@ -125,9 +125,6 @@ void Fun4All_PolySeeding_Combined(
   
   Enable::CDB = true;
   
-  const std::string dsttype = "STREAMING_EVENT";
-  const std::string dsttype_to_save = "TPC";
-
   G4TPC::sampa_tzero_bias = 0;
 
   // First order corrections will be applied from PHGarfield
@@ -350,10 +347,23 @@ void Fun4All_PolySeeding_Combined(
   out->StripRunNode("CYLINDERGEOM_MICROMEGAS_FULL");
   out->StripRunNode("GEOMETRY_IO");
   
+  out->UseFileRule();
+  out->SetClosingScript("./stageout.sh");
+  out->SetClosingScriptArgs(outdir + " --use-cp");
   se->registerOutputManager(out);
+  
   auto *hm = QAHistManagerDef::getHistoManager();
   std::string histoout = "HIST_" + outfilename;
   hm->setOutfileName(histoout);
+  if (!histdir.empty())
+  {
+    hm->SetClosingScriptArgs(histdir + " --use-cp");
+  }
+  else
+  {
+    hm->SetClosingScriptArgs(outdir + " --use-cp");
+  }
+  
   if (nEvents < 0)
   {
     return;
