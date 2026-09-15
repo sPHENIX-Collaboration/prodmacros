@@ -22,10 +22,7 @@
 # /sphenix/u/sphnxpro/Production2026/cosmics_calo_ana568_2026p001_v001/thisProd/pilots/autopilot_cosmics_calo_cosmics_ana568_2026p001_v001.yaml
 
 # Run3pp polyseed production, Aug 26, 2026 ana567_2026p001_v001
-#/sphenix/u/sphnxpro/Production2026/run3pp_tracking_polyseed_ana567_2026p001_v005/thisProd/pilots/autopilot_run3pp_tracking_polyseed_physics_ana567_2026p001_v005.yaml
-#/sphenix/u/sphnxpro/Production2026/run3pp_tracking_polyseed_ana567_2026p001_v006/thisProd/pilots/autopilot_run3pp_tracking_polyseed_physics_ana567_2026p001_v006.yaml
-#/sphenix/u/sphnxpro/Production2026/run3pp_tracking_polyseed_ana567_2026p001_v007/thisProd/pilots/autopilot_run3pp_tracking_polyseed_physics_ana567_2026p001_v007.yaml
-#/sphenix/u/sphnxpro/Production2026/run3pp_tracking_polyseed_ana567_2026p001_v008/thisProd/pilots/autopilot_run3pp_tracking_polyseed_physics_ana567_2026p001_v008.yaml
+# /sphenix/u/sphnxpro/Production2026/run3pp_tracking_polyseed_combined_ana571_2026p002_v001/thisProd/pilots/autopilot_run3pp_tracking_polyseed_combined_physics_ana571_2026p002_v001.yaml
 
 # # Cosmics HCal downstream final-10 production, Sep 3, 2026 pro001_2026p001_v002
 # /sphenix/u/sphnxpro/Production2026/cosmics_calo_pro001_2026p001_v002/thisProd/pilots/autopilot_cosmics_calo_cosmics_pro001_2026p001_v002.yaml
@@ -33,6 +30,9 @@
 # Cosmics TRIGGERED production, Sep 4, 2026 ana569_pcdb001_v001
 /sphenix/u/sphnxpro/Production2026/cosmics_calo_ana569_pcdb001_v001/thisProd/pilots/autopilot_cosmics_calo_cosmics_ana569_pcdb001_v001.yaml
 
-# Run3auau calo TRIGGERED production, Sep 10, 2026 ana569_pcdb001_v666
-/sphenix/u/sphnxpro/Production2026/run3auau_calo_ana569_pcdb001_v666/thisProd/pilots/autopilot_run3auau_calo_physics_ana569_pcdb001_v666.yaml
-/sphenix/u/sphnxpro/Production2026/run3pp_tracking_combined_ana569_pcdb001_v666/thisProd/pilots/autopilot_run3pp_tracking_physics_ana569_pcdb001_v666.yaml
+# Run3auau calo TRIGGERED production, Sep 11, 2026 ana571_2026p002_v666
+/sphenix/u/sphnxpro/Production2026/run3auau_calo_ana571_2026p002_v666/thisProd/pilots/autopilot_run3auau_calo_physics_ana571_2026p002_v666.yaml
+
+# # Run3pp tracking DST_COMBINED test production, Sep 10, 2026 ana569_pcdb001_v666
+# /sphenix/u/sphnxpro/Production2026/run3pp_tracking_combined_ana569_pcdb001_v666/thisProd/pilots/autopilot_run3pp_tracking_physics_ana569_pcdb001_v666.yaml
+

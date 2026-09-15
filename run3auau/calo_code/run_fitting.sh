@@ -36,10 +36,12 @@ full_command="root.exe -q -b '${root_line}'"
 echo Sourcing ${SPHENIXPROD_SCRIPT_PATH}/common_runscript_exec.sh
 . ${SPHENIXPROD_SCRIPT_PATH}/common_runscript_exec.sh
 
+shopt -s nullglob
 for hfile in HIST_*.root; do
     echo stageout.sh ${hfile} to ${histdir}
     . ./stageout.sh ${hfile} ${histdir}
 done
+shopt -u nullglob
 
 echo ./stageout.sh ${logbase}.root ${outdir} ${dbid}
 . ./stageout.sh ${logbase}.root ${outdir} ${dbid}

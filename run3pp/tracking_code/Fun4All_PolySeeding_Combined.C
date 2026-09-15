@@ -348,23 +348,10 @@ void Fun4All_PolySeeding_Combined(
   out->StripRunNode("CYLINDERGEOM_MICROMEGAS_FULL");
   out->StripRunNode("GEOMETRY_IO");
   
-  out->UseFileRule();
-  out->SetClosingScript("./stageout.sh");
-  out->SetClosingScriptArgs(outdir + " --use-cp");
   se->registerOutputManager(out);
-  
   auto *hm = QAHistManagerDef::getHistoManager();
   std::string histoout = "HIST_" + outfilename;
   hm->setOutfileName(histoout);
-  if (!histdir.empty())
-  {
-    hm->SetClosingScriptArgs(histdir + " --use-cp");
-  }
-  else
-  {
-    hm->SetClosingScriptArgs(outdir + " --use-cp");
-  }
-  
   if (nEvents < 0)
   {
     return;

@@ -39,10 +39,12 @@ eval "${full_command}" ;  status_f4a=$?
 echo ./stageout.sh ${logbase}.root ${outdir} ${dbid}
 ./stageout.sh ${logbase}.root ${outdir} ${dbid}
 
+shopt -s nullglob
 for hfile in HIST_*.root; do
     echo stageout.sh ${hfile} to ${histdir}
     ./stageout.sh ${hfile} ${histdir}
 done
+shopt -u nullglob
 
 ls -la
 

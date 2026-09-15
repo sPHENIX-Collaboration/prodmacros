@@ -35,6 +35,7 @@ for hfile in HIST_*.root; do
     echo ./stageout ${hfile} to ${histdir}
     ./stageout.sh ${hfile} ${histdir}
 done
+shopt -u nullglob
 
 for hfile in CALIB_*.root; do
     echo ./stageout ${hfile} to ${histdir}

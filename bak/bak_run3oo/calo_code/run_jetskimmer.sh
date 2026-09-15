@@ -40,10 +40,12 @@ root_line="Fun4All_JetSkimmedProductionYear2.C(${nevents},\"${fname_calo}\",\"${
 full_command="root.exe -q -b '${root_line}'"
 eval "${full_command}"
 
+shopt -s nullglob
 for hfile in HIST_*.root; do
     echo stageout.sh ${hfile} to ${histdir}
     ./stageout.sh ${hfile} ${histdir}
 done
+shopt -u nullglob
 
 echo ./stageout.sh ${outfile_jetcalo} ${outdir} ${dbid}
 ./stageout.sh ${outfile_jetcalo} ${outdir} ${dbid}

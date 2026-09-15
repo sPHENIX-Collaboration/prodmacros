@@ -35,10 +35,12 @@ root_line="Fun4All_Year2_Fitting.C(${nevents},\"infile.list\",\"${outfile}\",\"$
 full_command="root.exe -q -b '${root_line}'"
 eval "${full_command}"
 
+shopt -s nullglob
 for hfile in HIST_*.root; do
     echo stageout.sh ${hfile} to ${histdir}
     ./stageout.sh ${hfile} ${histdir}
 done
+shopt -u nullglob
 
 echo ./stageout.sh ${logbase}.root ${outdir} ${dbid}
 ./stageout.sh ${logbase}.root ${outdir} ${dbid}
@@ -110,10 +112,12 @@ for infile_ in ${inputs[@]}; do
     echo Stageout ${outfile} to ${outdir}
         ./stageout.sh ${outfile} ${outdir}
  
+    shopt -s nullglob
     for hfile in `ls HIST_*.root`; do
 	echo Stageout ${hfile} to ${histdir}
         ./stageout.sh ${hfile} ${histdir}
     done
+    shopt -u nullglob
 
 done
 

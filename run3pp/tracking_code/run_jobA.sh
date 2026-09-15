@@ -32,10 +32,12 @@ echo Sourcing ${SPHENIXPROD_SCRIPT_PATH}/common_runscript_exec.sh
 echo ./stageout.sh ${logbase}.root ${outdir} ${dbid}
 . ./stageout.sh ${logbase}.root ${outdir} ${dbid}
 
+shopt -s nullglob
 for hfile in HIST_*.root; do
     echo stageout.sh ${hfile} to ${histdir}
     . ./stageout.sh ${hfile} ${histdir}
 done
+shopt -u nullglob
 
 echo Sourcing ${SPHENIXPROD_SCRIPT_PATH}/common_runscript_finish.sh
 . ${SPHENIXPROD_SCRIPT_PATH}/common_runscript_finish.sh
