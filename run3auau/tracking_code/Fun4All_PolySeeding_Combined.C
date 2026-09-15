@@ -325,6 +325,7 @@ void Fun4All_PolySeeding_Combined(
   out->AddNode("TPC_POLYTRACKS");
   out->AddNode("TPC_POLYTRACKVERTICES");
   out->AddNode("TRKR_CLUSTER");
+  out->AddNode("TRKR_CLUSTER_SEED");
   out->AddNode("TRKR_CLUSTERCROSSINGASSOC");
   out->AddNode("LaserEventInfo");
   out->AddNode("GL1RAWHIT");
