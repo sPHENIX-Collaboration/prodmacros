@@ -327,6 +327,7 @@ void Fun4All_PolySeeding_Combined(
   out->AddNode("TRKR_CLUSTER");
   out->AddNode("TRKR_CLUSTERCROSSINGASSOC");
   out->AddNode("LaserEventInfo");
+  out->AddNode("TRKR_CLUSTER_SEED");
   out->AddNode("GL1RAWHIT");
   if (G4TPC::ENABLE_CENTRAL_MEMBRANE_CLUSTERING)
   {
