@@ -21,11 +21,8 @@
 # # Cosmics high-gain partial production, Aug 25, 2026 ana568_2026p001_v001
 # /sphenix/u/sphnxpro/Production2026/cosmics_calo_ana568_2026p001_v001/thisProd/pilots/autopilot_cosmics_calo_cosmics_ana568_2026p001_v001.yaml
 
-# Run3pp polyseed production, Aug 26, 2026 ana567_2026p001_v001
-# /sphenix/u/sphnxpro/Production2026/run3pp_tracking_polyseed_combined_ana571_2026p002_v001/thisProd/pilots/autopilot_run3pp_tracking_polyseed_combined_physics_ana571_2026p002_v001.yaml
-
-# # Cosmics HCal downstream final-10 production, Sep 3, 2026 pro001_2026p001_v002
-# /sphenix/u/sphnxpro/Production2026/cosmics_calo_pro001_2026p001_v002/thisProd/pilots/autopilot_cosmics_calo_cosmics_pro001_2026p001_v002.yaml
+# Run3pp polyseed production
+/sphenix/u/sphnxpro/Production2026/run3pp_tracking_polyseed_combined_ana571_2026p002_v001/thisProd/pilots/autopilot_run3pp_tracking_polyseed_combined_physics_ana571_2026p002_v001.yaml
 
 # Cosmics TRIGGERED production, Sep 4, 2026 ana569_pcdb001_v001
 /sphenix/u/sphnxpro/Production2026/cosmics_calo_ana569_pcdb001_v001/thisProd/pilots/autopilot_cosmics_calo_cosmics_ana569_pcdb001_v001.yaml
