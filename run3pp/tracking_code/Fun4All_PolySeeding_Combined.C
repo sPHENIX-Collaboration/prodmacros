@@ -350,11 +350,7 @@ void Fun4All_PolySeeding_Combined(
   auto *hm = QAHistManagerDef::getHistoManager();
   std::string histoout = "HIST_" + outfilename;
   hm->setOutfileName(histoout);
-<<<<<<< HEAD
-=======
 
-  
->>>>>>> ec412791b303f845c9ed105aee109cc275ce43ba
   if (nEvents < 0)
   {
     return;
