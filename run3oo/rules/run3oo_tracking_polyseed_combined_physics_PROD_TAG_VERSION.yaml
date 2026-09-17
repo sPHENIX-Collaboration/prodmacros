@@ -1,9 +1,9 @@
-PROD_COMBINED_run3pp:
+PROD_COMBINED_run3oo:
   params:
     dsttype:     DST_COMBINED
-    period:      run3pp
+    period:      run3oo
     physicsmode: physics
-    dataset:     run3pp
+    dataset:     run3oo
     build:       PROD
     dbtag:       TAG
     version:     VERSION
@@ -22,12 +22,12 @@ PROD_COMBINED_run3pp:
     priority:              '80'
 
 #______________________________________________________________________________________________________________________
-PROD_TRKR_POLYSEED_COMBINED_run3pp:
+PROD_TRKR_POLYSEED_COMBINED_run3oo:
   params:
     dsttype:     DST_TRKR_SEED
-    period:      run3pp
+    period:      run3oo
     physicsmode: physics
-    dataset:     run3pp
+    dataset:     run3oo
     build:       PROD
     dbtag:       TAG
     version:     VERSION
