@@ -1,4 +1,4 @@
-s/*
+/*
  * This macro is run in our daily CI and is intended as a minimum working
  * example showing how to unpack the raw hits into the offline tracker hit
  * format. No other reconstruction or analysis is performed
