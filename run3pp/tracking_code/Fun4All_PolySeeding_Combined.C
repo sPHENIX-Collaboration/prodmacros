@@ -318,11 +318,6 @@ void Fun4All_PolySeeding_Combined(
 
   out->AddNode("Sync");
   out->AddNode("EventHeader");
-  out->AddNode("TPC_CROSSING_DECISIONS");
-  out->AddNode("TPC_POLYCLUSTERS");
-  out->AddNode("TPC_POLYTRACKS");
-  out->AddNode("TPC_POLYTRACKVERTICES");
-  out->AddNode("TRKR_CLUSTER");
   out->AddNode("TRKR_CLUSTERCROSSINGASSOC");
   out->AddNode("LaserEventInfo");
   out->AddNode("GL1RAWHIT");
@@ -335,10 +330,7 @@ void Fun4All_PolySeeding_Combined(
   
   out->AddNode("TpcTrackSeedContainer");
   out->AddNode("SiliconTrackSeedContainer");
-  out->AddNode("LaserEventInfo");
-  out->AddNode("TRKR_CLUSTERCROSSINGASSOC");
   out->AddNode("SvtxTrackSeedContainer");
-  out->AddNode("GL1RAWHIT");
   
   out->StripRunNode("CYLINDERGEOM_MVTX");
   out->StripRunNode("CYLINDERGEOM_INTT");
