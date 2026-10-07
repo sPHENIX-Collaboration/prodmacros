@@ -1,0 +1,40 @@
+################################# Prod02 #######################################
+sphnxprod02:
+  defaultlocations:
+    prodbase:   /sphenix/u/sphnxpro/Production2026/sphenixprod
+    configbase: /sphenix/u/sphnxpro/Production2026/run3pp_tracking_ana564_2026p001_v001/thisProd/rules
+    submitdir:  /sphenix/data/data02/sphnxpro/production/run3pp/submission/{rule}
+
+  # Clustering
+  ana564_TRKR_CLUSTER_run3pp:
+    config: run3pp_tracking_physics_ana564_2026p001_v001.yaml
+    runlist: /sphenix/u/sphnxpro/Production2026/run3pp_tracking_ana564_2026p001_v001/thisProd/refreshed_runlist_run3pp.list
+    jobprio: 60
+    submit: on
+    dstspider: on
+
+  # Seeding
+  ana564_TRKR_SEED_run3pp:
+    config: run3pp_tracking_physics_ana564_2026p001_v001.yaml
+    runlist: /sphenix/u/sphnxpro/Production2026/run3pp_tracking_ana564_2026p001_v001/thisProd/refreshed_runlist_run3pp.list
+    jobprio: 30
+    submit: on
+    dstspider: on
+
+################################# Prod03 #######################################
+### Second location for run3oo seeding. Lower prio to defer to OO
+sphnxprod03:
+  defaultlocations:
+    prodbase:   /sphenix/u/sphnxpro/Production2026/sphenixprod
+    configbase: /sphenix/u/sphnxpro/Production2026/run3pp_tracking_ana564_2026p001_v001/thisProd/rules
+    submitdir:  /sphenix/data/data02/sphnxpro/production/run3pp/submission/{rule}
+
+  # Seeding
+  ana564_TRKR_SEED_run3pp:
+    config: run3pp_tracking_physics_ana564_2026p001_v001.yaml
+    runlist: /sphenix/u/sphnxpro/Production2026/run3pp_tracking_ana564_2026p001_v001/thisProd/refreshed_runlist_run3pp.list
+    jobprio: 29
+    submit: on
+    dstspider: on
+
+###############################################################################
