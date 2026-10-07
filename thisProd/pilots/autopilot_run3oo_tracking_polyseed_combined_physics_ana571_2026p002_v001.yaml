@@ -1,0 +1,27 @@
+################################# Prod03 #######################################
+### Standard full production
+sphnxprod03:
+  defaultlocations:
+    prodbase:   /sphenix/u/sphnxpro/Production2026/sphenixprod
+    configbase: /sphenix/u/sphnxpro/Production2026/run3oo_tracking_polyseed_combined_physics_ana571_2026p002_v001/thisProd/rules
+    submitdir:  /sphenix/data/data02/sphnxpro/production/run3oo/submission/{rule}
+
+  # Combined polyseeding
+  PROD_COMBINED_run3oo:
+    config: run3oo_tracking_polyseed_combined_physics_ana571_2026p002_v001.yaml
+#    runlist: /sphenix/u/sphnxpro/Production2026/run3oo_tracking_ana571_2026p002_v001/thisProd/runlist
+    runlist: /sphenix/u/sphnxpro/Production2026/run3oo_tracking_ana564_2026p001_v001/thisProd/trimmed_runlist_run3oo.list
+    jobprio: 60
+    submit: on
+    dstspider: on
+
+  # Combined polyseeding
+  PROD_TRKR_POLYSEED_COMBINED_run3oo:
+    config: run3oo_tracking_polyseed_combined_physics_ana571_2026p002_v001.yaml
+#    runlist: /sphenix/u/sphnxpro/Production2026/run3oo_tracking_ana571_2026p002_v001/thisProd/runlist
+    runlist: /sphenix/u/sphnxpro/Production2026/run3oo_tracking_ana564_2026p001_v001/thisProd/trimmed_runlist_run3oo.list
+    jobprio: 30
+    submit: off
+    dstspider: on
+
+###############################################################################

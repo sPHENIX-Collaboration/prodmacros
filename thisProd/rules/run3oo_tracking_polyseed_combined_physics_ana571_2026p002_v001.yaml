@@ -4,12 +4,12 @@ PROD_COMBINED_run3oo:
     period:      run3oo
     physicsmode: physics
     dataset:     run3oo
-    build:       PROD
-    dbtag:       TAG
-    version:     VERSION
+    build:        ana.571
+    dbtag:        2026p002
+    version:      001
 
   input:
-    intriplet:   PROD_TAG_VERSION
+    intriplet:   ana561_2025p013_v001
 
   job:
     script:                 run_combining.sh
@@ -28,12 +28,12 @@ PROD_TRKR_POLYSEED_COMBINED_run3oo:
     period:      run3oo
     physicsmode: physics
     dataset:     run3oo
-    build:       PROD
-    dbtag:       TAG
-    version:     VERSION
+    build:        ana.571
+    dbtag:        2026p002
+    version:      001
 
   input:
-    intriplet:   PROD_TAG_VERSION
+    intriplet:   ana571_2026p002_v001
     inputmode:   combined4polyseed
 
   job:
