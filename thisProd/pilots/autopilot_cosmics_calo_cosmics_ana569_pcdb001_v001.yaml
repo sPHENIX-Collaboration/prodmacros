@@ -23,11 +23,11 @@ sphnxprod02:
   #   dstspider: on
 
   # HCalCosmics disabled for now
-  # ana569_HCALCOSMICS_cosmics:
-  #   config: cosmics_calo_cosmics_ana569_pcdb001_v001.yaml
-  #   runlist: /sphenix/u/sphnxpro/Production2026/cosmics_calo_ana569_pcdb001_v001/thisProd/runlist_cosmics_highgain_partial.txt
-  #   jobprio: 60
-  #   submit: on
-  #   dstspider: on
+  ana569_HCALCOSMICS_cosmics:
+    config: cosmics_calo_cosmics_ana569_pcdb001_v001.yaml
+    runlist: /sphenix/u/sphnxpro/Production2026/cosmics_calo_ana569_pcdb001_v001/thisProd/runlist_cosmics_highgain_partial.txt
+    jobprio: 60
+    submit: on
+    dstspider: on
 
 ###############################################################################
