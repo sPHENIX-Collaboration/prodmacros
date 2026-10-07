@@ -1,0 +1,18 @@
+################################# Prod03 #######################################
+### Standard full production
+sphnxprod01:
+  defaultlocations:
+    prodbase:   /sphenix/u/sphnxpro/Production2026/sphenixprod
+    configbase: /sphenix/u/sphnxpro/Production2026/run3pp_tracking_ana561_2025p013_v001/thisProd/rules
+    submitdir:  /sphenix/data/data02/sphnxpro/production/run3pp/submission/{rule}
+
+  # Event combining
+  ana561_STREAMING_EVENT_run3pp:
+    config: run3pp_tracking_physics_ana561_2025p013_v001.yaml
+    runlist: /sphenix/u/sphnxpro/Production2026/run3pp_tracking_ana561_2025p013_v001/thisProd/refreshed_runlist_run3pp.list
+    jobprio: 90
+    submit: on
+    dstspider: on
+
+
+###############################################################################
