@@ -1,0 +1,40 @@
+################################# Prod03 #######################################
+### Standard full production 
+sphnxprod04:
+  defaultlocations:
+    prodbase:   /sphenix/u/sphnxpro/Production2026/sphenixprod
+    configbase: /sphenix/u/sphnxpro/Production2026/run2pp_calo_pro002_pcdb003_v001/thisProd/rules
+    submitdir:  /sphenix/data/data03/sphnxpro/production/run2pp/submission/{rule}
+
+  # Event combining
+  PROD_TRIGGERED_EVENT_run2pp:
+    config: run2pp_calo_physics_pro002_pcdb003_v001.yaml
+    runlist: /sphenix/u/sphnxpro/Production2026/run2pp_calo_pro002_pcdb003_v001/thisProd/runlist_run2pp_1M_v1.list
+    # runs: [82374 82703]
+    jobprio: 90
+    submit: on
+    dstspider: on
+
+sphnxprod01:
+  defaultlocations:
+    prodbase:   /sphenix/u/sphnxpro/Production2026/sphenixprod
+    configbase: /sphenix/u/sphnxpro/Production2026/run2pp_calo_pro002_pcdb003_v001/thisProd/rules
+    submitdir:  /sphenix/data/data03/sphnxpro/production/run2pp/submission/{rule}
+
+  # Waveform fitting
+  PROD_CALOFITTING_run2pp:
+    config: run2pp_calo_physics_pro002_pcdb003_v001.yaml
+    runlist: /sphenix/u/sphnxpro/Production2026/run2pp_calo_pro002_pcdb003_v001/thisProd/runlist_run2pp_1M_v1.list
+    jobprio: 60
+    submit: off
+    dstspider: off
+
+  # Jet skimmer
+  PROD_JETSKIMMER_run2pp:
+    config: run2pp_calo_physics_pro002_pcdb003_v001.yaml
+    runlist: /sphenix/u/sphnxpro/Production2026/run2pp_calo_pro002_pcdb003_v001/thisProd/runlist_run2pp_1M_v1.list
+    jobprio: 30
+    submit: off
+    dstspider: off
+
+###############################################################################
