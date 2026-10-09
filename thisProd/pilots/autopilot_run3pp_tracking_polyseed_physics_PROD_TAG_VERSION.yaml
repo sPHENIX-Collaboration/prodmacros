@@ -1,0 +1,17 @@
+################################# Prod03 #######################################
+### Standard full production
+sphnxprod03:
+  defaultlocations:
+    prodbase:   /sphenix/u/sphnxpro/Production2026/sphenixprod
+    configbase: /sphenix/u/sphnxpro/Production2026/BRANCH/thisProd/rules
+    submitdir:  /sphenix/data/data02/sphnxpro/production/run3pp/submission/{rule}
+
+  # Polyseeding
+  PROD_TRKR_POLYSEED_run3pp:
+    config: run3pp_tracking_polyseed_physics_PROD_TAG_VERSION.yaml
+    runlist: /sphenix/u/sphnxpro/Production2026/BRANCH/thisProd/runlist
+    jobprio: 30
+    submit: on
+    dstspider: on
+
+###############################################################################
