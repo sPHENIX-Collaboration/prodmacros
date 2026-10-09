@@ -1,0 +1,38 @@
+sphnxprod04:
+  defaultlocations:
+    prodbase:   /sphenix/u/sphnxpro/Production2026/sphenixprod
+    configbase: /sphenix/u/sphnxpro/Production2026/run3auau_calo_pro002_pcdb003_v001/thisProd/rules
+    submitdir:  /sphenix/data/data03/sphnxpro/production/run3auau/submission/{rule}
+
+  # Event combining
+  PROD_TRIGGERED_EVENT_run3auau:
+    config: run3auau_calo_physics_pro002_pcdb003_v001.yaml
+    runlist: /sphenix/u/sphnxpro/Production2026/run3auau_calo_pro002_pcdb003_v001/thisProd/runlist_run3auau_physics_100kevents_ondisk_test1.list
+    # runs: [82374 82703]
+    jobprio: 90
+    submit: on
+    dstspider: on
+
+sphnxprod02:
+  defaultlocations:
+    prodbase:   /sphenix/u/sphnxpro/Production2026/sphenixprod
+    configbase: /sphenix/u/sphnxpro/Production2026/run3auau_calo_pro002_pcdb003_v001/thisProd/rules
+    submitdir:  /sphenix/data/data03/sphnxpro/production/run3auau/submission/{rule}
+
+  # Waveform fitting
+  PROD_CALOFITTING_run3auau:
+    config: run3auau_calo_physics_pro002_pcdb003_v001.yaml
+    runlist: /sphenix/u/sphnxpro/Production2026/run3auau_calo_pro002_pcdb003_v001/thisProd/runlist_run3auau_physics_100kevents_ondisk_test1.list
+    jobprio: 60
+    submit: off
+    dstspider: off
+
+  # Jet skimmer
+  PROD_JETSKIMMER_run3auau:
+    config: run3auau_calo_physics_pro002_pcdb003_v001.yaml
+    runlist: /sphenix/u/sphnxpro/Production2026/run3auau_calo_pro002_pcdb003_v001/thisProd/runlist_run3auau_physics_100kevents_ondisk_test1.list
+    jobprio: 30
+    submit: off
+    dstspider: off
+
+###############################################################################

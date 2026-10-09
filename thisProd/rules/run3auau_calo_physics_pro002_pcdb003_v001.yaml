@@ -1,0 +1,91 @@
+#______________________________________________________________________________
+pro002_TRIGGERED_EVENT_run3auau:
+  params:
+    dsttype:      DST_TRIGGERED_EVENT
+    build:        pro.002
+    dbtag:        pcdb003
+    version:      1
+    period:       run3auau
+    dataset:      run3auau
+    physicsmode:  physics
+
+  input:
+    db:             rawr
+    table:          datasets
+    min_run_time:   300
+    min_run_events: 100000
+
+  job:
+    script:                 run_eventcombine.sh
+    log:                   '{condor}/{logbase}.condor'
+    neventsper:             10000
+    payload:                [../triggered_code/*]
+    request_memory:         3.9 GB, 6 GB
+    request_xferslots:     '3'
+    batch_name:            '{rule_name}_{outtriplet}'
+    priority:              '90'
+    filesystem:
+      logdir:   "/sphenix/data/data03/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/log"
+      histdir:  "/sphenix/data/data03/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/hist"
+      condor:            "/tmp/data03/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/log"
+
+#______________________________________________________________________________
+pro002_CALOFITTING_run3auau:
+  params:
+    dsttype:      DST_CALOFITTING
+    build:        pro.002
+    dbtag:        pcdb003
+    version:      1
+    period:       run3auau
+    dataset:      run3auau
+    physicsmode:  physics
+
+  input:
+    table:        datasets
+    intriplet:    pro002_pcdb003_v001  # This is the output triplet of the previous rule
+
+  job:
+    script:                 run_fitting.sh
+    log:                   '{condor}/{logbase}.condor'
+    neventsper:             100000
+    payload:                [../calo_code/*]
+    request_memory:         2500MB, 3.9GB, 6GB
+    request_cpus:          '1'
+    batch_name:            '{rule_name}_{outtriplet}'
+    priority:              '60'
+    filesystem:
+      logdir:   "/sphenix/data/data03/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/log"
+      histdir:  "/sphenix/data/data03/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/hist"
+      condor:            "/tmp/data03/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/log"
+
+#______________________________________________________________________________
+pro002_JETSKIMMER_run3auau:
+  params:
+    dsttype:     DST_JETCALO
+    build:       pro.002
+    dbtag:       pcdb003
+    version:     1
+    period:      run3auau
+    dataset:     run3auau
+    physicsmode: physics
+
+  input:
+    table:       datasets
+    intriplet:   pro002_pcdb003_v001
+    indsttype:   DST_CALOFITTING
+
+  job:
+    script:                 run_jetskimmer.sh
+    log:                   '{condor}/{logbase}.condor'
+    neventsper:             100000
+    payload:                [../calo_code/*]
+    request_memory:         2500MB, 3.9GB, 6GB
+    request_cpus:          '1'
+    batch_name:            '{rule_name}_{outtriplet}'
+    priority:              '60'
+    filesystem:
+      logdir:   "/sphenix/data/data03/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/log"
+      histdir:  "/sphenix/data/data03/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/hist"
+      condor:            "/tmp/data03/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/log"
+
+###############################################################################
