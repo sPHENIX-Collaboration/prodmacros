@@ -1,0 +1,24 @@
+PROD_TRKR_POLYSEED_run3pp:
+  params:
+    dsttype:     DST_TRKR_SEED
+    period:      run3pp
+    physicsmode: physics
+    dataset:     run3pp
+    build:       PROD
+    dbtag:       TAG
+    version:     VERSION
+
+  input:
+    intriplet:   PROD_TAG_VERSION
+    inputmode:   input4polyseed
+
+  job:
+    script:                 run_rolloverPoly.sh
+    log:                   '{condor}/{logbase}.condor'
+    neventsper:             1000
+    payload:                [../tracking_code/*]
+    request_memory:         9GB, 12GB
+    request_cpus:          '2'
+    batch_name:            '{rule_name}_{outtriplet}'
+    priority:              '30'
+
