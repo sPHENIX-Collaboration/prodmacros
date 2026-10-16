@@ -1,0 +1,25 @@
+################################# Prod02 #######################################
+### Standard full production
+sphnxprod02:
+  defaultlocations:
+    prodbase:   /sphenix/u/sphnxpro/Production2026/sphenixprod
+    configbase: /sphenix/u/sphnxpro/Production2026/run3auau_tracking_polyseed_combined_physics_ana578_2026p004_v001/thisProd/rules
+    submitdir:  /sphenix/data/data02/sphnxpro/production/run3auau/submission/{rule}
+
+  # Combined polyseeding
+  ana578_TRKR_POLYSEED_COMBINED_run3auau:
+    config: run3auau_tracking_polyseed_combined_physics_ana578_2026p004_v001.yaml
+    runlist: /sphenix/u/sphnxpro/Production2026/run3auau_tracking_polyseed_combined_physics_ana578_2026p004_v001/thisProd/trimmed_runlist_run3auau.list
+    jobprio: 30
+    submit: on
+    dstspider: on
+
+###############################################################################
+
+  # Track building from combined-polyseed output
+  ana578_TRKR_TRACKS_run3auau:
+    config: run3auau_tracking_polyseed_combined_physics_ana578_2026p004_v001.yaml
+    runlist: /sphenix/u/sphnxpro/Production2026/run3auau_tracking_polyseed_combined_physics_ana578_2026p004_v001/thisProd/trimmed_runlist_run3auau.list
+    jobprio: 30
+    submit: on
+    dstspider: on
