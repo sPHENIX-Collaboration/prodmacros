@@ -1,0 +1,13 @@
+# DST_COMBINED only; downstream tracking jobs use a separate production.
+sphnxprod03:
+  defaultlocations:
+    prodbase:   /sphenix/u/sphnxpro/Production2026/sphenixprod
+    configbase: /sphenix/u/sphnxpro/Production2026/run3pp_tracking_dst_combined_physics_ana581_2026p005_v001/thisProd/rules
+    submitdir:  /sphenix/data/data02/sphnxpro/production/run3pp/submission/{rule}
+
+  ana581_COMBINED_run3pp:
+    config: run3pp_tracking_dst_combined_physics_ana581_2026p005_v001.yaml
+    runlist: /sphenix/u/sphnxpro/Production2026/run3pp_tracking_dst_combined_physics_ana581_2026p005_v001/thisProd/runlist_run3pp_dst_combined.txt
+    jobprio: 80
+    submit: on
+    dstspider: on
