@@ -1,0 +1,48 @@
+ana581_TRKR_POLYSEED_COMBINED_run3auau:
+  params:
+    dsttype:     DST_TRKR_SEED
+    period:      run3auau
+    physicsmode: physics
+    dataset:     run3auau
+    build:       ana.581
+    dbtag:       2026p005
+    version:     1
+
+  input:
+    intriplet:   ana581_2026p005_v001
+    inputmode:   combined4polyseed
+
+  job:
+    script:                 run_polyseed_combined.sh
+    log:                   '{condor}/{logbase}.condor'
+    neventsper:             1000
+    payload:                [../tracking_code/*]
+    request_memory:         5 GB, 7GB
+    request_cpus:          '1'
+    batch_name:            '{rule_name}_{outtriplet}'
+    priority:              '30'
+
+
+#______________________________________________________________________________________________________________________
+ana581_TRKR_TRACKS_run3auau:
+  params:
+    dsttype:     DST_TRKR_TRACKS
+    period:      run3auau
+    physicsmode: physics
+    dataset:     run3auau
+    build:       ana.581
+    dbtag:       2026p005
+    version:     1
+
+  input:
+    intriplet:   ana581_2026p005_v001
+
+  job:
+    script:                 run_jobC.sh
+    log:                   '{condor}/{logbase}.condor'
+    neventsper:             1000
+    payload:                [../tracking_code/*]
+    request_memory:         2.3GB, 3GB
+    request_cpus:          '1'
+    batch_name:            '{rule_name}_{outtriplet}'
+    priority:              '30'
