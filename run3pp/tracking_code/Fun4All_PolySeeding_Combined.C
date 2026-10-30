@@ -220,12 +220,16 @@ void Fun4All_PolySeeding_Combined(
 
   auto *finder_svx = new PHSimpleVertexFinder("SiliconVertexFinder");
   finder_svx->Verbosity(0);
-  finder_svx->setDcaCut(0.1);
-  finder_svx->setTrackPtCut(0.2);
-  finder_svx->setBeamLineCut(1);
-  finder_svx->setTrackQualityCut(500);
-  finder_svx->setNmvtxRequired(3);
-  finder_svx->setOutlierPairCut(0.1);
+  finder_svx->setDcaCut(0.5);
+  finder_svx->setTrackPtCut(0.1);
+  finder_svx->setBeamSpotCutX(-0.2, 0.2);
+  finder_svx->setBeamSpotCutY(-0.2, 0.2);
+  finder_svx->setRequireMVTX(true);
+  finder_svx->setNmvtxRequired(2);
+  finder_svx->setRequireINTT(true);
+  finder_svx->setNinttRequired(1);
+  finder_svx->setTrackQualityCut(10000000000.0);
+  finder_svx->setOutlierPairCut(0.75);
   finder_svx->setTrackMapName("SiliconSvtxTrackMap");
   finder_svx->setVertexMapName("SiliconSvtxVertexMap");
   se->registerSubsystem(finder_svx);
