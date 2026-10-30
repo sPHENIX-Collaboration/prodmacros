@@ -1,4 +1,4 @@
-# Downstream tracking is inactive until explicitly enabled.
+# Downstream tracking production.
 sphnxprod02:
   defaultlocations:
     prodbase:   /sphenix/u/sphnxpro/Production2026/sphenixprod
@@ -9,12 +9,12 @@ sphnxprod02:
     config: run3auau_tracking_downstream_ana581_2026p005_v001.yaml
     runlist: /sphenix/u/sphnxpro/Production2026/run3auau_tracking_downstream_ana581_2026p005_v001/thisProd/runlist_run3auau_full.txt
     jobprio: 30
-    submit: off
-    dstspider: off
+    submit: on
+    dstspider: on
 
   ana581_TRKR_TRACKS_run3auau:
     config: run3auau_tracking_downstream_ana581_2026p005_v001.yaml
     runlist: /sphenix/u/sphnxpro/Production2026/run3auau_tracking_downstream_ana581_2026p005_v001/thisProd/runlist_run3auau_full.txt
     jobprio: 30
-    submit: off
-    dstspider: off
+    submit: on
+    dstspider: on
