@@ -56,7 +56,6 @@ void Fun4All_Fitting_QA(int nEvents = 100,
   ///////////////////////////////////
   // Validation
   CaloFittingQA *ca = new CaloFittingQA("CaloFittingQA");
-  ca->set_offlineflag(true);  // raw waveforms from packet nodes, not PRDF
   se->registerSubsystem(ca);
 
   Fun4AllInputManager *In = nullptr;
