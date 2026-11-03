@@ -18,15 +18,15 @@ sphnxprod01:
     config: run2auau_calo_physics_ana581_2026p005_v001.yaml
     runlist: /sphenix/u/sphnxpro/Production2026/run2auau_calo_ana581_2026p005_v001/thisProd/runlist_run2auau_calo_cleaned.list
     jobprio: 60
-    submit: off
-    dstspider: off
+    submit: on
+    dstspider: on
 
   # Jet skimmer
   ana581_JETSKIMMER_run2auau:
     config: run2auau_calo_physics_ana581_2026p005_v001.yaml
     runlist: /sphenix/u/sphnxpro/Production2026/run2auau_calo_ana581_2026p005_v001/thisProd/runlist_run2auau_calo_cleaned.list
     jobprio: 30
-    submit: off
-    dstspider: off
+    submit: on
+    dstspider: on
 
 ###############################################################################
