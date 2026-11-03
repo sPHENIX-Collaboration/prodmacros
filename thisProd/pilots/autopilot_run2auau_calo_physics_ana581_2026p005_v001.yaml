@@ -1,4 +1,4 @@
-sphnxprod01:
+sphnxprod02:
   defaultlocations:
     prodbase:   /sphenix/u/sphnxpro/Production2026/sphenixprod
     configbase: /sphenix/u/sphnxpro/Production2026/run2auau_calo_ana581_2026p005_v001/thisProd/rules
@@ -17,7 +17,7 @@ sphnxprod01:
   ana581_CALOFITTING_run2auau:
     config: run2auau_calo_physics_ana581_2026p005_v001.yaml
     runlist: /sphenix/u/sphnxpro/Production2026/run2auau_calo_ana581_2026p005_v001/thisProd/runlist_run2auau_calo_cleaned.list
-    jobprio: 60
+    jobprio: 150
     submit: on
     dstspider: on
 
@@ -25,7 +25,7 @@ sphnxprod01:
   ana581_JETSKIMMER_run2auau:
     config: run2auau_calo_physics_ana581_2026p005_v001.yaml
     runlist: /sphenix/u/sphnxpro/Production2026/run2auau_calo_ana581_2026p005_v001/thisProd/runlist_run2auau_calo_cleaned.list
-    jobprio: 30
+    jobprio: 150
     submit: on
     dstspider: on
 
