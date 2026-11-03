@@ -6,8 +6,6 @@
 
 #include <calotrigger/TriggerRunInfoReco.h>
 
-#include <calovalid/CaloFittingQA.h>
-
 #include <calopacketskimmer/CaloPacketSkimmer.h>
 
 #include <mbd/MbdReco.h>
@@ -38,12 +36,10 @@ R__LOAD_LIBRARY(libCaloPacketSkimmer.so)
 
 // this pass containis the reco process that's stable wrt time stamps(raw tower building)
 void Fun4All_Fitting(int nEvents = 100,
-                     const std::string &inlist = "files.list",
-                     const std::string &outfile1 = "DST_CALOFITTING_run3oo_pro001_pcdb001_v001-00082703-00000.root",
-                     const std::string &outfile2 = "DST_ZDC_RAW_run3oo_pro001_pcdb001_v001-00082703-00000.root",
-                     const std::string &/*outfile3*/ = "DST_SEPD_RAW_run3oo_pro001_pcdb001_v001-00082703-00000.root",
-                     const std::string &outfile_hist = "HIST_CALOFITTINGQA_run3auau_new_pcdb001_v001-00082703-00000.root",
-                     const std::string &dbtag = "newcdbtag")
+                     const std::string &inlist = "/cvmfs/sphenix.sdcc.bnl.gov/files/calofitting/files.list",
+                     const std::string &outfile1 = "DST_CALOFITTING_run3auau_pro001_pcdb001_v001-00068114-90000.root",
+                     const std::string &outfile2 = "DST_ZDC_RAW_run3auau_pro001_pcdb001_v001-00068114-90000.root",
+                     const std::string &dbtag = "pcdb001")
 {
   gSystem->Load("libg4dst.so");
 
@@ -69,11 +65,6 @@ void Fun4All_Fitting(int nEvents = 100,
   se->registerSubsystem(calopacket);
 
   Process_Calo_Fitting();
-
-  ///////////////////////////////////
-  // Validation
-  CaloFittingQA *ca = new CaloFittingQA("CaloFittingQA");
-  se->registerSubsystem(ca);
 
   Fun4AllInputManager *In = nullptr;
   std::ifstream infile;
@@ -131,8 +122,6 @@ void Fun4All_Fitting(int nEvents = 100,
   }
   se->run(nEvents);
   se->End();
-
-  QAHistManagerDef::saveQARootFile(outfile_hist);
 
   CDBInterface::instance()->Print();  // print used DB files
   se->PrintTimer();
