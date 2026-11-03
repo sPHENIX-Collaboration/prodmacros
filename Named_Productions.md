@@ -233,7 +233,7 @@ sphnxprod01:
   defaultlocations:
     prodbase:   /sphenix/u/sphnxpro/Production2026/sphenixprod
     configbase: /sphenix/u/sphnxpro/Production2026/run3oo_calo_pro001_pcdb001_v001/thisProd/rules
-    submitdir:  /sphenix/data/data03/sphnxpro/production/run3oo/submission/{rule}
+    submitdir:  /sphenix/data/data03/sphnxpro/production/run3oo/submission/{batch_name}
 ```
 Most important here is to change `configbase`. Note that the production submission installation at `prodbase` can also be individualized. `submitdir` is a location for helper caches, so make sure it's not in danger of being full.
 
@@ -575,7 +575,7 @@ sphnxprod02:
   defaultlocations:
     prodbase:   /sphenix/u/sphnxpro/Production2026/sphenixprod
     configbase: /sphenix/u/sphnxpro/Production2026/run3oo_calo_pro001_pcdb001_v001/thisProd/rules
-    submitdir:  /sphenix/data/data02/sphnxpro/production/run3oo/submission/{rule}
+    submitdir:  /sphenix/data/data02/sphnxpro/production/run3oo/submission/{batch_name}
 
   # Event combining
   pro001_TRIGGERED_EVENT_run3oo:
@@ -721,7 +721,7 @@ pro001_TRKR_TRACKS_run3oo:
 ### Standard full production
 sphnxprod01:
   defaultlocations:
-    submitdir:  /sphenix/data/data02/sphnxpro/production/run3oo/submission/{rule}
+    submitdir:  /sphenix/data/data02/sphnxpro/production/run3oo/submission/{batch_name}
     prodbase:   /sphenix/u/sphnxpro/Production2026/sphenixprod
     configbase: /sphenix/u/sphnxpro/Production2026/run3oo_tracking_pro001_pcdb001_v001/thisProd/rules
 

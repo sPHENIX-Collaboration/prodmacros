@@ -4,7 +4,7 @@ sphnxprod02:
   defaultlocations:
     prodbase:   /sphenix/u/sphnxpro/Production2026/sphenixprod
     configbase: /sphenix/u/sphnxpro/Production2026/BRANCH/thisProd/rules
-    submitdir:  /sphenix/data/data03/sphnxpro/production/cosmics/submission/{rule}
+    submitdir:  /sphenix/data/data03/sphnxpro/production/cosmics/submission/{batch_name}
 
   # Event combining
   PROD_TRIGGERED_EVENT_cosmics:
