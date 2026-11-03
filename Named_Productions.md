@@ -60,7 +60,7 @@ Keep a production instance small: after copying the dataset template to `thisPro
 
 ```bash
 git ls-files
-git rm -r --ignore-unmatch -- AGENTS.md Named_Productions.md README.md active_productions.txt .clang-format .clang-tidy bak cosmics run2auau run2pp run3auau run3oo run3pp testing
+git rm -r --ignore-unmatch -- AGENTS.md Named_Productions.md README.md active_productions.txt .clang-format .clang-tidy bak cosmics run* testing
 # Add a README_${PROD_DATASET}_${PROD_TYPE}_${TRIPLET}.md for instance-specific notes.
 ls -1
 cd thisProd
