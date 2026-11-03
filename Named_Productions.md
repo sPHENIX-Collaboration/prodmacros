@@ -61,7 +61,7 @@ Production specific comments should go into a dedicated README file.
 At this point only the directory `dir_...` and maybe the README should be left.
 
 ```bash
-git rm -rf Named*_Productions*.md active_productions.txt run* bak testing
+git rm -rf AGENTS.md Named*_Productions*.md active_productions.txt run* bak testing
 # touch README_${PROD_DATASET}_${PROD_TYPE}_${TRIPLET}.md
 ls -1 
 thisProd
