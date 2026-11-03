@@ -39,8 +39,6 @@ void Fun4All_Fitting(int nEvents = 100,
                      const std::string &inlist = "/cvmfs/sphenix.sdcc.bnl.gov/files/calofitting/files.list",
                      const std::string &outfile1 = "DST_CALOFITTING_run3auau_pro001_pcdb001_v001-00068114-90000.root",
                      const std::string &outfile2 = "DST_ZDC_RAW_run3auau_pro001_pcdb001_v001-00068114-90000.root",
-                     const std::string & /*outfile3*/ = "",
-                     const std::string & /*outfile_hist*/ = "HIST_CALOFITTINGQA_run3auau_pro001_pcdb001_v001-00068114-90000.root",
                      const std::string &dbtag = "pcdb001")
 {
   gSystem->Load("libg4dst.so");
