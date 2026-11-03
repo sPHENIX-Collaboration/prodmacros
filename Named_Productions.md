@@ -56,15 +56,13 @@ branch_run3oo_calo_pro001_pcdb001_v001
 cp -r ${PROD_DATASET} thisProd
 git add thisProd
 ```
-Optional: The autopilot control and the general instructions shouldn't be edited here. No other directories are needed at this point either, so we can delete all of it.
-Production specific comments should go into a dedicated README file.
-At this point only the directory `dir_...` and maybe the README should be left.
+Keep a production instance small: after copying the dataset template to `thisProd/`, remove the generic repository documentation, the copied active-production list, backup directories, and every top-level dataset template. The tracked files left at the top level should be `.gitignore`, a production-specific README, and `thisProd/`. Inspect the file list first and adapt the explicit paths below if the template repository has changed. Do not edit or remove the live master `active_productions.txt` in `prodmacros`.
 
 ```bash
-git rm -rf AGENTS.md Named*_Productions*.md active_productions.txt run* bak testing
-# touch README_${PROD_DATASET}_${PROD_TYPE}_${TRIPLET}.md
-ls -1 
-thisProd
+git ls-files
+git rm -r --ignore-unmatch -- AGENTS.md Named_Productions.md README.md active_productions.txt .clang-format .clang-tidy bak cosmics run2auau run2pp run3auau run3oo run3pp testing
+# Add a README_${PROD_DATASET}_${PROD_TYPE}_${TRIPLET}.md for instance-specific notes.
+ls -1
 cd thisProd
 ```
 
@@ -120,12 +118,12 @@ tracking_code/run_jobC.sh
 tracking_code/run_rolloverjob0.sh
 ```
 
-Optional: Delete the directories not needed for your production type.
+Remove macro directories not needed for this production type, then remove unused rule and pilot templates so `thisProd/` contains only files this instance uses. For example:
 ```bash
-# For calo: remove streaming/tracking code
-git rm -rf streaming_code tracking_code
-# For tracking: remove calo/triggered code
-# git rm -rf triggered_code calo_code
+# For calo:
+git rm -r -- streaming_code tracking_code
+# For tracking instead:
+# git rm -r -- triggered_code calo_code
 ```
 
 

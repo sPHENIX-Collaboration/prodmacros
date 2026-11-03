@@ -7,6 +7,7 @@ This is the shared agent guidance for `prodmacros` and `sphenixprod`. Keep the d
 - `prodmacros/Named_Productions.md` is the operational handbook for creating, activating, and cleaning productions. `prodmacros/run*/` contains dataset templates; `prodmacros/active_productions.txt` is the master pilot list. In the standard `Production2026` layout, the top-level `active_productions.txt` symlinks to that list.
 - `sphenixprod/README.md` explains the toolchain. Check the actual `sphenixprod` code for current behavior: `production_control.py` interprets pilots, `create_submission.py` creates jobs, `sphenixprodrules.py` parses rules, and `stageout.sh` handles outputs. Do not infer supported placeholders or flags from a template alone.
 - Production instances are separate repositories under `Production2026`. Their `thisProd/` files, branch, tag, and pilot are the source for that instance. A template edit does not update an existing instance automatically.
+- Keep instance repositories lean after copying a dataset template: retain only `.gitignore`, a production-specific README, and the `thisProd/` files needed by that production. Remove copied handbook/active-list files, unrelated dataset templates, unused macro directories, and unused rule/pilot YAMLs. Inspect the tracked file list before committing; `Named_Productions.md` has the cleanup procedure.
 
 ## Production changes
 
