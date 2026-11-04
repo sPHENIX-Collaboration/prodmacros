@@ -1,12 +1,12 @@
-#ifndef FUN4ALL_JETSKIMMEDPRODUCTIONYEAR2_C
-#define FUN4ALL_JETSKIMMEDPRODUCTIONYEAR2_C
+#ifndef FUN4ALL_JETSKIMMER_C
+#define FUN4ALL_JETSKIMMER_C
 
-#include <QA.C>
 #include <Calo_Calib.C>
+#include <G4_Centrality.C>
+#include <G4_Global.C>
 #include <HIJetReco.C>
 #include <Jet_QA.C>
-#include <G4_Global.C>
-#include <G4_Centrality.C>
+#include <QA.C>
 
 #include <mbd/MbdReco.h>
 
@@ -43,7 +43,6 @@
 
 #include <phool/recoConsts.h>
 
-
 R__LOAD_LIBRARY(libfun4all.so)
 R__LOAD_LIBRARY(libcalo_reco.so)
 R__LOAD_LIBRARY(libcalotrigger.so)
@@ -57,15 +56,14 @@ R__LOAD_LIBRARY(libJetDSTSkimmer.so)
 R__LOAD_LIBRARY(libepd.so)
 R__LOAD_LIBRARY(libzdcinfo.so)
 
-void Fun4All_JetSkimmedProductionYear2(int nEvents = 1000,
+void Fun4All_JetSkimmer(int nEvents = 1000,
                         const std::string &fname_calo = "DST_CALOFITTING_run3oo_pro001_pcdb001_v001-00082703-00000.root",
-                        const std::string &fname_zdc  = "DST_ZDC_RAW_run3oo_pro001_pcdb001_v001-00082703-00000.root",
-                        const std::string &fname_sepd  = "DST_SEPD_RAW_run3oo_pro001_pcdb001_v001-00082703-00000.root",
-                        const std::string &outfile_low  = "DST_JETCALO_run3oo_pro001_pcdb001_v001-00082703-00000.root",
+                        const std::string &fname_zdc = "DST_ZDC_RAW_run3oo_pro001_pcdb001_v001-00082703-00000.root",
+                        const std::string &/*fname_sepd*/ = "DST_SEPD_RAW_run3oo_pro001_pcdb001_v001-00082703-00000.root",
+                        const std::string &outfile_low = "DST_JETCALO_run3oo_pro001_pcdb001_v001-00082703-00000.root",
                         const std::string &outfile_high = "DST_Jet_run3oo_pro001_pcdb001_v001-00082703-00000.root",
                         const std::string &outfile_hist = "HIST_JETQA_run3oo_pro001_pcdb001_v001-00082703-00000.root",
-                        const std::string &dbtag = "newcdbtag"
-  )
+                        const std::string &dbtag = "newcdbtag")
 {
   Fun4AllServer *se = Fun4AllServer::instance();
   se->Verbosity(1);
@@ -87,40 +85,10 @@ void Fun4All_JetSkimmedProductionYear2(int nEvents = 1000,
   MbdReco *mbdreco = new MbdReco();
   se->registerSubsystem(mbdreco);
 
-  // sEPD Reconstruction--Calib Info
-  CaloTowerBuilder *caEPD = new CaloTowerBuilder("SEPDBUILDER");
-  caEPD->set_detector_type(CaloTowerDefs::SEPD);
-  caEPD->set_builder_type(CaloTowerDefs::kPRDFTowerv4);
-  caEPD->set_processing_type(CaloWaveformProcessing::TEMPLATE);
-  caEPD->set_nsamples(12);
-  caEPD->set_offlineflag();
-  se->registerSubsystem(caEPD);
-
   EpdReco *epdreco = new EpdReco();
   se->registerSubsystem(epdreco);
 
-  //we need to do the ZDC fitting here...
-  CaloTowerBuilder *caZDC = new CaloTowerBuilder("ZDCBUILDER");
-  caZDC->set_detector_type(CaloTowerDefs::ZDC);
-  caZDC->set_builder_type(CaloTowerDefs::kPRDFTowerv4);
-  if( (runnumber > RunnumberRange::RUN2PP_FIRST && runnumber < RunnumberRange::RUN2PP_LAST)
-     || (runnumber > RunnumberRange::RUN3PP_FIRST && runnumber < RunnumberRange::RUN3PP_LAST) ){
-    caZDC->set_processing_type(CaloWaveformProcessing::FAST);
-  }
-  else {
-    caZDC->set_processing_type(CaloWaveformProcessing::FUNCFIT);
-    caZDC->set_funcfit_type(2);
-  }
-  caZDC->set_nsamples(16);
-  caZDC->set_offlineflag();
-  se->registerSubsystem(caZDC);
 
-
-  // ZDC Reconstruction--Calib Info
-  ZdcReco *zdcreco = new ZdcReco();
-  zdcreco->set_zdc1_cut(0.0);
-  zdcreco->set_zdc2_cut(0.0);
-  se->registerSubsystem(zdcreco);
 
   // Official vertex storage
   GlobalVertexReco *gvertex = new GlobalVertexReco();
@@ -134,6 +102,12 @@ void Fun4All_JetSkimmedProductionYear2(int nEvents = 1000,
   std::cout << "Processing Calo Calibration" << std::endl;
   Process_Calo_Calib();
 
+  // ZDC Reconstruction--Calib Info
+  ZdcReco *zdcreco = new ZdcReco();
+  zdcreco->set_zdc1_cut(0.0);
+  zdcreco->set_zdc2_cut(0.0);
+  se->registerSubsystem(zdcreco);
+
   CaloValid *ca = new CaloValid("CaloValid");
   ca->set_timing_cut_width(200);
   se->registerSubsystem(ca);
@@ -141,73 +115,72 @@ void Fun4All_JetSkimmedProductionYear2(int nEvents = 1000,
   // Centrality required for HI
   Centrality();
 
-
   // Jet reco related flags
   Enable::QA = true;
-  
+
   // Au+Au mode
   HIJETS::is_pp = false;
-  
+
   // QA options
-  JetQA::HasTracks        = false;
-  JetQA::DoInclusive      = true;
-  JetQA::DoTriggered      = false;
+  JetQA::HasTracks = false;
+  JetQA::DoInclusive = true;
+  JetQA::DoTriggered = false;
   JetQA::RestrictPtToTrig = false;
-  JetQA::RestrictEtaByR   = true;
-  JetQA::DoPP             = HIJETS::is_pp;
-  JetQA::UseBkgdSub       = true;
-  JetQA::HasCalos         = true;
-  
+  JetQA::RestrictEtaByR = true;
+  JetQA::DoPP = HIJETS::is_pp;
+  JetQA::UseBkgdSub = true;
+  JetQA::HasCalos = true;
+
   if (!HIJETS::is_pp)
-    {
-      std::cout << ">>> Running Centrality()" << std::endl;
-      Centrality();
-    }
-  
-  // HIJetReco macro 
+  {
+    std::cout << ">>> Running Centrality()" << std::endl;
+    Centrality();
+  }
+
+  // HIJetReco macro
   std::cout << ">>> Running HIJetReco()" << std::endl;
   HIJetReco();
-  
+
   // Jet DST skimmer with map-based threshold
   std::cout << ">>> Configuring JetDSTSkimmer" << std::endl;
   JetDSTSkimmer *jetDSTSkimmer = new JetDSTSkimmer();
-  
+
   // Jet thresholds: map from node name [set min jet pT]
   std::map<std::string, float> jetNodePts;
-  
+
   jetNodePts["AntiKt_Tower_r03_Sub1"] = 10.0F;
   jetDSTSkimmer->SetJetNodeThresholds(jetNodePts);
-  
+
   // Cluster thresholds: map from cluster node [set min cluster pT]
   std::map<std::string, float> clusterNodePts;
   clusterNodePts["CLUSTERINFO_CEMC"] = 8.0F;
   jetDSTSkimmer->SetClusterNodeThresholds(clusterNodePts);
-  
+
   jetDSTSkimmer->Verbosity(0);
   se->registerSubsystem(jetDSTSkimmer);
   std::cout << ">>> JetDSTSkimmer registered" << std::endl;
-  
+
   // Filter out beam-background events
-  /*
-  BeamBackgroundFilterAndQA *filter =
-    new BeamBackgroundFilterAndQA("BeamBackgroundFilterAndQA");
-  filter->Verbosity(std::max(Enable::QA_VERBOSITY, Enable::JETQA_VERBOSITY));
-  filter->SetConfig(
-		    {
-		      .debug          = false,
-		      .doQA           = Enable::QA,
-		      .doEvtAbort     = false,
-		      .filtersToApply = {"StreakSideband"}
-		    });
-  se->registerSubsystem(filter);
-  */
+
+  // BeamBackgroundFilterAndQA *filter =
+  //   new BeamBackgroundFilterAndQA("BeamBackgroundFilterAndQA");
+  // filter->Verbosity(std::max(Enable::QA_VERBOSITY, Enable::JETQA_VERBOSITY));
+  // filter->SetConfig(
+  // 		    {
+  // 		      .debug          = false,
+  // 		      .doQA           = Enable::QA,
+  // 		      .doEvtAbort     = false,
+  // 		      .filtersToApply = {"StreakSideband"}
+  // 		    });
+  // se->registerSubsystem(filter);
+
   // Register modules necessary for QA
   if (Enable::QA)
-    {
-      std::cout << ">>> Enabling QA: DoRhoCalculation + Jet_QA" << std::endl;
-      DoRhoCalculation();
-      Jet_QA();
-    }
+  {
+    std::cout << ">>> Enabling QA: DoRhoCalculation + Jet_QA" << std::endl;
+    DoRhoCalculation();
+    Jet_QA();
+  }
 
   Fun4AllInputManager *InCalo = new Fun4AllDstInputManager("in");
   InCalo->AddFile(fname_calo);
@@ -216,10 +189,6 @@ void Fun4All_JetSkimmedProductionYear2(int nEvents = 1000,
   Fun4AllInputManager *InZDC = new Fun4AllDstInputManager("inzdc");
   InZDC->AddFile(fname_zdc);
   se->registerInputManager(InZDC);
-
-  Fun4AllInputManager *InSEPD = new Fun4AllDstInputManager("insepd");
-  InSEPD->AddFile(fname_sepd);
-  se->registerInputManager(InSEPD);
 
   // --- Output managers ---
   // DST_JETCALO: low-threshold output — keeps raw tower and ZDC data
