@@ -1,5 +1,5 @@
-#ifndef FUN4ALL_YEAR2_FITTING_C
-#define FUN4ALL_YEAR2_FITTING_C
+#ifndef FUN4ALL_FITTING_C
+#define FUN4ALL_FITTING_C
 
 #include <Calo_Fitting.C>
 #include <QA.C>
@@ -37,7 +37,7 @@ R__LOAD_LIBRARY(libcalotrigger.so)
 R__LOAD_LIBRARY(libCaloPacketSkimmer.so)
 
 // this pass containis the reco process that's stable wrt time stamps(raw tower building)
-void Fun4All_Year2_Fitting(int nEvents = 100,
+void Fun4All_Fitting(int nEvents = 100,
                            const std::string &inlist = "files.list",
                            const std::string &outfile1 = "DST_CALOFITTING_run3oo_pro001_pcdb001_v001-00082703-00000.root",
                            const std::string &outfile2 = "DST_ZDC_RAW_run3oo_pro001_pcdb001_v001-00082703-00000.root",

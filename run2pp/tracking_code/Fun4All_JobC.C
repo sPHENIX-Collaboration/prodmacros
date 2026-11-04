@@ -69,7 +69,6 @@ void reconstruct_pipi_mass()
 
   // PV to SV cuts
   kfparticle->constrainToPrimaryVertex();
-  kfparticle->setMotherPV_DCAchi2(100);
   kfparticle->setFlightDistancechi2(-1.);
   kfparticle->setMinDIRA(0.88);
   kfparticle->setDecayLengthRange(0.1, FLT_MAX);
@@ -119,7 +118,6 @@ void reconstruct_KK_mass()
 
   // PV to SV cuts
   kfparticle->constrainToPrimaryVertex();
-  kfparticle->setMotherPV_DCAchi2(100);
   kfparticle->setFlightDistancechi2(-1.);
 
   // Track parameters
@@ -169,7 +167,6 @@ void reconstruct_ppi_mass()
 
   // PV to SV cuts
   kfparticle->constrainToPrimaryVertex(true);
-  kfparticle->setMotherPV_DCAchi2(100);
   kfparticle->setFlightDistancechi2(-1.);
   kfparticle->setMinDIRA(0.88);
   kfparticle->setDecayLengthRange(0.1, FLT_MAX);
@@ -221,7 +218,6 @@ void reconstruct_Kpi_mass()
 
   // PV to SV cuts
   kfparticle->constrainToPrimaryVertex(true);
-  kfparticle->setMotherPV_DCAchi2(100);
   kfparticle->setMotherPV_DCA(100);
   kfparticle->setMotherPV_DCA_XY(0.005);
   kfparticle->setFlightDistancechi2(5);

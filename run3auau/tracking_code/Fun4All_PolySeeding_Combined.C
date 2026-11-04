@@ -18,9 +18,6 @@
 #include <Trkr_RecoInit.C>
 #include <Trkr_TpcReadoutInit.C>
 
-#include <trackreco/DSTClusterPruning.h>
-#include <cdbobjects/CDBTTree.h>
-
 #include <inttrawhitqa/InttQa.h>
 #include <inttrawhitqa/InttRawHitQA.h>
 
@@ -33,29 +30,17 @@
 #include <trackingqa/MicromegasClusterQA.h>
 #include <trackingqa/MvtxClusterQA.h>
 #include <trackingqa/TpcClusterQA.h>
-
 #include <trackingqa/SiliconSeedsQA.h>
 #include <trackingqa/TpcSeedsQA.h>
 #include <trackingqa/TpcSiliconQA.h>
 
-#include <ffamodules/CDBInterface.h>
-#include <ffamodules/FlagHandler.h>
+#include <trackingdiagnostics/Tpc_AssembledTrackDisplay.h>
+#include <trackingdiagnostics/Tpc_ModuleTrackDisplay.h>
+#include <trackingdiagnostics/Tpc_PolyClusterDisplay.h>
+#include <trackingdiagnostics/Tpc_PolyClusterResiduals.h>
+#include <trackingdiagnostics/TrackResiduals.h>
 
-#include <phgarfield/PHGarfield.h>
 #include <tpcconditions/TpcConditionsReco.h>
-
-#include <fun4all/Fun4AllDstInputManager.h>
-#include <fun4all/Fun4AllDstOutputManager.h>
-#include <fun4all/Fun4AllInputManager.h>
-#include <fun4all/Fun4AllOutputManager.h>
-#include <fun4all/Fun4AllRunNodeInputManager.h>
-#include <fun4all/Fun4AllServer.h>
-#include <fun4all/Fun4AllUtils.h>
-
-#include <fun4all/Fun4AllReturnCodes.h>
-#include <fun4all/SubsysReco.h>
-
-#include <phool/recoConsts.h>
 
 #include <tpctrackreco/TpcCrossingFinder.h>
 #include <tpctrackreco/TpcPolyClusterTrkrClusterConverter.h>
@@ -66,13 +51,28 @@
 #include <tpctrackreco/Tpc_PolyTrackReco.h>
 #include <tpctrackreco/Tpc_PolyTrackVertexer.h>
 
-#include <trackingdiagnostics/Tpc_AssembledTrackDisplay.h>
-#include <trackingdiagnostics/Tpc_ModuleTrackDisplay.h>
-#include <trackingdiagnostics/Tpc_PolyClusterDisplay.h>
-#include <trackingdiagnostics/Tpc_PolyClusterResiduals.h>
-#include <trackingdiagnostics/TrackResiduals.h>
+#include <trackreco/DSTClusterPruning.h>
 
+#include <phgarfield/PHGarfield.h>
+
+#include <ffamodules/CDBInterface.h>
+#include <ffamodules/FlagHandler.h>
+
+#include <fun4all/Fun4AllDstInputManager.h>
+#include <fun4all/Fun4AllDstOutputManager.h>
+#include <fun4all/Fun4AllInputManager.h>
+#include <fun4all/Fun4AllOutputManager.h>
+#include <fun4all/Fun4AllRunNodeInputManager.h>
+#include <fun4all/Fun4AllServer.h>
+#include <fun4all/Fun4AllUtils.h>
 #include <fun4all/Fun4AllMemoryHistograms.h>
+#include <fun4all/Fun4AllReturnCodes.h>
+#include <fun4all/SubsysReco.h>
+
+#include <phool/recoConsts.h>
+
+
+#include <TROOT.h>
 
 #include <format>
 
@@ -112,7 +112,7 @@ void Fun4All_PolySeeding_Combined(
     const std::string &dbtag = "newcdbtag")
 {
   Fun4AllMemoryHistograms::instance()->Enable();
-  const bool convertSeeds = false;
+//  const bool convertSeeds = false;
   auto *se = Fun4AllServer::instance();
   se->Verbosity(1);
   se->VerbosityDownscale(100);
