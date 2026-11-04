@@ -23,6 +23,11 @@
 
 #include <format>
 
+#include <Rtypes.h>  // resolves R__LOAD_LIBRARY for clang-tidy
+#include <TSystem.h>
+
+#include <fstream>
+
 R__LOAD_LIBRARY(libfun4all.so)
 R__LOAD_LIBRARY(libffamodules.so)
 R__LOAD_LIBRARY(libcdbobjects.so)
@@ -35,8 +40,7 @@ void Fun4All_Combining(
     const int neventsper = 1000,
     const int startseg = 0,
     const std::string &dbtag = "newcdbtag",
-    const std::string &filelist = "filelistold.list",
-    const std::string &histdir = "")
+    const std::string &filelist = "filelistold.list")
 {
   gSystem->Load("libg4dst.so");
   auto *se = Fun4AllServer::instance();
