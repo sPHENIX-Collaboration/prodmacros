@@ -1,0 +1,67 @@
+# run2pp calo ana581, downstream steps only (no event combining).
+# CALOFITTING reads the existing pro001_pcdb001_v001 DST_TRIGGERED_EVENT files and writes
+# ana581_pcdb001_v001; its optional QA histograms use qadbtag 2026p005 (ana581_2026p005_v001).
+# JETSKIMMER reads ana581_pcdb001_v001 and writes ana581_newcdbtag_v001.
+#______________________________________________________________________________
+ana581_CALOFITTING_run2pp:
+  params:
+    dsttype:      DST_CALOFITTING
+    build:        ana.581
+    dbtag:        pcdb001
+    qadbtag:      2026p005
+    version:      1
+    period:       run2pp
+    dataset:      run2pp
+    physicsmode:  physics
+
+  input:
+    table:        datasets
+    intriplet:    pro001_pcdb001_v001  # Output triplet of pro001_TRIGGERED_EVENT_run2pp
+
+  job:
+    script:                 run_fitting.sh
+    log:                   '{condor}/{logbase}.condor'
+    neventsper:             100000
+    payload:                [../calo_code/*]
+    request_memory:         2500MB, 3.9GB, 6GB
+    request_cpus:          '1'
+    batch_name:            '{rule_name}_{outtriplet}'
+    priority:              '60'
+    rungroup_size:         1
+    filesystem:
+      logdir:   "/sphenix/data/data03/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/log"
+      histdir:  "/sphenix/data/data03/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/hist"
+      condor:            "/tmp/data03/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/log"
+
+#______________________________________________________________________________
+ana581_JETSKIMMER_run2pp:
+  params:
+    dsttype:     DST_JETCALO
+    build:       ana.581
+    dbtag:       newcdbtag
+    version:     1
+    period:      run2pp
+    dataset:     run2pp
+    physicsmode: physics
+
+  input:
+    table:       datasets
+    intriplet:   ana581_pcdb001_v001  # Output triplet of ana581_CALOFITTING_run2pp
+    indsttype:   DST_CALOFITTING
+
+  job:
+    script:                 run_jetskimmer.sh
+    log:                   '{condor}/{logbase}.condor'
+    neventsper:             100000
+    payload:                [../calo_code/*]
+    request_memory:         2500MB, 3.9GB, 6GB
+    request_cpus:          '1'
+    batch_name:            '{rule_name}_{outtriplet}'
+    priority:              '60'
+    rungroup_size:         1
+    filesystem:
+      logdir:   "/sphenix/data/data03/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/log"
+      histdir:  "/sphenix/data/data03/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/hist"
+      condor:            "/tmp/data03/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/log"
+
+###############################################################################

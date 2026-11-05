@@ -1,0 +1,27 @@
+################################# Prod02 #######################################
+### run2pp calo ana581: downstream steps only (fitting, jet skimmer)
+sphnxprod02:
+  defaultlocations:
+    prodbase:   /sphenix/u/sphnxpro/Production2026/sphenixprod
+    configbase: /sphenix/u/sphnxpro/Production2026/run2pp_calo_ana581_2026p005_v001/thisProd/rules
+    submitdir:  /sphenix/data/data03/sphnxpro/production/run2pp/submission/{batch_name}
+
+  # Waveform fitting (input: pro001_pcdb001_v001 DST_TRIGGERED_EVENT)
+  ana581_CALOFITTING_run2pp:
+    config: run2pp_calo_physics_ana581_2026p005_v001.yaml
+    runlist: /sphenix/u/sphnxpro/Production2026/run2pp_calo_ana581_2026p005_v001/thisProd/runlist_run2pp_1M_v1.list
+    jobprio: 60
+    submit: on
+    dstspider: on
+    histspider: on
+
+  # Jet skimmer (input: ana581_pcdb001_v001 DST_CALOFITTING)
+  ana581_JETSKIMMER_run2pp:
+    config: run2pp_calo_physics_ana581_2026p005_v001.yaml
+    runlist: /sphenix/u/sphnxpro/Production2026/run2pp_calo_ana581_2026p005_v001/thisProd/runlist_run2pp_1M_v1.list
+    jobprio: 30
+    submit: off
+    dstspider: off
+    histspider: off
+
+###############################################################################
