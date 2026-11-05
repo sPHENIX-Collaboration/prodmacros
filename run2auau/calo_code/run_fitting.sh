@@ -28,7 +28,7 @@ eval "$make_filelists"
 
 outfile=${logbase}.root
 outzdc=${logbase/DST_CALOFITTING/DST_ZDC_RAW}.root
-root_line="Fun4All_Fitting.C(${nevents},\"infile.list\",\"${outfile}\",\"${outzdc}\")"
+root_line="Fun4All_Fitting.C(${nevents},\"infile.list\",\"${outfile}\",\"${outzdc}\",\"${dbtag}\")"
 full_command="root.exe -q -b '${root_line}'"
 
 # Production step. A failure here ends the job with the root.exe exit code.
@@ -47,8 +47,8 @@ echo ./stageout.sh ${outzdc} ${zdcoutdir:-${outdir}} ${zdcdbid:-${dbid}}
 # Optional QA step. It does not go through common_runscript_exec.sh, so its exit code
 # and resource use never replace those of the production step. A failure is logged,
 # its partial histogram file is removed, and the job continues.
-outhist=${outfile/DST_CALOFITTING/HIST_CALOFITTINGQA}
-qa_line="Fun4All_Fitting_QA.C(${nevents},\"infile.list\",\"${outfile}\",\"${outhist}\",\"${dbtag}\")"
+outhist=${qaoutfile}
+qa_line="Fun4All_Fitting_QA.C(${nevents},\"infile.list\",\"${outfile}\",\"${outhist}\",\"${qadbtag}\")"
 echo "--- Executing optional QA macro"
 echo "root.exe -q -b '${qa_line}'"
 root.exe -q -b "${qa_line}"
@@ -59,12 +59,26 @@ if [[ ${qa_status} -ne 0 ]]; then
 fi
 echo "QA_STATUS=${qa_status}"
 
+qa_staged=0
 shopt -s nullglob
 for hfile in HIST_*.root; do
-    echo stageout.sh ${hfile} to ${histdir}
-    . ./stageout.sh ${hfile} ${histdir}
+    hist_stage_dir=${histdir}
+    if [[ ${hfile} == "${qaoutfile}" ]]; then
+        hist_stage_dir=${qahistdir}
+        qa_staged=1
+    fi
+    echo stageout.sh ${hfile} to ${hist_stage_dir}
+    . ./stageout.sh ${hfile} ${hist_stage_dir}
 done
 shopt -u nullglob
+
+if [[ ${qa_status} -ne 0 ]]; then
+    python ${SPHENIXPROD_SCRIPT_PATH}/sphenixdbutils.py qastep --status failed --exit-code ${qa_status}
+elif [[ ${qa_staged} -eq 1 ]]; then
+    python ${SPHENIXPROD_SCRIPT_PATH}/sphenixdbutils.py qastep --status succeeded --exit-code 0
+else
+    python ${SPHENIXPROD_SCRIPT_PATH}/sphenixdbutils.py qastep --status missing
+fi
 
 # The production file was kept for QA; it is already staged out.
 rm -fv "${outfile}"
