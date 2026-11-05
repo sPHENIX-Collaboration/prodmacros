@@ -6,6 +6,10 @@
 #include <caloreco/CaloTowerStatus.h>
 #include <caloreco/CaloWaveformProcessing.h>
 
+#include <calovalid/CaloValid.h>
+
+#include <litecaloeval/HCalCosmics.h>
+
 #include <ffamodules/CDBInterface.h>
 #include <ffamodules/FlagHandler.h>
 #include <ffamodules/HeadReco.h>
@@ -23,9 +27,9 @@
 
 #include <phool/recoConsts.h>
 
-#include <calovalid/CaloValid.h>
+#include <TSystem.h>
 
-#include <litecaloeval/HCalCosmics.h>
+#include <fstream>
 
 R__LOAD_LIBRARY(libfun4all.so)
 R__LOAD_LIBRARY(libfun4allraw.so)
@@ -35,7 +39,7 @@ R__LOAD_LIBRARY(libffamodules.so)
 R__LOAD_LIBRARY(libLiteCaloEvalTowSlope.so)
 
 void Fun4All_Old_HCalCosmics(int nEvents = 10000,
-                             const std::string inlist = "files.list",
+                             const std::string &inlist = "files.list",
                              const std::string &outfile = "DST_CALOFITTING_run3cosmics_ana502_2025p004_v001-00054530-00000.root",
                              const std::string &outfile_hist1 = "HIST_COSMIC_HCALOUT_run3cosmics_ana502_2025p004_v001-00054530-00000.root",
                              const std::string &outfile_hist2 = "HIST_COSMIC_HCALIN_run3cosmics_ana502_2025p004_v001-00054530-00000.root",
@@ -66,8 +70,6 @@ void Fun4All_Old_HCalCosmics(int nEvents = 10000,
   ctbIHCal->set_detector_type(CaloTowerDefs::HCALIN);
   ctbIHCal->set_processing_type(CaloWaveformProcessing::TEMPLATE);
   ctbIHCal->set_builder_type(buildertype);
-  ctbIHCal->set_nsamples(12);
-  ctbIHCal->set_offlineflag();
   ctbIHCal->set_softwarezerosuppression(true, 200);
   se->registerSubsystem(ctbIHCal);
 
@@ -75,8 +77,6 @@ void Fun4All_Old_HCalCosmics(int nEvents = 10000,
   ctbOHCal->set_detector_type(CaloTowerDefs::HCALOUT);
   ctbOHCal->set_processing_type(CaloWaveformProcessing::TEMPLATE);
   ctbOHCal->set_builder_type(buildertype);
-  ctbOHCal->set_nsamples(12);
-  ctbOHCal->set_offlineflag();
   ctbOHCal->set_softwarezerosuppression(true, 200);
   se->registerSubsystem(ctbOHCal);
 
@@ -102,13 +102,12 @@ void Fun4All_Old_HCalCosmics(int nEvents = 10000,
 
   // loop over all files in file list and create an input manager for each one
   Fun4AllInputManager *In = nullptr;
-  ifstream infile;
+  std::ifstream infile;
   infile.open(inlist);
   int iman = 0;
   std::string line;
   bool first{true};
   int runnumber = 0;
-  int segment = 99999;
   if (infile.is_open())
   {
     while (std::getline(infile, line))
@@ -121,9 +120,8 @@ void Fun4All_Old_HCalCosmics(int nEvents = 10000,
       // extract run number from first not commented out file in list
       if (first)
       {
-        pair<int, int> runseg = Fun4AllUtils::GetRunSegment(line);
+        std::pair<int, int> runseg = Fun4AllUtils::GetRunSegment(line);
         runnumber = runseg.first;
-        segment = runseg.second;
         rc->set_uint64Flag("TIMESTAMP", runnumber);
         first = false;
       }
@@ -144,8 +142,6 @@ void Fun4All_Old_HCalCosmics(int nEvents = 10000,
 
   ///////////////////////////////////////////
   // Cosmics histMaker
-//  char outfile_hist[500];
-//sprintf(outfile_hist, "%s-%08d-%05d.root", outfile_hist2.c_str(), runnumber, segment);
   HCalCosmics *wt2 = new HCalCosmics("HCalCalib_HCALIN", outfile_hist2);
   wt2->set_tower_threshold(0.2498);  // 500*0.0004996=0.2498
   wt2->set_vert_threshold(0.2498);   // 500*0.0004996=0.2498
@@ -155,7 +151,6 @@ void Fun4All_Old_HCalCosmics(int nEvents = 10000,
   wt2->TowerPrefix("TOWERINFO_CALIB_");
   se->registerSubsystem(wt2);
 
-//  sprintf(outfile_hist, "%s-%08d-%05d.root", outfile_hist1.c_str(), runnumber, segment);
   HCalCosmics *wt3 = new HCalCosmics("HCalCosmics_HCALOUT", outfile_hist1);
   wt3->set_tower_threshold(1.665);  // 500*0.00333=1.665
   wt3->set_vert_threshold(1.665);   // 500*0.00333=1.665
@@ -165,8 +160,6 @@ void Fun4All_Old_HCalCosmics(int nEvents = 10000,
   wt3->TowerPrefix("TOWERINFO_CALIB_");
   se->registerSubsystem(wt3);
 
-  char dstoutfile[500];
-  sprintf(dstoutfile, "%s-%08d-%05d.root", outfile.c_str(), runnumber, segment);
   Fun4AllDstOutputManager *out = new Fun4AllDstOutputManager("DSTOUT", outfile);
   // this strips all nodes under the Packets PHCompositeNode
   // (means removes all offline packets)

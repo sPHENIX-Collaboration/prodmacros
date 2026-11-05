@@ -1,5 +1,5 @@
-#ifndef FUN4ALL_JETSKIMMEDPRODUCTIONYEAR2_C
-#define FUN4ALL_JETSKIMMEDPRODUCTIONYEAR2_C
+#ifndef FUN4ALL_JETSKIMMER_C
+#define FUN4ALL_JETSKIMMER_C
 
 #include <Calo_Calib.C>
 #include <G4_Centrality.C>
@@ -88,27 +88,7 @@ void Fun4All_JetSkimmer(int nEvents = 1000,
   EpdReco *epdreco = new EpdReco();
   se->registerSubsystem(epdreco);
 
-  // we need to do the ZDC fitting here...
-  CaloTowerBuilder *caZDC = new CaloTowerBuilder("ZDCBUILDER");
-  caZDC->set_detector_type(CaloTowerDefs::ZDC);
-  caZDC->set_builder_type(CaloTowerDefs::kPRDFTowerv4);
-  if ((runnumber > RunnumberRange::RUN2PP_FIRST && runnumber < RunnumberRange::RUN2PP_LAST) || (runnumber > RunnumberRange::RUN3PP_FIRST && runnumber < RunnumberRange::RUN3PP_LAST))
-  {
-    caZDC->set_processing_type(CaloWaveformProcessing::FAST);
-  }
-  else
-  {
-    caZDC->set_processing_type(CaloWaveformProcessing::FUNCFIT);
-    caZDC->set_funcfit_type(2);
-  }
-  caZDC->set_nsamples(16);
-  se->registerSubsystem(caZDC);
 
-  // ZDC Reconstruction--Calib Info
-  ZdcReco *zdcreco = new ZdcReco();
-  zdcreco->set_zdc1_cut(0.0);
-  zdcreco->set_zdc2_cut(0.0);
-  se->registerSubsystem(zdcreco);
 
   // Official vertex storage
   GlobalVertexReco *gvertex = new GlobalVertexReco();
@@ -121,6 +101,12 @@ void Fun4All_JetSkimmer(int nEvents = 1000,
   // Set status of CALO towers, calibrate, cluster
   std::cout << "Processing Calo Calibration" << std::endl;
   Process_Calo_Calib();
+
+  // ZDC Reconstruction--Calib Info
+  ZdcReco *zdcreco = new ZdcReco();
+  zdcreco->set_zdc1_cut(0.0);
+  zdcreco->set_zdc2_cut(0.0);
+  se->registerSubsystem(zdcreco);
 
   CaloValid *ca = new CaloValid("CaloValid");
   ca->set_timing_cut_width(200);

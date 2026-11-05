@@ -72,8 +72,6 @@ void Fun4All_Hcal_Cosmics(int nEvents = 0,
   ctbIHCal->set_detector_type(CaloTowerDefs::HCALIN);
   ctbIHCal->set_processing_type(CaloWaveformProcessing::TEMPLATE);
   ctbIHCal->set_builder_type(buildertype);
-  ctbIHCal->set_nsamples(12);
-  ctbIHCal->set_offlineflag();
   ctbIHCal->set_softwarezerosuppression(true, 200);
   se->registerSubsystem(ctbIHCal);
 
@@ -81,8 +79,6 @@ void Fun4All_Hcal_Cosmics(int nEvents = 0,
   ctbOHCal->set_detector_type(CaloTowerDefs::HCALOUT);
   ctbOHCal->set_processing_type(CaloWaveformProcessing::TEMPLATE);
   ctbOHCal->set_builder_type(buildertype);
-  ctbOHCal->set_nsamples(12);
-  ctbOHCal->set_offlineflag();
   ctbOHCal->set_softwarezerosuppression(true, 200);
   se->registerSubsystem(ctbOHCal);
 

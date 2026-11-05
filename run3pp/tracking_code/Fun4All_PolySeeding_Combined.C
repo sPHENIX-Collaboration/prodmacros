@@ -18,9 +18,6 @@
 #include <Trkr_RecoInit.C>
 #include <Trkr_TpcReadoutInit.C>
 
-#include <trackreco/DSTClusterPruning.h>
-#include <cdbobjects/CDBTTree.h>
-
 #include <inttrawhitqa/InttQa.h>
 #include <inttrawhitqa/InttRawHitQA.h>
 
@@ -33,27 +30,16 @@
 #include <trackingqa/MicromegasClusterQA.h>
 #include <trackingqa/MvtxClusterQA.h>
 #include <trackingqa/TpcClusterQA.h>
-
 #include <trackingqa/SiliconSeedsQA.h>
 #include <trackingqa/TpcSeedsQA.h>
 #include <trackingqa/TpcSiliconQA.h>
 
-#include <ffamodules/CDBInterface.h>
-#include <ffamodules/FlagHandler.h>
+#include <trackingdiagnostics/Tpc_AssembledTrackDisplay.h>
+#include <trackingdiagnostics/Tpc_ModuleTrackDisplay.h>
+#include <trackingdiagnostics/Tpc_PolyClusterDisplay.h>
+#include <trackingdiagnostics/Tpc_PolyClusterResiduals.h>
+#include <trackingdiagnostics/TrackResiduals.h>
 
-#include <fun4all/Fun4AllDstInputManager.h>
-#include <fun4all/Fun4AllDstOutputManager.h>
-#include <fun4all/Fun4AllInputManager.h>
-#include <fun4all/Fun4AllOutputManager.h>
-#include <fun4all/Fun4AllRunNodeInputManager.h>
-#include <fun4all/Fun4AllServer.h>
-#include <fun4all/Fun4AllUtils.h>
-
-#include <fun4all/Fun4AllReturnCodes.h>
-#include <fun4all/SubsysReco.h>
-
-#include <phool/recoConsts.h>
-#include <phgarfield/PHGarfield.h>
 #include <tpcconditions/TpcConditionsReco.h>
 
 #include <tpctrackreco/TpcCrossingFinder.h>
@@ -65,13 +51,28 @@
 #include <tpctrackreco/Tpc_PolyTrackReco.h>
 #include <tpctrackreco/Tpc_PolyTrackVertexer.h>
 
-#include <trackingdiagnostics/Tpc_AssembledTrackDisplay.h>
-#include <trackingdiagnostics/Tpc_ModuleTrackDisplay.h>
-#include <trackingdiagnostics/Tpc_PolyClusterDisplay.h>
-#include <trackingdiagnostics/Tpc_PolyClusterResiduals.h>
-#include <trackingdiagnostics/TrackResiduals.h>
+#include <trackreco/DSTClusterPruning.h>
 
+#include <phgarfield/PHGarfield.h>
+
+#include <ffamodules/CDBInterface.h>
+#include <ffamodules/FlagHandler.h>
+
+#include <fun4all/Fun4AllDstInputManager.h>
+#include <fun4all/Fun4AllDstOutputManager.h>
+#include <fun4all/Fun4AllInputManager.h>
+#include <fun4all/Fun4AllOutputManager.h>
+#include <fun4all/Fun4AllRunNodeInputManager.h>
+#include <fun4all/Fun4AllServer.h>
+#include <fun4all/Fun4AllUtils.h>
 #include <fun4all/Fun4AllMemoryHistograms.h>
+#include <fun4all/Fun4AllReturnCodes.h>
+#include <fun4all/SubsysReco.h>
+
+#include <phool/recoConsts.h>
+
+
+#include <TROOT.h>
 
 #include <format>
 
@@ -106,12 +107,12 @@ R__LOAD_LIBRARY(libTrackingDiagnostics.so)
 
 void Fun4All_PolySeeding_Combined(
     const int nEvents = 10,
-    const std::string &inputfile = "DST_COMBINED_run3pp_ana571_2026p002_v001-00079513-00000.root",
-    const std::string &outfilename = "DST_TRACKSEEDS_run3pp_ana571_2026p002_v001-00079513-00000.root",
+    const std::string &inputfile = "DST_STREAMING_EVENT_combined_run3pp_ana561_2025p013_v001-00081612-00000.root",
+    const std::string &outfilename = "DST_TRACKSEEDS_run3pp_ana561_2025p013_v001-00081612-00000.root",
     const std::string &dbtag = "newcdbtag")
 {
   Fun4AllMemoryHistograms::instance()->Enable();
-  const bool convertSeeds = false;
+//  const bool convertSeeds = false;
   auto *se = Fun4AllServer::instance();
   se->Verbosity(1);
   se->VerbosityDownscale(100);
@@ -126,7 +127,7 @@ void Fun4All_PolySeeding_Combined(
   TRACKING::tpc_zero_supp = true;
   
   Enable::CDB = true;
-  
+
   G4TPC::sampa_tzero_bias = 0;
 
   // First order corrections will be applied from PHGarfield
@@ -236,10 +237,7 @@ void Fun4All_PolySeeding_Combined(
 
   //==============================================================
   se->registerSubsystem(new TpcConditionsReco());
-  // Shared drift model for the crossing finder and the polyclusterizer;
-  // must be registered after TpcConditionsReco and before the polyseeding modules.
-  auto *garfield = new PHGarfield();
-  se->registerSubsystem(garfield);
+  se->registerSubsystem(new PHGarfield());
 
   se->registerSubsystem(new Tpc_ModuleTrackReco());     // makes TPC_MODULETRACKS
   se->registerSubsystem(new Tpc_AssembledTrackReco());  // makes TPC_ASSEMBLEDTRACKS
@@ -264,7 +262,7 @@ void Fun4All_PolySeeding_Combined(
   Tpc_LaserEventIdentifying();
   TPC_LaserClustering();
   TPC_LaserPadAggregating();
-  
+
   Reject_Laser_Events();
 
   Tracking_Reco_TrackMatching_run2pp();
@@ -330,15 +328,16 @@ void Fun4All_PolySeeding_Combined(
 
   out->AddNode("Sync");
   out->AddNode("EventHeader");
+  out->AddNode("TRKR_CLUSTER_SEED");
   out->AddNode("TRKR_CLUSTERCROSSINGASSOC");
   out->AddNode("LaserEventInfo");
   out->AddNode("GL1RAWHIT");
-  out->AddNode("TRKR_CLUSTER_SEED");
   out->AddNode("LASER_AGGREGATED_PADS");
   if (G4TPC::ENABLE_CENTRAL_MEMBRANE_CLUSTERING)
   {
     out->AddNode("LASER_CLUSTER");
   }
+  
   out->AddNode("TpcTrackSeedContainer");
   out->AddNode("SiliconTrackSeedContainer");
   out->AddNode("SvtxTrackSeedContainer");
@@ -350,7 +349,11 @@ void Fun4All_PolySeeding_Combined(
   out->StripRunNode("GEOMETRY_IO");
   
   se->registerOutputManager(out);
-
+  
+  auto *hm = QAHistManagerDef::getHistoManager();
+  std::string histoout = "HIST_" + outfilename;
+  hm->setOutfileName(histoout);
+  
   if (nEvents < 0)
   {
     return;
@@ -360,10 +363,6 @@ void Fun4All_PolySeeding_Combined(
   Fun4AllMemoryHistograms::instance()->SaveHistos("testarena.root");
   se->PrintTimer();
 
-  TString qaname = "HIST_" + outfilename;
-  std::string qaOutputFileName(qaname.Data());
-  QAHistManagerDef::saveQARootFile(qaOutputFileName);
-  
   CDBInterface::instance()->Print();
   delete se;
   gROOT->EndOfProcessCleanups();

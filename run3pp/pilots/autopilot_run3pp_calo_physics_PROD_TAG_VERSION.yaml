@@ -2,7 +2,7 @@ sphnxprod03:
   defaultlocations:
     prodbase:   /sphenix/u/sphnxpro/Production2026/sphenixprod
     configbase: /sphenix/u/sphnxpro/Production2026/BRANCH/thisProd/rules
-    submitdir:  /sphenix/data/data03/sphnxpro/production/run3pp/submission/{rule}
+    submitdir:  /sphenix/data/data03/sphnxpro/production/run3pp/submission/{batch_name}
 
   # Event combining
   PROD_TRIGGERED_EVENT_run3pp:
