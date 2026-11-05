@@ -28,7 +28,7 @@ R__LOAD_LIBRARY(libcalovalid.so)
 
 void Fun4All_Fitting_QA(int nEvents = 100,
                         const std::string &inlist = "/cvmfs/sphenix.sdcc.bnl.gov/files/calofitting/files.list",
-                        const std::string &infilefits = "DST_CALOFITTING_run3auau_pro001_pcdb001_v001-00068114-90000.root",
+                        const std::string &infilefits = "/cvmfs/sphenix.sdcc.bnl.gov/files/calofitting/DST_CALOFITTING_run3auau_pro001_pcdb001_v001-00068114-90000.root",
                         const std::string &outfile_hist = "HIST_CALOFITTINGQA_run3auau_pro001_pcdb001_v001-00068114-90000.root",
                         const std::string &dbtag = "newcdbtag")
 {
