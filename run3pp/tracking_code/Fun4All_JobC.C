@@ -58,31 +58,33 @@ void reconstruct_pipi_mass()
   kfparticle->setDecayDescriptor("K_S0 -> pi^+ pi^-");
   kfparticle->saveOutput(false);
 
-  kfparticle->usePID();
-  kfparticle->setPIDacceptFraction(0.4);
+  kfparticle->usePID(false);
   kfparticle->dontUseGlobalVertex();
   kfparticle->requireTrackVertexBunchCrossingMatch();
   kfparticle->allowZeroMassTracks();
   kfparticle->saveDST();
   kfparticle->setContainerName(pipi_reconstruction_name);
   kfparticle->magFieldFile("FIELDMAP_TRACKING");
+  //kfparticle->saveLightweightNTupleToQA(); //To be uncommented when PR 4517 is merged
 
   // PV to SV cuts
   kfparticle->constrainToPrimaryVertex();
   kfparticle->setMotherPV_DCA_StdDev(100);
   kfparticle->setFlightDistancechi2(-1.);
-  kfparticle->setMinDIRA(0.88);
-  kfparticle->setDecayLengthRange(0.1, FLT_MAX);
+  kfparticle->setMinDIRA(0.95);
+  kfparticle->setDecayLengthRange(0.8, FLT_MAX);
 
   // Track parameters
   kfparticle->setMinimumTrackPT(0.0);
-  kfparticle->setMinTPChits(20);
-  kfparticle->setMinMVTXhits(1);
+  kfparticle->setMinTPChits(25);
+  kfparticle->setMinMVTXhits(0);
   kfparticle->setMinINTThits(0);
+  kfparticle->setMinimumTrackPV_DCA(0.05);
+  kfparticle->setMinimumTrackPV_DCA_XY(0.05);
 
   // Vertex parameters
-  kfparticle->setMaximumVertexchi2nDOF(20);
-  kfparticle->setMaximumDaughterDCA(0.5);
+  kfparticle->setMaximumVertexchi2nDOF(FLT_MAX);
+  kfparticle->setMaximumDaughterDCA(0.05);
   kfparticle->setMaximumDaughterDCA_XY(100);
 
   // Parent parameters
@@ -109,7 +111,7 @@ void reconstruct_KK_mass()
   kfparticle->saveOutput(false);
 
   kfparticle->usePID();
-  kfparticle->setPIDacceptFraction(0.4);
+  kfparticle->setPIDacceptFraction(0.6);
   kfparticle->dontUseGlobalVertex();
   kfparticle->requireTrackVertexBunchCrossingMatch();
   kfparticle->allowZeroMassTracks();
@@ -125,13 +127,13 @@ void reconstruct_KK_mass()
   // Track parameters
   kfparticle->setMinimumTrackPT(0.1);
   kfparticle->setMaximumTrackPT(0.7);
-  kfparticle->setMaximumTrackchi2nDOF(100.);
+  kfparticle->setMaximumTrackchi2nDOF(50.);
   kfparticle->setMinTPChits(25);
   kfparticle->setMinMVTXhits(1);
   kfparticle->setMinINTThits(0);
 
   // Vertex parameters
-  kfparticle->setMaximumVertexchi2nDOF(20);
+  kfparticle->setMaximumVertexchi2nDOF(FLT_MAX);
   kfparticle->setMaximumDaughterDCA(0.05);
   kfparticle->setMaximumDaughterDCA_XY(100);
 
@@ -158,32 +160,34 @@ void reconstruct_ppi_mass()
   kfparticle->setDecayDescriptor("[Lambda0 -> proton^+ pi^-]cc");
   kfparticle->saveOutput(false);
 
-  kfparticle->usePID();
-  kfparticle->setPIDacceptFraction(0.4);
+  kfparticle->usePID(false);
   kfparticle->dontUseGlobalVertex();
   kfparticle->requireTrackVertexBunchCrossingMatch();
   kfparticle->allowZeroMassTracks();
   kfparticle->saveDST();
   kfparticle->setContainerName(ppi_reconstruction_name);
   kfparticle->magFieldFile("FIELDMAP_TRACKING");
+  //kfparticle->saveLightweightNTupleToQA(); //To be uncommented when PR 4517 is merged
 
   // PV to SV cuts
   kfparticle->constrainToPrimaryVertex(true);
   kfparticle->setMotherPV_DCA_StdDev(100);
   kfparticle->setFlightDistancechi2(-1.);
-  kfparticle->setMinDIRA(0.88);
-  kfparticle->setDecayLengthRange(0.1, FLT_MAX);
+  kfparticle->setMinDIRA(0.95);
+  kfparticle->setDecayLengthRange(0.8, FLT_MAX);
 
   // Track parameters
   kfparticle->setMinimumTrackPT(0.1);
   kfparticle->setMinimumTrackPV_DCA_XY(0.05);
   kfparticle->setMinTPChits(25);
-  kfparticle->setMinMVTXhits(1);
+  kfparticle->setMinMVTXhits(0);
   kfparticle->setMinINTThits(0);
+  kfparticle->setMinimumTrackPV_DCA(0.05);
+  kfparticle->setMinimumTrackPV_DCA_XY(0.05);
 
   // Vertex parameters
-  kfparticle->setMaximumVertexchi2nDOF(20);
-  kfparticle->setMaximumDaughterDCA(0.5);
+  kfparticle->setMaximumVertexchi2nDOF(FLT_MAX);
+  kfparticle->setMaximumDaughterDCA(0.05);
   kfparticle->setMaximumDaughterDCA_XY(100);
 
   // Parent parameters
@@ -210,8 +214,7 @@ void reconstruct_Kpi_mass()
   kfparticle->setDecayDescriptor("[D0 -> K^- pi^+]cc");
   kfparticle->saveOutput(false);
 
-  kfparticle->usePID();
-  kfparticle->setPIDacceptFraction(0.4);
+  kfparticle->usePID(false);
   kfparticle->dontUseGlobalVertex();
   kfparticle->requireTrackVertexBunchCrossingMatch();
   kfparticle->allowZeroMassTracks();
@@ -222,29 +225,31 @@ void reconstruct_Kpi_mass()
   // PV to SV cuts
   kfparticle->constrainToPrimaryVertex(true);
   kfparticle->setMotherPV_DCA_StdDev(100);
-  kfparticle->setMotherPV_DCA(100);
-  kfparticle->setMotherPV_DCA_XY(0.005);
-  kfparticle->setFlightDistancechi2(5);
-  kfparticle->setMinDIRA(0.9);
+  kfparticle->setMotherPV_DCA(0.02);
+  kfparticle->setMotherPV_DCA_XY(0.02);
+  kfparticle->setFlightDistancechi2(-1.);
+  kfparticle->setMinDIRA(0.98);
   kfparticle->setMinDIRA_XY(-1.1);
-  kfparticle->setDecayLengthRange_XY(0.005, FLT_MAX);
+  kfparticle->setDecayLengthRange_XY(0.006, 0.12);
 
   // Track parameters
-  kfparticle->setMinimumTrackPT(0.2);
-  kfparticle->setMaximumTrackchi2nDOF(300.);
+  kfparticle->setMinimumTrackPT(0.0);
+  kfparticle->setMaximumTrackchi2nDOF(50.);
   kfparticle->setMinTPChits(25);
   kfparticle->setMinMVTXhits(1);
   kfparticle->setMinINTThits(0);
+  kfparticle->setMinimumTrackPV_DCA(-1.);
+  kfparticle->setMinimumTrackPV_DCA_XY(0.005);
 
   // Vertex parameters
-  kfparticle->setMaximumVertexchi2nDOF(20);
-  kfparticle->setMaximumDaughterDCA(0.1);
+  kfparticle->setMaximumVertexchi2nDOF(FLT_MAX);
+  kfparticle->setMaximumDaughterDCA(0.05);
   kfparticle->setMaximumDaughterDCA_XY(100);  // 5 mm
 
   // Parent parameters
-  kfparticle->setMotherPT(0.0);
-  kfparticle->setMinimumMass(1.75);
-  kfparticle->setMaximumMass(1.95);
+  kfparticle->setMotherPT(1.0);
+  kfparticle->setMinimumMass(1.70);
+  kfparticle->setMaximumMass(2.00);
   kfparticle->setMaximumMotherVertexVolume(0.1);
 
   se->registerSubsystem(kfparticle);
