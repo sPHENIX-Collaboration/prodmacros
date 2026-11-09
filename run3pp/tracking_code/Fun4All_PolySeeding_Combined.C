@@ -107,7 +107,7 @@ R__LOAD_LIBRARY(libTrackingDiagnostics.so)
 
 void Fun4All_PolySeeding_Combined(
     const int nEvents = 10,
-    const std::string &inputfile = "DST_STREAMING_EVENT_combined_run3pp_ana561_2025p013_v001-00081612-00000.root",
+    const std::string &inputfile = "DST_STREAMING_EVENT_combined_run3pp_ana581_2026p005_v001-00081612-00000.root",
     const std::string &outfilename = "DST_TRACKSEEDS_run3pp_ana561_2025p013_v001-00081612-00000.root",
     const std::string &dbtag = "newcdbtag")
 {
@@ -358,7 +358,9 @@ void Fun4All_PolySeeding_Combined(
   se->End();
   Fun4AllMemoryHistograms::instance()->SaveHistos("testarena.root");
   se->PrintTimer();
-
+  
+  QAHistManagerDef::saveQARootFile(histoout);
+  
   CDBInterface::instance()->Print();
   delete se;
   gROOT->EndOfProcessCleanups();

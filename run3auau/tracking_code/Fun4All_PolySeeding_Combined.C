@@ -360,6 +360,8 @@ void Fun4All_PolySeeding_Combined(
   Fun4AllMemoryHistograms::instance()->SaveHistos("testarena.root");
   se->PrintTimer();
 
+  QAHistManagerDef::saveQARootFile(histoout);
+
   CDBInterface::instance()->Print();
   delete se;
   gROOT->EndOfProcessCleanups();
