@@ -6,8 +6,14 @@
 # /sphenix/u/sphnxpro/Production2026/run3auau_calo_pro001_pcdb001_v001/dir_run3auau_calo_pro001_pcdb001_v001/pilots/autopilot_run3auau_calo_physics_pro001_pcdb001_v001.yaml
 # /sphenix/u/sphnxpro/Production2026/run3pp_calo_pro001_pcdb001_v001/thisProd_run3pp/pilots/autopilot_run3pp_calo_physics_run3pp_calo_physics_pro001_pcdb001_v001.yaml
 
+## Run2 pp calo ana581_2026p005_v001 on prod02
+/sphenix/u/sphnxpro/Production2026/run2pp_calo_ana581_2026p005_v001/thisProd/pilots/autopilot_run2pp_calo_physics_ana581_2026p005_v001.yaml
+
 ## Run2 AuAu calo ana581_2026p005_v001 on prod01
 /sphenix/u/sphnxpro/Production2026/run2auau_calo_ana581_2026p005_v001/thisProd/pilots/autopilot_run2auau_calo_physics_ana581_2026p005_v001.yaml
+
+## Run2 AuAu jet skimmer ana581_newcdbtag_v001 on prod02
+/sphenix/u/sphnxpro/Production2026/run2auau_calo_ana581_2026p005_v001/thisProd/pilots/autopilot_run2auau_jetskimmer_physics_ana581_newcdbtag_v001.yaml
 
 
 # Cosmics TRIGGERED production, Sep 4, 2026 ana569_pcdb001_v001
