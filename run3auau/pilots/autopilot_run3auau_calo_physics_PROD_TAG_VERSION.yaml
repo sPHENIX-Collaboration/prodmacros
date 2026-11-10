@@ -20,6 +20,7 @@ sphnxprod03:
     jobprio: 60
     submit: on
     dstspider: on
+    histspider: on
 
   # Jet skimmer
   PROD_JETSKIMMER_run3auau:
@@ -28,5 +29,6 @@ sphnxprod03:
     jobprio: 30
     submit: on
     dstspider: on
+    histspider: on
 
 ###############################################################################

@@ -22,11 +22,15 @@ sphnxprod03:
     jobprio: 60
     submit: on
     dstspider: on
+    histspider: on
 
   # Jet skimmer
   PROD_JETSKIMMER_run3oo:
     config: run3oo_calo_physics_PROD_TAG_VERSION.yaml
     runlist: /sphenix/u/sphnxpro/Production2026/BRANCH/thisProd/runlist
     jobprio: 30
+    submit: on
+    dstspider: on
+    histspider: on
 
 ###############################################################################
