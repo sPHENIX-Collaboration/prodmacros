@@ -19,12 +19,7 @@ echo "---------------------------------------------"
 make_filelists="./create_full_filelist_run_seg.py $dataset $intriplet $dsttype $run $seg"
 echo "$make_filelists"
 eval "$make_filelists"
-. ${SPHENIXPROD_SCRIPT_PATH}/stagein.sh --checkonly
-
-### Stage input to local
-# for fullinfile in `cat infile_paths.list`; do
-#     cp -v $fullinfile .
-# done
+. ${SPHENIXPROD_SCRIPT_PATH}/stagein.sh
 
 outfile=${logbase}.root
 outzdc=${logbase/DST_CALOFITTING/DST_ZDC_RAW}.root
