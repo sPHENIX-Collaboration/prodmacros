@@ -65,7 +65,7 @@ void reconstruct_pipi_mass()
   kfparticle->saveDST();
   kfparticle->setContainerName(pipi_reconstruction_name);
   kfparticle->magFieldFile("FIELDMAP_TRACKING");
-  //kfparticle->saveLightweightNTupleToQA(); //To be uncommented when PR 4517 is merged
+  kfparticle->saveLightweightNTupleToQA(); //To be uncommented when PR 4517 is merged
 
   // PV to SV cuts
   kfparticle->constrainToPrimaryVertex();
@@ -167,7 +167,7 @@ void reconstruct_ppi_mass()
   kfparticle->saveDST();
   kfparticle->setContainerName(ppi_reconstruction_name);
   kfparticle->magFieldFile("FIELDMAP_TRACKING");
-  //kfparticle->saveLightweightNTupleToQA(); //To be uncommented when PR 4517 is merged
+  kfparticle->saveLightweightNTupleToQA(); //To be uncommented when PR 4517 is merged
 
   // PV to SV cuts
   kfparticle->constrainToPrimaryVertex(true);
