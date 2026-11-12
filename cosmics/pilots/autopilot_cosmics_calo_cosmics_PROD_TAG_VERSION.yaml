@@ -9,7 +9,7 @@ sphnxprod02:
   # Event combining
   PROD_TRIGGERED_EVENT_cosmics:
     config: cosmics_calo_cosmics_PROD_TAG_VERSION.yaml
-    runlist: /sphenix/u/sphnxpro/Production2026/BRANCH/thisProd/runlist
+    runlist: /sphenix/u/sphnxpro/Production2026/BRANCH/thisProd/runlist_cosmics_run25_all.txt
     # runs: [82716 82744]
     jobprio: 90
     submit: on
@@ -18,7 +18,7 @@ sphnxprod02:
   # Waveform fitting (disabled while HCalCosmics owns DST_CALOFITTING)
   # PROD_CALOFITTING_cosmics:
   #   config: cosmics_calo_cosmics_PROD_TAG_VERSION.yaml
-  #   runlist: /sphenix/u/sphnxpro/Production2026/BRANCH/thisProd/runlist
+  #   runlist: /sphenix/u/sphnxpro/Production2026/BRANCH/thisProd/runlist_cosmics_run25_all.txt
   #   # runs: [82716 82744]
   #   jobprio: 60
   #   submit: on
@@ -27,7 +27,7 @@ sphnxprod02:
   # HCalCosmics analysis
   PROD_HCALCOSMICS_cosmics:
     config: cosmics_calo_cosmics_PROD_TAG_VERSION.yaml
-    runlist: /sphenix/u/sphnxpro/Production2026/BRANCH/thisProd/runlist
+    runlist: /sphenix/u/sphnxpro/Production2026/BRANCH/thisProd/runlist_cosmics_run25_all.txt
     # runs: [82716 82744]
     jobprio: 60
     submit: on
