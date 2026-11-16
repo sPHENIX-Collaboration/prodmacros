@@ -58,12 +58,10 @@ R__LOAD_LIBRARY(libepd.so)
 R__LOAD_LIBRARY(libzdcinfo.so)
 
 void Fun4All_JetSkimmedProductionYear2(int nEvents = 1000,
-                        const std::string &fname_calo = "DST_CALOFITTING_run3oo_pro001_pcdb001_v001-00082703-00000.root",
-                        const std::string &fname_zdc  = "DST_ZDC_RAW_run3oo_pro001_pcdb001_v001-00082703-00000.root",
-                        const std::string &fname_sepd  = "DST_SEPD_RAW_run3oo_pro001_pcdb001_v001-00082703-00000.root",
-                        const std::string &outfile_low  = "DST_JETCALO_run3oo_pro001_pcdb001_v001-00082703-00000.root",
-                        const std::string &outfile_high = "DST_Jet_run3oo_pro001_pcdb001_v001-00082703-00000.root",
-                        const std::string &outfile_hist = "HIST_JETQA_run3oo_pro001_pcdb001_v001-00082703-00000.root",
+                        const std::string &fname_calo = "/cvmfs/sphenix.sdcc.bnl.gov/files/calofitting/DST_CALOFITTING_run2pp_ana585_pcdb004_v001-00053483-90000.root",
+                        const std::string &outfile_low  = "DST_JETCALO_run2pp_ana585_pcdb004_v001-00053483-90000.root",
+                        const std::string &outfile_high = "DST_Jet_run2pp_ana585_pcdb004_v001-00053483-90000.root",
+                        const std::string &outfile_hist = "HIST_JETQA_run2pp_ana585_pcdb004_v001-00053483-90000.root",
                         const std::string &dbtag = "newcdbtag"
   )
 {
@@ -209,20 +207,11 @@ void Fun4All_JetSkimmedProductionYear2(int nEvents = 1000,
   InCalo->AddFile(fname_calo);
   se->registerInputManager(InCalo);
 
-  Fun4AllInputManager *InZDC = new Fun4AllDstInputManager("inzdc");
-  InZDC->AddFile(fname_zdc);
-  se->registerInputManager(InZDC);
-
-  Fun4AllInputManager *InSEPD = new Fun4AllDstInputManager("insepd");
-  InSEPD->AddFile(fname_sepd);
-  se->registerInputManager(InSEPD);
-
   // --- Output managers ---
   // DST_JETCALO: low-threshold output — keeps raw tower and ZDC data
   Fun4AllDstOutputManager *outlower = new Fun4AllDstOutputManager("DSTOUTLOW", outfile_low);
   outlower->AddNode("Sync");
   outlower->AddNode("EventHeader");
-  outlower->AddNode("12001");
   outlower->AddNode("14001");
   outlower->AddNode("TOWERS_HCALIN");
   outlower->AddNode("TOWERS_HCALOUT");
@@ -243,7 +232,6 @@ void Fun4All_JetSkimmedProductionYear2(int nEvents = 1000,
   outhigher->StripNode("TOWERS_CEMC");
   outhigher->StripNode("TOWERS_SEPD");
   outhigher->StripNode("TOWERINFO_CALIB_ZDC");
-  outhigher->StripNode("12001");
   outhigher->StripCompositeNode("Packets");
   se->registerOutputManager(outhigher);
 
