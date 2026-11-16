@@ -5,12 +5,9 @@
 #include <Calo_Calib.C>
 #include <HIJetReco.C>
 #include <Jet_QA.C>
-#include <G4_Global.C>
 #include <G4_Centrality.C>
 
 #include <mbd/MbdReco.h>
-
-#include <caloreco/CaloTowerBuilder.h>
 
 #include <epd/EpdReco.h>
 
@@ -30,13 +27,10 @@
 
 #include <ffamodules/CDBInterface.h>
 #include <ffamodules/FlagHandler.h>
-#include <ffamodules/HeadReco.h>
-#include <ffamodules/SyncReco.h>
 
 #include <fun4all/Fun4AllDstInputManager.h>
 #include <fun4all/Fun4AllDstOutputManager.h>
 #include <fun4all/Fun4AllInputManager.h>
-#include <fun4all/Fun4AllRunNodeInputManager.h>
 #include <fun4all/Fun4AllServer.h>
 #include <fun4all/Fun4AllUtils.h>
 #include <fun4all/SubsysReco.h>
@@ -85,30 +79,8 @@ void Fun4All_JetSkimmedProductionYear2(int nEvents = 1000,
   MbdReco *mbdreco = new MbdReco();
   se->registerSubsystem(mbdreco);
 
-  // sEPD Reconstruction--Calib Info
-  CaloTowerBuilder *caEPD = new CaloTowerBuilder("SEPDBUILDER");
-  caEPD->set_detector_type(CaloTowerDefs::SEPD);
-  caEPD->set_builder_type(CaloTowerDefs::kPRDFTowerv4);
-  caEPD->set_processing_type(CaloWaveformProcessing::TEMPLATE);
-  se->registerSubsystem(caEPD);
-
   EpdReco *epdreco = new EpdReco();
   se->registerSubsystem(epdreco);
-
-  //we need to do the ZDC fitting here...
-  CaloTowerBuilder *caZDC = new CaloTowerBuilder("ZDCBUILDER");
-  caZDC->set_detector_type(CaloTowerDefs::ZDC);
-  caZDC->set_builder_type(CaloTowerDefs::kPRDFTowerv4);
-  if( (runnumber > RunnumberRange::RUN2PP_FIRST && runnumber < RunnumberRange::RUN2PP_LAST)
-     || (runnumber > RunnumberRange::RUN3PP_FIRST && runnumber < RunnumberRange::RUN3PP_LAST) ){
-    caZDC->set_processing_type(CaloWaveformProcessing::FAST);
-  }
-  else {
-    caZDC->set_processing_type(CaloWaveformProcessing::FUNCFIT);
-    caZDC->set_funcfit_type(2);
-  }
-  se->registerSubsystem(caZDC);
-
 
   // ZDC Reconstruction--Calib Info
   ZdcReco *zdcreco = new ZdcReco();
