@@ -10,8 +10,6 @@
 
 #include <mbd/MbdReco.h>
 
-#include <caloreco/CaloTowerBuilder.h>
-
 #include <epd/EpdReco.h>
 
 #include <zdcinfo/ZdcReco.h>

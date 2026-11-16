@@ -36,7 +36,6 @@ void Process_Calo_Calib()
   // set MC or data
   bool isSim = true;
   int data_sim_runnumber_thres = 1000;
-  int runnumber = rc->get_uint64Flag("TIMESTAMP");
   if (rc->get_uint64Flag("TIMESTAMP") > data_sim_runnumber_thres)
   {
     isSim = false;
@@ -58,9 +57,6 @@ void Process_Calo_Calib()
   std::string geoLocation = CDBInterface::instance()->getUrl("calo_geo");
   ingeo->AddFile(geoLocation);
   se->registerInputManager(ingeo);
-
-  CaloTowerDefs::BuilderType buildertype = CaloTowerDefs::kPRDFTowerv4;
-
 
   //////////////////////////////
   // set statuses on raw towers
