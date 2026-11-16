@@ -56,7 +56,7 @@ void reconstruct_pipi_mass()
   KFParticle_sPHENIX *kfparticle = new KFParticle_sPHENIX(pipi_reconstruction_name);
 
   kfparticle->setDecayDescriptor("K_S0 -> pi^+ pi^-");
-  kfparticle->saveOutput(false);
+  kfparticle->saveOutput();
 
   kfparticle->usePID(false);
   kfparticle->dontUseGlobalVertex();
@@ -65,7 +65,7 @@ void reconstruct_pipi_mass()
   kfparticle->saveDST();
   kfparticle->setContainerName(pipi_reconstruction_name);
   kfparticle->magFieldFile("FIELDMAP_TRACKING");
-  kfparticle->saveLightweightNTupleToQA(); //To be uncommented when PR 4517 is merged
+  kfparticle->saveLightweightNTupleToQA();
 
   // PV to SV cuts
   kfparticle->constrainToPrimaryVertex();
@@ -158,7 +158,7 @@ void reconstruct_ppi_mass()
   KFParticle_sPHENIX *kfparticle = new KFParticle_sPHENIX(ppi_reconstruction_name);
 
   kfparticle->setDecayDescriptor("[Lambda0 -> proton^+ pi^-]cc");
-  kfparticle->saveOutput(false);
+  kfparticle->saveOutput();
 
   kfparticle->usePID(false);
   kfparticle->dontUseGlobalVertex();
@@ -167,7 +167,7 @@ void reconstruct_ppi_mass()
   kfparticle->saveDST();
   kfparticle->setContainerName(ppi_reconstruction_name);
   kfparticle->magFieldFile("FIELDMAP_TRACKING");
-  kfparticle->saveLightweightNTupleToQA(); //To be uncommented when PR 4517 is merged
+  kfparticle->saveLightweightNTupleToQA();
 
   // PV to SV cuts
   kfparticle->constrainToPrimaryVertex(true);
