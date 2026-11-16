@@ -178,7 +178,6 @@ void reconstruct_ppi_mass()
 
   // Track parameters
   kfparticle->setMinimumTrackPT(0.1);
-  kfparticle->setMinimumTrackPV_DCA_XY(0.05);
   kfparticle->setMinTPChits(25);
   kfparticle->setMinMVTXhits(0);
   kfparticle->setMinINTThits(0);
