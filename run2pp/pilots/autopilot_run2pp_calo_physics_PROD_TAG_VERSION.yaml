@@ -10,7 +10,7 @@ sphnxprod02:
   PROD_CALOFITTING_run2pp:
     config: run2pp_calo_physics_PROD_TAG_VERSION.yaml
     runlist: /sphenix/u/sphnxpro/Production2026/BRANCH/thisProd/runlist
-    jobprio: 150
+    jobprio: 60
     submit: on
     dstspider: on
     histspider: on
@@ -19,7 +19,7 @@ sphnxprod02:
   PROD_JETSKIMMER_run2pp:
     config: run2pp_calo_physics_PROD_TAG_VERSION.yaml
     runlist: /sphenix/u/sphnxpro/Production2026/BRANCH/thisProd/runlist
-    jobprio: 150
+    jobprio: 30
     submit: on
     dstspider: on
     histspider: on
