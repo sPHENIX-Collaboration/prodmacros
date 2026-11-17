@@ -10,7 +10,7 @@ sphnxprod02:
   ana585_CALOFITTING_run2pp:
     config: run2pp_calo_physics_ana585_calo001_v001.yaml
     runlist: /sphenix/u/sphnxpro/Production2026/run2pp_calo_ana585_calo001_v001/thisProd/runlist
-    jobprio: 150
+    jobprio: 60
     submit: on
     dstspider: on
     histspider: on
@@ -19,7 +19,7 @@ sphnxprod02:
   ana585_JETSKIMMER_run2pp:
     config: run2pp_calo_physics_ana585_calo001_v001.yaml
     runlist: /sphenix/u/sphnxpro/Production2026/run2pp_calo_ana585_calo001_v001/thisProd/runlist
-    jobprio: 150
+    jobprio: 30
     submit: on
     dstspider: on
     histspider: on
