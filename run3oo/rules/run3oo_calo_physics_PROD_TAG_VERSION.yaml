@@ -35,7 +35,7 @@ PROD_CALOFITTING_run3oo:
   params:
     dsttype:      DST_CALOFITTING
     build:        PROD
-    dbtag:        pcdb001
+    dbtag:        pcdb004
     qadbtag:      TAG
     version:      VERSION
     period:       run3oo
@@ -74,7 +74,7 @@ PROD_JETSKIMMER_run3oo:
 
   input:
     table:       datasets
-    intriplet:   PROD_pcdb001_VERSION
+    intriplet:   PROD_pcdb004_VERSION
     indsttype:   DST_CALOFITTING
 
   job:

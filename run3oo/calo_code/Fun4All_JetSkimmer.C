@@ -10,8 +10,6 @@
 
 #include <mbd/MbdReco.h>
 
-#include <caloreco/CaloTowerBuilder.h>
-
 #include <epd/EpdReco.h>
 
 #include <zdcinfo/ZdcReco.h>
@@ -57,12 +55,10 @@ R__LOAD_LIBRARY(libepd.so)
 R__LOAD_LIBRARY(libzdcinfo.so)
 
 void Fun4All_JetSkimmer(int nEvents = 1000,
-                        const std::string &fname_calo = "DST_CALOFITTING_run3oo_pro001_pcdb001_v001-00082703-00000.root",
-                        const std::string &fname_zdc = "DST_ZDC_RAW_run3oo_pro001_pcdb001_v001-00082703-00000.root",
-                        const std::string &/*fname_sepd*/ = "DST_SEPD_RAW_run3oo_pro001_pcdb001_v001-00082703-00000.root",
-                        const std::string &outfile_low = "DST_JETCALO_run3oo_pro001_pcdb001_v001-00082703-00000.root",
-                        const std::string &outfile_high = "DST_Jet_run3oo_pro001_pcdb001_v001-00082703-00000.root",
-                        const std::string &outfile_hist = "HIST_JETQA_run3oo_pro001_pcdb001_v001-00082703-00000.root",
+                        const std::string &fname_calo = "/cvmfs/sphenix.sdcc.bnl.gov/files/calofitting/DST_CALOFITTING_run3auau_ana585_pcdb004_v001-00068114-90000.root",
+                        const std::string &outfile_low = "DST_JETCALO_run3auau_ana585_pcdb004_v001-00068114-90000.root",
+                        const std::string &outfile_high = "DST_Jet_run3auau_ana585_pcdb004_v001-00068114-90000.root",
+                        const std::string &outfile_hist = "HIST_JETQA_run3auau_ana585_pcdb004_v001-00068114-90000.root",
                         const std::string &dbtag = "newcdbtag")
 {
   Fun4AllServer *se = Fun4AllServer::instance();
@@ -111,9 +107,6 @@ void Fun4All_JetSkimmer(int nEvents = 1000,
   CaloValid *ca = new CaloValid("CaloValid");
   ca->set_timing_cut_width(200);
   se->registerSubsystem(ca);
-
-  // Centrality required for HI
-  Centrality();
 
   // Jet reco related flags
   Enable::QA = true;
@@ -185,10 +178,6 @@ void Fun4All_JetSkimmer(int nEvents = 1000,
   Fun4AllInputManager *InCalo = new Fun4AllDstInputManager("in");
   InCalo->AddFile(fname_calo);
   se->registerInputManager(InCalo);
-
-  Fun4AllInputManager *InZDC = new Fun4AllDstInputManager("inzdc");
-  InZDC->AddFile(fname_zdc);
-  se->registerInputManager(InZDC);
 
   // --- Output managers ---
   // DST_JETCALO: low-threshold output — keeps raw tower and ZDC data

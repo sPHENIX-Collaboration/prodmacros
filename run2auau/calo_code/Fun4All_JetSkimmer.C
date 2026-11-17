@@ -108,9 +108,6 @@ void Fun4All_JetSkimmer(int nEvents = 1000,
   ca->set_timing_cut_width(200);
   se->registerSubsystem(ca);
 
-  // Centrality required for HI
-  Centrality();
-
   // Jet reco related flags
   Enable::QA = true;
 

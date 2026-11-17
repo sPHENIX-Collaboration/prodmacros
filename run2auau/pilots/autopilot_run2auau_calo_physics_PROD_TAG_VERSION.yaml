@@ -1,4 +1,4 @@
-sphnxprod03:
+sphnxprod02:
   defaultlocations:
     prodbase:   /sphenix/u/sphnxpro/Production2026/sphenixprod
     configbase: /sphenix/u/sphnxpro/Production2026/BRANCH/thisProd/rules
@@ -17,16 +17,18 @@ sphnxprod03:
   PROD_CALOFITTING_run2auau:
     config: run2auau_calo_physics_PROD_TAG_VERSION.yaml
     runlist: /sphenix/u/sphnxpro/Production2026/BRANCH/thisProd/runlist
-    jobprio: 60
+    jobprio: 150
     submit: on
     dstspider: on
+    histspider: on
 
   # Jet skimmer
   PROD_JETSKIMMER_run2auau:
     config: run2auau_calo_physics_PROD_TAG_VERSION.yaml
     runlist: /sphenix/u/sphnxpro/Production2026/BRANCH/thisProd/runlist
-    jobprio: 30
+    jobprio: 150
     submit: on
     dstspider: on
+    histspider: on
 
 ###############################################################################
