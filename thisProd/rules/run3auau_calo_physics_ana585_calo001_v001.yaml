@@ -46,7 +46,7 @@ ana585_CALOFITTING_run3auau:
 
   input:
     table:        datasets
-    intriplet:    ana585_nocdbtag_v001  # This is the output triplet of the previous rule
+    intriplet:    ana581_nocdbtag_v001  # This is the output triplet of the previous rule
 
   job:
     script:                 run_fitting.sh
