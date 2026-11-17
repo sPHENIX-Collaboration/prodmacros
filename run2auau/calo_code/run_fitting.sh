@@ -22,8 +22,7 @@ eval "$make_filelists"
 . ${SPHENIXPROD_SCRIPT_PATH}/stagein.sh
 
 outfile=${logbase}.root
-outzdc=${logbase/DST_CALOFITTING/DST_ZDC_RAW}.root
-root_line="Fun4All_Fitting.C(${nevents},\"infile.list\",\"${outfile}\",\"${outzdc}\",\"${dbtag}\")"
+root_line="Fun4All_Fitting.C(${nevents},\"infile.list\",\"${outfile}\",\"${dbtag}\")"
 full_command="root.exe -q -b '${root_line}'"
 
 # Production step. A failure here ends the job with the root.exe exit code.
@@ -35,9 +34,6 @@ echo Sourcing ${SPHENIXPROD_SCRIPT_PATH}/common_runscript_exec.sh
 # file, because the QA step below reads it.
 echo ./stageout.sh ${outfile} ${outdir} ${dbid} --keep-local
 . ./stageout.sh ${outfile} ${outdir} ${dbid} --keep-local
-
-echo ./stageout.sh ${outzdc} ${zdcoutdir:-${outdir}} ${zdcdbid:-${dbid}}
-. ./stageout.sh ${outzdc} ${zdcoutdir:-${outdir}} ${zdcdbid:-${dbid}}
 
 # Optional QA step. It does not go through common_runscript_exec.sh, so its exit code
 # and resource use never replace those of the production step. A failure is logged,

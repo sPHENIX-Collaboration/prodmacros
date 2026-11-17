@@ -59,7 +59,7 @@ void Fun4All_JetSkimmer(int nEvents = 1000,
                         const std::string &outfile_low = "DST_JETCALO_run3auau_ana585_pcdb004_v001-00068114-90000.root",
                         const std::string &outfile_high = "DST_Jet_run3auau_ana585_pcdb004_v001-00068114-90000.root",
                         const std::string &outfile_hist = "HIST_JETQA_run3auau_ana585_pcdb004_v001-00068114-90000.root",
-                        const std::string &dbtag = "newcdbtag")
+                        const std::string &dbtag = "calo001")
 {
   Fun4AllServer *se = Fun4AllServer::instance();
   se->Verbosity(1);
@@ -107,9 +107,6 @@ void Fun4All_JetSkimmer(int nEvents = 1000,
   CaloValid *ca = new CaloValid("CaloValid");
   ca->set_timing_cut_width(200);
   se->registerSubsystem(ca);
-
-  // Centrality required for HI
-  Centrality();
 
   // Jet reco related flags
   Enable::QA = true;

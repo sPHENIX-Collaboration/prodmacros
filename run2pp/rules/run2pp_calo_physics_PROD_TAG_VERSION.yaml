@@ -1,39 +1,15 @@
-#______________________________________________________________________________
-PROD_TRIGGERED_EVENT_run2pp:
-  params:
-    dsttype:      DST_TRIGGERED_EVENT
-    build:        PROD
-    dbtag:        TAG
-    version:      VERSION
-    period:       run2pp
-    dataset:      run2pp
-    physicsmode:  physics
-
-  input:
-    min_run_time:   300
-    min_run_events: 100000
-
-  job:
-    script:                 run_eventcombine.sh
-    log:                   '{condor}/{logbase}.condor'
-    neventsper:             10000
-    payload:                [../triggered_code/*]
-    request_memory:         2 GB, 3 GB, 5 GB
-    request_xferslots:     '3'
-    batch_name:            '{rule_name}_{outtriplet}'
-    priority:              '90'
-    rungroup_size:         1
-    filesystem:
-      logdir:   "/sphenix/data/data03/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/log"
-      histdir:  "/sphenix/data/data03/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/hist"
-      condor:            "/tmp/data03/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/log"
-
+# run2pp calo, downstream steps only (no event combining).
+# Replace PROD, TAG, and VERSION for the instance. TAG is the QA/skimmer conditions tag.
+# CALOFITTING reads the existing pro001_pcdb001_v001 DST_TRIGGERED_EVENT files and writes
+# PROD_pcdb004_VERSION; its optional QA histograms use qadbtag TAG.
+# JETSKIMMER reads PROD_pcdb004_VERSION and writes PROD_TAG_VERSION.
 #______________________________________________________________________________
 PROD_CALOFITTING_run2pp:
   params:
     dsttype:      DST_CALOFITTING
     build:        PROD
-    dbtag:        TAG
+    dbtag:        pcdb004
+    qadbtag:      TAG
     version:      VERSION
     period:       run2pp
     dataset:      run2pp
@@ -41,7 +17,7 @@ PROD_CALOFITTING_run2pp:
 
   input:
     table:        datasets
-    intriplet:    PROD_TAG_VERSION  # This is the output triplet of the previous rule
+    intriplet:    pro001_pcdb001_v001  # Existing run2pp DST_TRIGGERED_EVENT files
 
   job:
     script:                 run_fitting.sh
@@ -71,7 +47,7 @@ PROD_JETSKIMMER_run2pp:
 
   input:
     table:       datasets
-    intriplet:   PROD_TAG_VERSION
+    intriplet:   PROD_pcdb004_VERSION  # Output triplet of PROD_CALOFITTING_run2pp
     indsttype:   DST_CALOFITTING
 
   job:
