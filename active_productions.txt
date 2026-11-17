@@ -15,9 +15,17 @@
 ## Run2 AuAu jet skimmer ana581_newcdbtag_v001 on prod02
 /sphenix/u/sphnxpro/Production2026/run2auau_calo_ana581_2026p005_v001/thisProd/pilots/autopilot_run2auau_jetskimmer_physics_ana581_newcdbtag_v001.yaml
 
+## Run3 AuAu calo ana581_calo001_v001 on prod02
+/sphenix/u/sphnxpro/Production2026/run3auau_calo_ana581_calo001_v001/thisProd/pilots/autopilot_run3auau_calo_physics_ana581_calo001_v001.yaml
+
+## Run3 O+O calo ana581_calo001_v001 on prod03
+/sphenix/u/sphnxpro/Production2026/run3oo_calo_ana581_calo001_v001/thisProd/pilots/autopilot_run3oo_calo_physics_ana581_calo001_v001.yaml
 
 # Cosmics TRIGGERED production, Sep 4, 2026 ana569_pcdb001_v001
-/sphenix/u/sphnxpro/Production2026/cosmics_calo_ana569_pcdb001_v001/thisProd/pilots/autopilot_cosmics_calo_cosmics_ana569_pcdb001_v001.yaml
+# /sphenix/u/sphnxpro/Production2026/cosmics_calo_ana569_pcdb001_v001/thisProd/pilots/autopilot_cosmics_calo_cosmics_ana569_pcdb001_v001.yaml
+
+# Cosmics high-gain HCal production, Nov 12, 2026, ana584_pcdb001_v001 (runlist_cosmics_run25_all.txt, 884 runs)
+/sphenix/u/sphnxpro/Production2026/cosmics_calo_highgain_ana584_pcdb001_v001/thisProd/pilots/autopilot_cosmics_calo_cosmics_ana584_pcdb001_v001.yaml
 
 ############################# Tracking:
 ### Event combining for run3auau, run3pp, run3oo ana561
@@ -25,15 +33,11 @@
 /sphenix/u/sphnxpro/Production2026/run3pp_tracking_ana561_2025p013_v001/thisProd/pilots/autopilot_run3pp_tracking_physics_ana561_2025p013_v001.yaml
 /sphenix/u/sphnxpro/Production2026/run3oo_tracking_ana561_2025p013_v001/thisProd/pilots/autopilot_run3oo_tracking_physics_ana561_2025p013_v001.yaml
 
-## DST_COMBINED only: run3 tracking ana581_2026p005_v001
-/sphenix/u/sphnxpro/Production2026/run3auau_tracking_dst_combined_physics_ana581_2026p005_v001/thisProd/pilots/autopilot_run3auau_tracking_dst_combined_physics_ana581_2026p005_v001.yaml
-/sphenix/u/sphnxpro/Production2026/run3pp_tracking_dst_combined_physics_ana581_2026p005_v001/thisProd/pilots/autopilot_run3pp_tracking_dst_combined_physics_ana581_2026p005_v001.yaml
-/sphenix/u/sphnxpro/Production2026/run3oo_tracking_dst_combined_physics_ana581_2026p005_v001/thisProd/pilots/autopilot_run3oo_tracking_dst_combined_physics_ana581_2026p005_v001.yaml
+##### New tracking production, 11/17/2026
+/sphenix/u/sphnxpro/Production2026/run3auau_tracking_ana585_2026p006_v001/thisProd/pilots/autopilot_run3auau_tracking_physics_ana585_2026p006_v001.yaml
+/sphenix/u/sphnxpro/Production2026/run3pp_tracking_ana585_2026p006_v001/thisProd/pilots/autopilot_run3pp_tracking_physics_ana585_2026p006_v001.yaml
+/sphenix/u/sphnxpro/Production2026/run3oo_tracking_ana585_2026p006_v001/thisProd/pilots/autopilot_run3oo_tracking_physics_ana585_2026p006_v001.yaml
 
-## Downstream tracking ana581_2026p005_v001
-/sphenix/u/sphnxpro/Production2026/run3auau_tracking_downstream_ana581_2026p005_v001/thisProd/pilots/autopilot_run3auau_tracking_downstream_ana581_2026p005_v001.yaml
-/sphenix/u/sphnxpro/Production2026/run3pp_tracking_downstream_ana581_2026p005_v001/thisProd/pilots/autopilot_run3pp_tracking_downstream_ana581_2026p005_v001.yaml
-/sphenix/u/sphnxpro/Production2026/run3oo_tracking_downstream_ana581_2026p005_v001/thisProd/pilots/autopilot_run3oo_tracking_downstream_ana581_2026p005_v001.yaml
 
 ############################# Testing and special productions:
 # Run3pp tracking DC Tree test production, Sep 18, 2026 ana571_2026p002_v002
