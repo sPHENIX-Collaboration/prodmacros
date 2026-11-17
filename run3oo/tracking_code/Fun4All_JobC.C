@@ -7,8 +7,7 @@
 // does not reshuffle it
 #include <GlobalVariables.C>
 
-#include <G4_KFParticle.C>
-#include <KFParticle_selections.h>
+#include <KFParticle_selections.C>
 #include <QA.C>
 #include <Trkr_Clustering.C>
 #include <Trkr_Reco.C>
@@ -18,13 +17,6 @@
 #include <trackingqa/TpcSiliconQA.h>
 #include <trackingqa/TrackFittingQA.h>
 #include <trackingqa/VertexQA.h>
-
-#include <kfparticleqa/QAKFParticle.h>
-
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wundefined-internal"
-#include <kfparticle_sphenix/KFParticle_sPHENIX.h>
-#pragma GCC diagnostic pop
 
 #include <ffamodules/CDBInterface.h>
 #include <ffamodules/FlagHandler.h>
@@ -47,7 +39,6 @@ R__LOAD_LIBRARY(libtpc.so)
 R__LOAD_LIBRARY(libmicromegas.so)
 R__LOAD_LIBRARY(libtrack_reco.so)
 R__LOAD_LIBRARY(libtrackingqa.so)
-R__LOAD_LIBRARY(libkfparticle_sphenix.so)
 
 void Fun4All_JobC(
     const int nEvents = 2,
@@ -136,7 +127,7 @@ void Fun4All_JobC(
   se->registerSubsystem(new VertexQA);
 
   //Track resonance QA setup
-  KFPARTICLE::usingIonData = true;
+  set_OO_cuts();
   KFPARTICLE::save_kfpntuple = false;
   KFPARTICLE::save_kfpntuple_to_qa = true;
   KFPARTICLE::getQA = true;

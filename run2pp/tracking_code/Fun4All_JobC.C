@@ -7,7 +7,7 @@
 // does not reshuffle it
 #include <GlobalVariables.C>
 
-#include <G4_KFParticle.C>
+#include <KFParticle_selections.C>
 #include <QA.C>
 #include <Trkr_Clustering.C>
 #include <Trkr_Reco.C>
@@ -17,13 +17,6 @@
 #include <trackingqa/TpcSiliconQA.h>
 #include <trackingqa/TrackFittingQA.h>
 #include <trackingqa/VertexQA.h>
-
-#include <kfparticleqa/QAKFParticle.h>
-
-#pragma GCC diagnostic push
-#pragma GCC diagnostic ignored "-Wundefined-internal"
-#include <kfparticle_sphenix/KFParticle_sPHENIX.h>
-#pragma GCC diagnostic pop
 
 #include <ffamodules/CDBInterface.h>
 #include <ffamodules/FlagHandler.h>
@@ -46,209 +39,6 @@ R__LOAD_LIBRARY(libtpc.so)
 R__LOAD_LIBRARY(libmicromegas.so)
 R__LOAD_LIBRARY(libtrack_reco.so)
 R__LOAD_LIBRARY(libtrackingqa.so)
-R__LOAD_LIBRARY(libkfparticle_sphenix.so)
-
-void reconstruct_pipi_mass()
-{
-  Fun4AllServer *se = Fun4AllServer::instance();
-
-  std::string pipi_reconstruction_name = "pipi_reco";
-  KFParticle_sPHENIX *kfparticle = new KFParticle_sPHENIX(pipi_reconstruction_name);
-
-  kfparticle->setDecayDescriptor("K_S0 -> pi^+ pi^-");
-  kfparticle->saveOutput(false);
-
-  kfparticle->usePID();
-  kfparticle->setPIDacceptFraction(0.4);
-  kfparticle->dontUseGlobalVertex();
-  kfparticle->requireTrackVertexBunchCrossingMatch();
-  kfparticle->allowZeroMassTracks();
-  kfparticle->saveDST();
-  kfparticle->setContainerName(pipi_reconstruction_name);
-  kfparticle->magFieldFile("FIELDMAP_TRACKING");
-
-  // PV to SV cuts
-  kfparticle->constrainToPrimaryVertex();
-  kfparticle->setFlightDistancechi2(-1.);
-  kfparticle->setMinDIRA(0.88);
-  kfparticle->setDecayLengthRange(0.1, FLT_MAX);
-
-  // Track parameters
-  kfparticle->setMinimumTrackPT(0.0);
-  kfparticle->setMinTPChits(20);
-  kfparticle->setMinMVTXhits(1);
-  kfparticle->setMinINTThits(0);
-
-  // Vertex parameters
-  kfparticle->setMaximumVertexchi2nDOF(20);
-  kfparticle->setMaximumDaughterDCA(0.5);
-  kfparticle->setMaximumDaughterDCA_XY(100);
-
-  // Parent parameters
-  kfparticle->setMotherPT(0);
-  kfparticle->setMinimumMass(0.40);
-  kfparticle->setMaximumMass(0.60);
-  kfparticle->setMaximumMotherVertexVolume(0.1);
-
-  se->registerSubsystem(kfparticle);
-
-  QAKFParticle *kfpqa = new QAKFParticle("QAKFParticle_K_S0", "K_S0", 0.4, 0.6);
-  kfpqa->setKFParticleNodeName(pipi_reconstruction_name);
-  se->registerSubsystem(kfpqa);
-}
-
-void reconstruct_KK_mass()
-{
-  Fun4AllServer *se = Fun4AllServer::instance();
-
-  std::string KK_reconstruction_name = "KK_reco";
-  KFParticle_sPHENIX *kfparticle = new KFParticle_sPHENIX(KK_reconstruction_name);
-
-  kfparticle->setDecayDescriptor("phi -> K^+ K^-");
-  kfparticle->saveOutput(false);
-
-  kfparticle->usePID();
-  kfparticle->setPIDacceptFraction(0.4);
-  kfparticle->dontUseGlobalVertex();
-  kfparticle->requireTrackVertexBunchCrossingMatch();
-  kfparticle->allowZeroMassTracks();
-  kfparticle->saveDST();
-  kfparticle->setContainerName(KK_reconstruction_name);
-  kfparticle->magFieldFile("FIELDMAP_TRACKING");
-
-  // PV to SV cuts
-  kfparticle->constrainToPrimaryVertex();
-  kfparticle->setFlightDistancechi2(-1.);
-
-  // Track parameters
-  kfparticle->setMinimumTrackPT(0.1);
-  kfparticle->setMaximumTrackPT(0.7);
-  kfparticle->setMaximumTrackchi2nDOF(100.);
-  kfparticle->setMinTPChits(25);
-  kfparticle->setMinMVTXhits(1);
-  kfparticle->setMinINTThits(0);
-
-  // Vertex parameters
-  kfparticle->setMaximumVertexchi2nDOF(20);
-  kfparticle->setMaximumDaughterDCA(0.05);
-  kfparticle->setMaximumDaughterDCA_XY(100);
-
-  // Parent parameters
-  kfparticle->setMotherPT(0);
-  kfparticle->setMinimumMass(0.98);
-  kfparticle->setMaximumMass(1.1);
-  kfparticle->setMaximumMotherVertexVolume(0.1);
-
-  se->registerSubsystem(kfparticle);
-
-  QAKFParticle *kfpqa = new QAKFParticle("QAKFParticle_phi", "phi", 0.98, 1.1);
-  kfpqa->setKFParticleNodeName(KK_reconstruction_name);
-  se->registerSubsystem(kfpqa);
-}
-
-void reconstruct_ppi_mass()
-{
-  Fun4AllServer *se = Fun4AllServer::instance();
-
-  std::string ppi_reconstruction_name = "ppi_reco";
-  KFParticle_sPHENIX *kfparticle = new KFParticle_sPHENIX(ppi_reconstruction_name);
-
-  kfparticle->setDecayDescriptor("[Lambda0 -> proton^+ pi^-]cc");
-  kfparticle->saveOutput(false);
-
-  kfparticle->usePID();
-  kfparticle->setPIDacceptFraction(0.4);
-  kfparticle->dontUseGlobalVertex();
-  kfparticle->requireTrackVertexBunchCrossingMatch();
-  kfparticle->allowZeroMassTracks();
-  kfparticle->saveDST();
-  kfparticle->setContainerName(ppi_reconstruction_name);
-  kfparticle->magFieldFile("FIELDMAP_TRACKING");
-
-  // PV to SV cuts
-  kfparticle->constrainToPrimaryVertex(true);
-  kfparticle->setFlightDistancechi2(-1.);
-  kfparticle->setMinDIRA(0.88);
-  kfparticle->setDecayLengthRange(0.1, FLT_MAX);
-
-  // Track parameters
-  kfparticle->setMinimumTrackPT(0.1);
-  kfparticle->setMinimumTrackPV_DCA_XY(0.05);
-  kfparticle->setMinTPChits(25);
-  kfparticle->setMinMVTXhits(1);
-  kfparticle->setMinINTThits(0);
-
-  // Vertex parameters
-  kfparticle->setMaximumVertexchi2nDOF(20);
-  kfparticle->setMaximumDaughterDCA(0.5);
-  kfparticle->setMaximumDaughterDCA_XY(100);
-
-  // Parent parameters
-  kfparticle->setMotherPT(0);
-  kfparticle->setMinimumMass(1.08);
-  kfparticle->setMaximumMass(1.15);
-  kfparticle->setMaximumMotherVertexVolume(0.1);
-
-  se->registerSubsystem(kfparticle);
-
-  QAKFParticle *kfpqa = new QAKFParticle("QAKFParticle_Lambda0", "Lambda0", 1.08, 1.15);
-  kfpqa->setKFParticleNodeName(ppi_reconstruction_name);
-  se->registerSubsystem(kfpqa);
-}
-
-void reconstruct_Kpi_mass()
-{
-  Fun4AllServer *se = Fun4AllServer::instance();
-
-  std::string Kpi_reconstruction_name = "Kpi_reco";
-  KFParticle_sPHENIX *kfparticle = new KFParticle_sPHENIX(Kpi_reconstruction_name);
-  kfparticle->Verbosity(0);
-
-  kfparticle->setDecayDescriptor("[D0 -> K^- pi^+]cc");
-  kfparticle->saveOutput(false);
-
-  kfparticle->usePID();
-  kfparticle->setPIDacceptFraction(0.4);
-  kfparticle->dontUseGlobalVertex();
-  kfparticle->requireTrackVertexBunchCrossingMatch();
-  kfparticle->allowZeroMassTracks();
-  kfparticle->saveDST();
-  kfparticle->setContainerName(Kpi_reconstruction_name);
-  kfparticle->magFieldFile("FIELDMAP_TRACKING");
-
-  // PV to SV cuts
-  kfparticle->constrainToPrimaryVertex(true);
-  kfparticle->setMotherPV_DCA(100);
-  kfparticle->setMotherPV_DCA_XY(0.005);
-  kfparticle->setFlightDistancechi2(5);
-  kfparticle->setMinDIRA(0.9);
-  kfparticle->setMinDIRA_XY(-1.1);
-  kfparticle->setDecayLengthRange_XY(0.005, FLT_MAX);
-
-  // Track parameters
-  kfparticle->setMinimumTrackPT(0.2);
-  kfparticle->setMaximumTrackchi2nDOF(300.);
-  kfparticle->setMinTPChits(25);
-  kfparticle->setMinMVTXhits(1);
-  kfparticle->setMinINTThits(0);
-
-  // Vertex parameters
-  kfparticle->setMaximumVertexchi2nDOF(20);
-  kfparticle->setMaximumDaughterDCA(0.1);
-  kfparticle->setMaximumDaughterDCA_XY(100);  // 5 mm
-
-  // Parent parameters
-  kfparticle->setMotherPT(0.0);
-  kfparticle->setMinimumMass(1.75);
-  kfparticle->setMaximumMass(1.95);
-  kfparticle->setMaximumMotherVertexVolume(0.1);
-
-  se->registerSubsystem(kfparticle);
-
-  QAKFParticle *kfpqa = new QAKFParticle("QAKFParticle_D0", "D0", 1.75, 1.95);
-  kfpqa->setKFParticleNodeName(Kpi_reconstruction_name);
-  se->registerSubsystem(kfpqa);
-}
 
 void Fun4All_JobC(
     const int nEvents = 2,
@@ -335,6 +125,11 @@ void Fun4All_JobC(
 
   se->registerSubsystem(new TrackFittingQA);
   se->registerSubsystem(new VertexQA);
+
+  //Track resonance QA setup
+  KFPARTICLE::save_kfpntuple = false;
+  KFPARTICLE::save_kfpntuple_to_qa = true;
+  KFPARTICLE::getQA = true;
 
   reconstruct_pipi_mass();
   reconstruct_KK_mass();
