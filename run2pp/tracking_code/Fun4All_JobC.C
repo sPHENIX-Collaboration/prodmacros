@@ -131,10 +131,9 @@ void Fun4All_JobC(
   KFPARTICLE::save_kfpntuple_to_qa = true;
   KFPARTICLE::getQA = true;
 
-  reconstruct_pipi_mass();
-  reconstruct_KK_mass();
-  reconstruct_ppi_mass();
-  reconstruct_Kpi_mass();
+  KFPARTICLE::reconstruct_pipi_mass();
+  KFPARTICLE::reconstruct_ppi_mass();
+  KFPARTICLE::reconstruct_Kpi_mass();
 
   Fun4AllOutputManager *out = new Fun4AllDstOutputManager("DSTOUT", outfilename);
   out->AddNode("Sync");
