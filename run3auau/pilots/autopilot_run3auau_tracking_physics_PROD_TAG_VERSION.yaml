@@ -6,6 +6,14 @@ sphnxprod03:
     configbase: /sphenix/u/sphnxpro/Production2026/BRANCH/thisProd/rules
     submitdir:  /sphenix/data/data02/sphnxpro/production/run3auau/submission/{batch_name}
 
+  # Event combining
+  PROD_STREAMING_EVENT_run3auau:
+    config: run3auau_tracking_physics_PROD_TAG_VERSION.yaml
+    runlist: /sphenix/u/sphnxpro/Production2026/BRANCH/thisProd/runlist
+    jobprio: 90
+    submit: on
+    dstspider: on
+
   # Combined polyseeding
   PROD_TRKR_POLYSEED_COMBINED_run3auau:
     config: run3auau_tracking_physics_PROD_TAG_VERSION.yaml
