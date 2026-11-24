@@ -1,15 +1,15 @@
 # run2pp calo, downstream steps only (no event combining).
 # Replace PROD, TAG, and VERSION for the instance. TAG is the QA/skimmer conditions tag.
 # CALOFITTING reads the existing pro001_pcdb001_v001 DST_TRIGGERED_EVENT files and writes
-# ana585_pcdb004_v001; its optional QA histograms use qadbtag TAG.
-# JETSKIMMER reads ana585_pcdb004_v001 and writes PROD_TAG_VERSION.
+# ana588_pcdb004_v001; its optional QA histograms use qadbtag TAG.
+# JETSKIMMER reads ana588_pcdb004_v001 and writes PROD_TAG_VERSION.
 #______________________________________________________________________________
-ana585_CALOFITTING_run2pp:
+ana588_CALOFITTING_run2pp:
   params:
     dsttype:      DST_CALOFITTING
-    build:        ana.585
+    build:        ana.588
     dbtag:        pcdb004
-    qadbtag:      calo001
+    qadbtag:      mbd001
     version:      1
     period:       run2pp
     dataset:      run2pp
@@ -35,10 +35,10 @@ ana585_CALOFITTING_run2pp:
       condor:            "/tmp/data03/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/log"
 
 #______________________________________________________________________________
-ana585_JETSKIMMER_run2pp:
+ana588_JETSKIMMER_run2pp:
   params:
     dsttype:     DST_JETCALO
-    build:       ana.585
+    build:       ana.588
     dbtag:       newcdbtag
     version:     1
     period:      run2pp
@@ -47,7 +47,7 @@ ana585_JETSKIMMER_run2pp:
 
   input:
     table:       datasets
-    intriplet:   ana585_pcdb004_v001  # Output triplet of PROD_CALOFITTING_run2pp
+    intriplet:   ana588_pcdb004_v001  # Output triplet of PROD_CALOFITTING_run2pp
     indsttype:   DST_CALOFITTING
 
   job:

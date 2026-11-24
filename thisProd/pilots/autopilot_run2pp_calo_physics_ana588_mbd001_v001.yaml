@@ -3,22 +3,22 @@
 sphnxprod02:
   defaultlocations:
     prodbase:   /sphenix/u/sphnxpro/Production2026/sphenixprod
-    configbase: /sphenix/u/sphnxpro/Production2026/run2pp_calo_ana585_calo001_v001/thisProd/rules
+    configbase: /sphenix/u/sphnxpro/Production2026/run2pp_calo_ana588_mbd001_v001/thisProd/rules
     submitdir:  /sphenix/data/data03/sphnxpro/production/run2pp/submission/{batch_name}
 
   # Waveform fitting (input: existing pro001_pcdb001_v001 DST_TRIGGERED_EVENT)
-  ana585_CALOFITTING_run2pp:
-    config: run2pp_calo_physics_ana585_calo001_v001.yaml
-    runlist: /sphenix/u/sphnxpro/Production2026/run2pp_calo_ana585_calo001_v001/thisProd/runlist
+  ana588_CALOFITTING_run2pp:
+    config: run2pp_calo_physics_ana588_mbd001_v001.yaml
+    runlist: /sphenix/u/sphnxpro/Production2026/run2pp_calo_ana588_mbd001_v001/thisProd/runlist
     jobprio: 90
     submit: on
     dstspider: on
     histspider: on
 
   # Jet skimmer (input: DST_CALOFITTING of this production)
-  ana585_JETSKIMMER_run2pp:
-    config: run2pp_calo_physics_ana585_calo001_v001.yaml
-    runlist: /sphenix/u/sphnxpro/Production2026/run2pp_calo_ana585_calo001_v001/thisProd/runlist
+  ana588_JETSKIMMER_run2pp:
+    config: run2pp_calo_physics_ana588_mbd001_v001.yaml
+    runlist: /sphenix/u/sphnxpro/Production2026/run2pp_calo_ana588_mbd001_v001/thisProd/runlist
     jobprio: 30
     submit: on
     dstspider: on
