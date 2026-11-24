@@ -1,0 +1,25 @@
+sphnxprod03:
+  defaultlocations:
+    prodbase:   /sphenix/u/sphnxpro/Production2026/sphenixprod
+    configbase: /sphenix/u/sphnxpro/Production2026/run3auau_calo_ana588_mbd001_v001/thisProd/rules
+    submitdir:  /sphenix/data/data03/sphnxpro/production/run3auau/submission/{batch_name}
+
+  # Waveform fitting
+  ana588_CALOFITTING_run3auau:
+    config: run3auau_calo_physics_ana588_mbd001_v001.yaml
+    runlist: /sphenix/u/sphnxpro/Production2026/run3auau_calo_ana588_mbd001_v001/thisProd/runlist
+    jobprio: 60
+    submit: on
+    dstspider: on
+    histspider: on
+
+  # Jet skimmer
+  ana588_JETSKIMMER_run3auau:
+    config: run3auau_calo_physics_ana588_mbd001_v001.yaml
+    runlist: /sphenix/u/sphnxpro/Production2026/run3auau_calo_ana588_mbd001_v001/thisProd/runlist
+    jobprio: 30
+    submit: on
+    dstspider: on
+    histspider: on
+
+###############################################################################

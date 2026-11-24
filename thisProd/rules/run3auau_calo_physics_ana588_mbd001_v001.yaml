@@ -1,10 +1,10 @@
 # Replace PROD, TAG, and VERSION for the instance. TAG is the QA/skimmer
 # conditions tag; triggered-event and fitting tags are fixed below.
 #______________________________________________________________________________
-ana585_TRIGGERED_EVENT_run3auau:
+ana588_TRIGGERED_EVENT_run3auau:
   params:
     dsttype:      DST_TRIGGERED_EVENT
-    build:        ana.585
+    build:        ana.588
     dbtag:        nocdbtag
     version:      1
     period:       run3auau
@@ -33,12 +33,12 @@ ana585_TRIGGERED_EVENT_run3auau:
       condor:            "/tmp/data03/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/log"
 
 #______________________________________________________________________________
-ana585_CALOFITTING_run3auau:
+ana588_CALOFITTING_run3auau:
   params:
     dsttype:      DST_CALOFITTING
-    build:        ana.585
+    build:        ana.588
     dbtag:        pcdb004
-    qadbtag:      calo001
+    qadbtag:      mbd001
     version:      1
     period:       run3auau
     dataset:      run3auau
@@ -64,10 +64,10 @@ ana585_CALOFITTING_run3auau:
       condor:            "/tmp/data03/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/log"
 
 #______________________________________________________________________________
-ana585_JETSKIMMER_run3auau:
+ana588_JETSKIMMER_run3auau:
   params:
     dsttype:     DST_JETCALO
-    build:       ana.585
+    build:       ana.588
     dbtag:       newcdbtag
     version:     1
     period:      run3auau
@@ -76,7 +76,7 @@ ana585_JETSKIMMER_run3auau:
 
   input:
     table:       datasets
-    intriplet:   ana585_pcdb004_v001
+    intriplet:   ana588_pcdb004_v001
     indsttype:   DST_CALOFITTING
 
   job:
