@@ -1,12 +1,12 @@
 #______________________________________________________________________________
-ana584_TRIGGERED_EVENT_cosmics:
+ana588_TRIGGERED_EVENT_cosmics:
   params:
     dsttype:      DST_TRIGGERED_EVENT
     period:       cosmics
     physicsmode:  cosmics
     dataset:      cosmics
-    build:        ana.584
-    dbtag:        pcdb001
+    build:        ana.588
+    dbtag:        pcdb004
     version:      1
 
   input:
@@ -30,20 +30,20 @@ ana584_TRIGGERED_EVENT_cosmics:
       condor:            "/tmp/data03/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/log"
 
 #______________________________________________________________________________
-ana584_CALOFITTING_cosmics:
+ana588_CALOFITTING_cosmics:
   params:
     dsttype:      DST_CALOFITTING
     period:       cosmics
     physicsmode:  cosmics
     dataset:      cosmics
-    build:        ana.584
-    dbtag:        pcdb001
+    build:        ana.588
+    dbtag:        pcdb004
     version:      1
 
   input:
     db:           fcr
     table:        datasets
-    intriplet:    ana584_pcdb001_v001  # This is the output triplet of the previous rule
+    intriplet:    ana588_pcdb004_v001  # This is the output triplet of the previous rule
 
   job:
     script:                 run_fitting.sh
@@ -60,20 +60,20 @@ ana584_CALOFITTING_cosmics:
       condor:            "/tmp/data03/sphnxpro/{prodmode}/{period}/{physicsmode}/{outtriplet}/{leafdir}/{rungroup}/log"
 
 #______________________________________________________________________________
-ana584_HCALCOSMICS_cosmics:
+ana588_HCALCOSMICS_cosmics:
   params:
     dsttype:      DST_CALOFITTING
     period:       cosmics
     physicsmode:  cosmics
     dataset:      cosmics
-    build:        ana.584
-    dbtag:        pcdb001
+    build:        ana.588
+    dbtag:        pcdb004
     version:      1
 
   input:
     db:           fcr
     table:        datasets
-    intriplet:    ana584_pcdb001_v001  # This is the output triplet of the previous rule
+    intriplet:    ana588_pcdb004_v001  # This is the output triplet of the previous rule
 
   job:
     script:                 run_hcalcosmics.sh
