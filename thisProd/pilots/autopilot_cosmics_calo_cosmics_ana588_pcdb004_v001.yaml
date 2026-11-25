@@ -1,6 +1,6 @@
-################################# Prod02 #######################################
+################################# Prod03 #######################################
 ### Standard full production
-sphnxprod02:
+sphnxprod03:
   defaultlocations:
     prodbase:   /sphenix/u/sphnxpro/Production2026/sphenixprod
     configbase: /sphenix/u/sphnxpro/Production2026/cosmics_calo_highgain_ana588_pcdb004_v001/thisProd/rules
